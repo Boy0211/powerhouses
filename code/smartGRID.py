@@ -82,17 +82,34 @@ class Smartgrid():
             print(house)
 
     def battery_sort_function(self):
+
         for house in self.houses:
-            if int(house.identification) % 5 == 1:
+            while self.batterys[0].current_input < 1507:
                 self.add_house_to_battery(house, self.batterys[0])
-            elif int(house.identification) % 5 == 2:
+
+            while self.batterys[1].current_input < 1507:
                 self.add_house_to_battery(house, self.batterys[1])
-            elif int(house.identification) % 5 == 3:
+
+            while self.batterys[2].current_input < 1507:
                 self.add_house_to_battery(house, self.batterys[2])
-            elif int(house.identification) % 5 == 4:
+
+            while self.batterys[3].current_input < 1507:
                 self.add_house_to_battery(house, self.batterys[3])
-            elif int(house.identification) % 5 == 0:
+
+            while self.batterys[4].current_input < 1507:
                 self.add_house_to_battery(house, self.batterys[4])
+
+        # for house in self.houses:
+        #     if int(house.identification) % 5 == 1:
+        #         self.add_house_to_battery(house, self.batterys[0])
+        #     elif int(house.identification) % 5 == 2:
+        #         self.add_house_to_battery(house, self.batterys[1])
+        #     elif int(house.identification) % 5 == 3:
+        #         self.add_house_to_battery(house, self.batterys[2])
+        #     elif int(house.identification) % 5 == 4:
+        #         self.add_house_to_battery(house, self.batterys[3])
+        #     elif int(house.identification) % 5 == 0:
+        #         self.add_house_to_battery(house, self.batterys[4])
 
 
 if __name__ == "__main__":
