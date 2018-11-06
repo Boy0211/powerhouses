@@ -15,6 +15,7 @@ class Smartgrid():
         self.battery_sort_function()
         for battery in self.batterys:
             print(battery)
+        self.calculate_perfect()
 
     def load_houses(self, filename):
 
@@ -103,7 +104,16 @@ class Smartgrid():
         for house in self.houses:
             print(house)
 
-    # def distance_house_battery(self, house, battery):
+    def calculate_perfect(self):
+        counter = 0
+        for house in self.houses:
+            if house.battery_distances[int(house.connected_battery)] == min(house.battery_distances.values()):
+                counter += 1
+
+        percentage = (counter / 150) * 100
+        print(f"{round(percentage, 2)}%")
+
+
 
 
 
