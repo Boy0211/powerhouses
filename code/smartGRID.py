@@ -12,6 +12,14 @@ class Smartgrid():
         self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses.csv")
         self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk1_batterijen.txt")
         self.calculate_distance()
+        self.battery_sort_function()
+        for battery in self.batterys:
+            output_list = []
+            for house in battery.list_of_houses:
+                output_list.append(house.output)
+            battery.current_input = sum(output_list)
+            print(battery)
+
 
     def load_houses(self, filename):
 
@@ -49,7 +57,8 @@ class Smartgrid():
                 location_x = int(location_x)
                 location_y = int(location_y.strip())
                 current_input = 0
-                batterys.append(Battery(identification, location_x, location_y, max_input, current_input))
+                list_of_houses = []
+                batterys.append(Battery(identification, location_x, location_y, max_input, current_input, list_of_houses))
                 id_number += 1
 
         for battery in batterys:
@@ -69,7 +78,18 @@ class Smartgrid():
             house.battery_distances = battery_distances
             print(house)
 
-    def costs_grid()
+    def battery_sort_function(self):
+        for house in self.houses:
+            if int(house.identification) % 5 == 1:
+                self.batterys[0].list_of_houses.append(house)
+            elif int(house.identification) % 5 == 2:
+                self.batterys[1].list_of_houses.append(house)
+            elif int(house.identification) % 5 == 3:
+                self.batterys[2].list_of_houses.append(house)
+            elif int(house.identification) % 5 == 4:
+                self.batterys[3].list_of_houses.append(house)
+            elif int(house.identification) % 5 == 0:
+                self.batterys[4].list_of_houses.append(house)
 
 
 if __name__ == "__main__":
