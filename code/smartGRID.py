@@ -69,6 +69,8 @@ class Smartgrid():
             house.battery_distances = battery_distances
             print(house)
 
+    def costs_grid()
+
 
 if __name__ == "__main__":
     smartgrid = Smartgrid()
