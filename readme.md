@@ -1,5 +1,5 @@
 Sam Kuilboer
-Mendel
+Mendel Engelear
 Rutger Storm
 
 Heuristieken, Smartgrid
