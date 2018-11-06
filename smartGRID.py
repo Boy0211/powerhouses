@@ -2,16 +2,16 @@ import csv
 
 from house import House
 from battery import Battery
-from coordinates import Coordinates
+
 
 class Smartgrid():
 
-    def __init__():
-        self.houses = self.load_houses
-        self.batterys = self.load_batterys
+    def __init__(self):
+        self.houses = self.load_houses(f"csv_bestanden/wijk1_huizen.csv")
+        self.batterys = self.load_batterys(f"csv_bestanden/wijk1_batterijen.txt")
+        self.calculate_distance()
 
-    def load_houses():
-        filename = f"csv_bestanden/wijk1_huizen.csv"
+    def load_houses(self, filename):
 
         with open(filename, 'r') as csv_file:
             data = csv.DictReader(csv_file)
@@ -24,18 +24,13 @@ class Smartgrid():
                 location_x = int(line['x'])
                 location_y = int(line['y'])
                 output = float(line['max. output'])
-                houses.append(House(identification, location_x, location_y, output))
+                battery_distances = str('empty')
+                houses.append(House(identification, location_x, location_y, output, battery_distances))
                 id_number += 1
-
-            for house in houses:
-                print(house)
-
-            print(houses[0])
 
             return houses
 
-    def load_batterys():
-        filename = f"csv_bestanden/wijk1_batterijen.txt"
+    def load_batterys(self, filename):
 
         with open(filename, "r") as f:
             data = f.readlines()
@@ -61,19 +56,18 @@ class Smartgrid():
 
         return batterys
 
-    def calculate_distance(house, battery):
-        x_distance = abs(house.location_x - battery.location_x)
-        y_distance = abs(house.location_y - battery.location_y)
+    def calculate_distance(self):
 
-        print("----------")
-        print(x_distance)
-        print(y_distance)
-        print("----------")
+        for house in self.houses:
+            battery_distances = {}
+            for battery in self.batterys:
+                x_distance = abs(house.location_x - battery.location_x)
+                y_distance = abs(house.location_y - battery.location_y)
+                distance = x_distance + y_distance
+                battery_distances.update({battery.identification: distance})
+            house.battery_distances = battery_distances
+            print(house)
 
-        distance = x_distance + y_distance
-        print(distance)
 
 if __name__ == "__main__":
-    houses = Smartgrid.load_houses()
-    batterys = Smartgrid.load_batterys()
-    Smartgrid.calculate_distance(houses[0], batterys[0])
+    smartgrid = Smartgrid()
