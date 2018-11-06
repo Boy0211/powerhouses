@@ -8,10 +8,10 @@ from sort import sort_function as sort
 class Smartgrid():
 
     def __init__(self):
-        sort(f"data/csv_bestanden/wijk3_huizen.csv")
-        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses3.csv")
-        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk3_batterijen.txt")
-        self.calculate_distance()
+        sort(f"data/csv_bestanden/wijk2_huizen.csv")
+        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses2.csv")
+        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk2_batterijen.txt")
+        self.load_distances()
         self.battery_sort_function()
         for battery in self.batterys:
             print(battery)
@@ -29,7 +29,8 @@ class Smartgrid():
                 location_y = int(line['y'])
                 output = float(line['max. output'])
                 battery_distances = str('empty')
-                houses.append(House(identification, location_x, location_y, output, battery_distances))
+                connected_battery = 'not connected'
+                houses.append(House(identification, location_x, location_y, output, battery_distances, connected_battery))
                 id_number += 1
 
             return houses
@@ -56,20 +57,22 @@ class Smartgrid():
                 batterys.append(Battery(identification, location_x, location_y, max_input, current_input, list_of_houses))
                 id_number += 1
 
-        for battery in batterys:
-            print(battery)
+        # for battery in batterys:
+        #     print(battery)
 
         return batterys
 
     def add_house_to_battery(self, house, battery):
         battery.list_of_houses.append(house)
         battery.current_input += (house.output)
+        house.connected_battery = int(battery.identification)
 
     def remove_house_from_battery(self, house, battery):
         battery.list_of_houses.remove(house)
         battery.current_input -= (house.output)
+        house.connected_battery = 'not connected'
 
-    def calculate_distance(self):
+    def load_distances(self):
 
         for house in self.houses:
             battery_distances = {}
@@ -79,7 +82,6 @@ class Smartgrid():
                 distance = x_distance + y_distance
                 battery_distances.update({battery.identification: distance})
             house.battery_distances = battery_distances
-            print(house)
 
     def battery_sort_function(self):
 
@@ -89,15 +91,20 @@ class Smartgrid():
             for battery in self.batterys:
                 bat_list.append(battery.current_input)
             battery_counter = bat_list.index(min(bat_list))
-            print(battery_counter)
+            # print(battery_counter)
             del(bat_list)
 
             if self.batterys[battery_counter].current_input + self.houses[house_counter].output < 1507:
-                print(self.batterys[battery_counter].current_input + self.houses[house_counter].output)
                 self.add_house_to_battery(self.houses[house_counter], self.batterys[battery_counter])
             else:
                 print("het past gewoon godverdomme niet!")
             house_counter += 1
+
+        for house in self.houses:
+            print(house)
+
+    # def distance_house_battery(self, house, battery):
+
 
 
 if __name__ == "__main__":
