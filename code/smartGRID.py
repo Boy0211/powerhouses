@@ -8,18 +8,13 @@ from sort import sort_function as sort
 class Smartgrid():
 
     def __init__(self):
-        sort(f"data/csv_bestanden/wijk1_huizen.csv")
-        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses.csv")
-        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk1_batterijen.txt")
+        sort(f"data/csv_bestanden/wijk3_huizen.csv")
+        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses3.csv")
+        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk3_batterijen.txt")
         self.calculate_distance()
         self.battery_sort_function()
         for battery in self.batterys:
-            output_list = []
-            for house in battery.list_of_houses:
-                output_list.append(house.output)
-            battery.current_input = sum(output_list)
             print(battery)
-
 
     def load_houses(self, filename):
 
@@ -66,6 +61,14 @@ class Smartgrid():
 
         return batterys
 
+    def add_house_to_battery(self, house, battery):
+        battery.list_of_houses.append(house)
+        battery.current_input += (house.output)
+
+    def remove_house_from_battery(self, house, battery):
+        battery.list_of_houses.remove(house)
+        battery.current_input -= (house.output)
+
     def calculate_distance(self):
 
         for house in self.houses:
@@ -81,15 +84,15 @@ class Smartgrid():
     def battery_sort_function(self):
         for house in self.houses:
             if int(house.identification) % 5 == 1:
-                self.batterys[0].list_of_houses.append(house)
+                self.add_house_to_battery(house, self.batterys[0])
             elif int(house.identification) % 5 == 2:
-                self.batterys[1].list_of_houses.append(house)
+                self.add_house_to_battery(house, self.batterys[1])
             elif int(house.identification) % 5 == 3:
-                self.batterys[2].list_of_houses.append(house)
+                self.add_house_to_battery(house, self.batterys[2])
             elif int(house.identification) % 5 == 4:
-                self.batterys[3].list_of_houses.append(house)
+                self.add_house_to_battery(house, self.batterys[3])
             elif int(house.identification) % 5 == 0:
-                self.batterys[4].list_of_houses.append(house)
+                self.add_house_to_battery(house, self.batterys[4])
 
 
 if __name__ == "__main__":

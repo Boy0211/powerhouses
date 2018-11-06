@@ -1,7 +1,7 @@
 import csv
 
-INPUT_CSV = f"../data/csv_bestanden/wijk1_huizen.csv"
-OUTPUT_CSV = f"../data/csv_bestanden/sorted_houses.csv"
+INPUT_CSV = f"../data/csv_bestanden/wijk3_huizen.csv"
+OUTPUT_CSV = f"../data/csv_bestanden/sorted_houses3.csv"
 
 
 def sort_function(filename):

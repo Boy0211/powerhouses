@@ -10,4 +10,4 @@ class Battery(object):
         self.list_of_houses = list_of_houses
 
     def __str__(self):
-        return f"ID: {self.identification}\n location: ({self.location_x},{self.location_y})\n max_input: {self.max_input}\n current_input: {self.current_input}\n list of houses: {self.list_of_houses}\n"
+        return f"ID: {self.identification}\n location: ({self.location_x},{self.location_y})\n max_input: {self.max_input}\n current_input: {self.current_input}\n list of houses: {len(self.list_of_houses)}\n"
