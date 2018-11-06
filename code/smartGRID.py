@@ -2,13 +2,15 @@ import csv
 
 from house import House
 from battery import Battery
+from sort import sort_function as sort
 
 
 class Smartgrid():
 
     def __init__(self):
-        self.houses = self.load_houses(f"csv_bestanden/wijk1_huizen.csv")
-        self.batterys = self.load_batterys(f"csv_bestanden/wijk1_batterijen.txt")
+        sort(f"data/csv_bestanden/wijk1_huizen.csv")
+        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses.csv")
+        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk1_batterijen.txt")
         self.calculate_distance()
 
     def load_houses(self, filename):
@@ -19,7 +21,6 @@ class Smartgrid():
             id_number = 1
 
             for line in data:
-                print(line)
                 identification = id_number
                 location_x = int(line['x'])
                 location_y = int(line['y'])
