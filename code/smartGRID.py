@@ -83,33 +83,21 @@ class Smartgrid():
 
     def battery_sort_function(self):
 
-        for house in self.houses:
-            while self.batterys[0].current_input < 1507:
-                self.add_house_to_battery(house, self.batterys[0])
+        house_counter = 0
+        while house_counter < len(self.houses):
+            bat_list = []
+            for battery in self.batterys:
+                bat_list.append(battery.current_input)
+            battery_counter = bat_list.index(min(bat_list))
+            print(battery_counter)
+            del(bat_list)
 
-            while self.batterys[1].current_input < 1507:
-                self.add_house_to_battery(house, self.batterys[1])
-
-            while self.batterys[2].current_input < 1507:
-                self.add_house_to_battery(house, self.batterys[2])
-
-            while self.batterys[3].current_input < 1507:
-                self.add_house_to_battery(house, self.batterys[3])
-
-            while self.batterys[4].current_input < 1507:
-                self.add_house_to_battery(house, self.batterys[4])
-
-        # for house in self.houses:
-        #     if int(house.identification) % 5 == 1:
-        #         self.add_house_to_battery(house, self.batterys[0])
-        #     elif int(house.identification) % 5 == 2:
-        #         self.add_house_to_battery(house, self.batterys[1])
-        #     elif int(house.identification) % 5 == 3:
-        #         self.add_house_to_battery(house, self.batterys[2])
-        #     elif int(house.identification) % 5 == 4:
-        #         self.add_house_to_battery(house, self.batterys[3])
-        #     elif int(house.identification) % 5 == 0:
-        #         self.add_house_to_battery(house, self.batterys[4])
+            if self.batterys[battery_counter].current_input + self.houses[house_counter].output < 1507:
+                print(self.batterys[battery_counter].current_input + self.houses[house_counter].output)
+                self.add_house_to_battery(self.houses[house_counter], self.batterys[battery_counter])
+            else:
+                print("het past gewoon godverdomme niet!")
+            house_counter += 1
 
 
 if __name__ == "__main__":
