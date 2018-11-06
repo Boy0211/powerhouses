@@ -8,4 +8,4 @@ class House(object):
         self.output = output
 
     def __str__(self):
-        return f"ID: {self.identification}\n location: ({self.location_x},{self.location_y})\n output: {self.output}\n"
+        return f"ID: {self.identification}\nlocation: ({self.location_x},{self.location_y})\noutput: {self.output}\n"

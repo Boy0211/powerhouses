@@ -13,24 +13,26 @@ class Smartgrid():
     def load_houses():
         filename = f"csv_bestanden/wijk1_huizen.csv"
 
-        with open(filename, "r") as f:
-            data = csv.reader(f)
+        with open(filename, 'r') as csv_file:
+            data = csv.DictReader(csv_file)
             houses = []
-            id_number = 0
+            id_number = 1
 
-            for regel in data:
+            for line in data:
+                print(line)
                 identification = id_number
-                location_x = regel[0]
-                location_y = regel[1]
-                output = regel[2]
+                location_x = int(line['x'])
+                location_y = int(line['y'])
+                output = float(line['max. output'])
                 houses.append(House(identification, location_x, location_y, output))
                 id_number += 1
 
-        for house in houses:
-            print(house)
+            for house in houses:
+                print(house)
 
-        del houses[0]
-        return houses
+            print(houses[0])
+
+            return houses
 
     def load_batterys():
         filename = f"csv_bestanden/wijk1_batterijen.txt"
@@ -59,6 +61,19 @@ class Smartgrid():
 
         return batterys
 
+    def calculate_distance(house, battery):
+        x_distance = abs(house.location_x - battery.location_x)
+        y_distance = abs(house.location_y - battery.location_y)
+
+        print("----------")
+        print(x_distance)
+        print(y_distance)
+        print("----------")
+
+        distance = x_distance + y_distance
+        print(distance)
+
 if __name__ == "__main__":
-    Smartgrid.load_houses()
-    Smartgrid.load_batterys()
+    houses = Smartgrid.load_houses()
+    batterys = Smartgrid.load_batterys()
+    Smartgrid.calculate_distance(houses[0], batterys[0])
