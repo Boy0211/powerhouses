@@ -1,10 +1,9 @@
 import csv
 
-INPUT_CSV = f"../data/csv_bestanden/wijk2_huizen.csv"
-OUTPUT_CSV = f"../data/csv_bestanden/sorted_houses2.csv"
+def sort_function(filename, district):
 
-
-def sort_function(filename):
+    INPUT_CSV = f"../data/csv_bestanden/wijk{district}_huizen.csv"
+    OUTPUT_CSV = f"../data/csv_bestanden/sorted_houses{district}.csv"
 
     with open(INPUT_CSV, 'r') as csv_file:
         data = csv.DictReader(csv_file)

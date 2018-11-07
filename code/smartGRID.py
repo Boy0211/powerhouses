@@ -1,4 +1,5 @@
 import csv
+import heapq
 
 from house import House
 from battery import Battery
@@ -7,10 +8,10 @@ from sort import sort_function as sort
 
 class Smartgrid():
 
-    def __init__(self):
-        sort(f"data/csv_bestanden/wijk2_huizen.csv")
-        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses2.csv")
-        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk2_batterijen.txt")
+    def __init__(self, district):
+        sort(f"data/csv_bestanden/wijk{district}_huizen.csv", district)
+        self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses{district}.csv")
+        self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
         self.battery_sort_function()
         for battery in self.batterys:
@@ -105,17 +106,43 @@ class Smartgrid():
             print(house)
 
     def calculate_perfect(self):
-        counter = 0
+
+        counter_first = 0
+        counter_second = 0
+        counter_third = 0
+        counter_forth = 0
+        counter_five = 0
+
         for house in self.houses:
-            if house.battery_distances[int(house.connected_battery)] == min(house.battery_distances.values()):
-                counter += 1
 
-        percentage = (counter / 150) * 100
-        print(f"{round(percentage, 2)}%")
+            temp_sorted = (heapq.nsmallest(5, house.battery_distances.values()))
+            print(temp_sorted)
 
+            if house.battery_distances[int(house.connected_battery)] == temp_sorted[0]:
+                counter_first += 1
+            elif house.battery_distances[int(house.connected_battery)] == temp_sorted[1]:
+                counter_second += 1
+            elif house.battery_distances[int(house.connected_battery)] == temp_sorted[2]:
+                counter_third += 1
+            elif house.battery_distances[int(house.connected_battery)] == temp_sorted[3]:
+                counter_forth += 1
+            elif house.battery_distances[int(house.connected_battery)] == temp_sorted[4]:
+                counter_five += 1
 
+        percentage_first = (counter_first / 150) * 100
+        print(f"percentage best connected houses: {round(percentage_first, 2)}%")
 
+        percentage_second = (counter_second / 150) * 100
+        print(f"percentage worst connected houses: {round(percentage_second, 2)}%")
 
+        percentage_third = (counter_third / 150) * 100
+        print(f"percentage worst connected houses: {round(percentage_third, 2)}%")
+
+        percentage_forth = (counter_forth / 150) * 100
+        print(f"percentage worst connected houses: {round(percentage_forth, 2)}%")
+
+        percentage_five = (counter_five / 150) * 100
+        print(f"percentage worst connected houses: {round(percentage_five, 2)}%")
 
 if __name__ == "__main__":
-    smartgrid = Smartgrid()
+    smartgrid = Smartgrid("3")
