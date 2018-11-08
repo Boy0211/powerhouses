@@ -133,13 +133,13 @@ class Smartgrid():
         print(f"percentage best connected houses: {round(percentage_first, 2)}%")
 
         percentage_second = (counter_second / 150) * 100
-        print(f"percentage worst connected houses: {round(percentage_second, 2)}%")
+        print(f"percentage second best connected houses: {round(percentage_second, 2)}%")
 
         percentage_third = (counter_third / 150) * 100
-        print(f"percentage worst connected houses: {round(percentage_third, 2)}%")
+        print(f"percentage third best connected houses: {round(percentage_third, 2)}%")
 
         percentage_forth = (counter_forth / 150) * 100
-        print(f"percentage worst connected houses: {round(percentage_forth, 2)}%")
+        print(f"percentage fourth best connected houses: {round(percentage_forth, 2)}%")
 
         percentage_five = (counter_five / 150) * 100
         print(f"percentage worst connected houses: {round(percentage_five, 2)}%")
