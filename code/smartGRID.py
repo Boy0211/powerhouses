@@ -17,6 +17,7 @@ class Smartgrid():
         for battery in self.batterys:
             print(battery)
         self.calculate_perfect()
+        self.calculate_totals()
 
     def load_houses(self, filename):
 
@@ -105,6 +106,33 @@ class Smartgrid():
         for house in self.houses:
             print(house)
 
+    def calculate_distance(self, house):
+
+        distance = house.battery_distances[house.connected_battery]
+        return distance
+
+    def calculate_totals(self):
+
+        total_distance_min = 0
+        for house in self.houses:
+            distance_min = min(house.battery_distances.values())
+            total_distance_min += distance_min
+        print(f"minimal distance: {total_distance_min}")
+
+        total_distance_connected = 0
+        for house in self.houses:
+            distance = self.calculate_distance(house)
+            total_distance_connected += distance
+        print(f"connected distance: {total_distance_connected}")
+
+        total_distance_max = 0
+        for house in self.houses:
+            distance_max = max(house.battery_distances.values())
+            total_distance_max += distance_max
+        print(f"maximal distance: {total_distance_max}")
+
+        print(f"total costs: {total_distance_connected * 9}")
+
     def calculate_perfect(self):
 
         counter_first = 0
@@ -116,7 +144,6 @@ class Smartgrid():
         for house in self.houses:
 
             temp_sorted = (heapq.nsmallest(5, house.battery_distances.values()))
-            print(temp_sorted)
 
             if house.battery_distances[int(house.connected_battery)] == temp_sorted[0]:
                 counter_first += 1
