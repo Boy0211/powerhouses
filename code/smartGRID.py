@@ -145,4 +145,4 @@ class Smartgrid():
         print(f"percentage worst connected houses: {round(percentage_five, 2)}%")
 
 if __name__ == "__main__":
-    smartgrid = Smartgrid("3")
+    smartgrid = Smartgrid("1")
