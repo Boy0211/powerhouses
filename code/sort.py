@@ -2,10 +2,10 @@ import csv
 
 def sort_function(filename, district):
 
-    INPUT_CSV = f"../data/csv_bestanden/wijk{district}_huizen.csv"
-    OUTPUT_CSV = f"../data/csv_bestanden/sorted_houses{district}.csv"
 
-    with open(INPUT_CSV, 'r') as csv_file:
+    OUTPUT_CSV = f"data/csv_bestanden/sorted_houses{district}.csv"
+
+    with open(filename, 'r') as csv_file:
         data = csv.DictReader(csv_file)
         sortedlist = sorted(data, key=lambda row: row["max. output"], reverse=True)
         # print(sortedlist)
