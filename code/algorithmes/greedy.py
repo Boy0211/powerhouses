@@ -4,9 +4,10 @@ class Greedy():
 
     def greedy_1(self):
 
-        house_counter = 0
+        ''' Greedy algorithm that fills up the most empty battery'''
 
         # iterate through all houses
+        house_counter = 0
         while house_counter < len(self.houses):
             bat_list = []
 
