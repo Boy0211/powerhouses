@@ -1,0 +1,35 @@
+Probleemomschrijving:
+Maak een smartgrid waarin de huizen in een wijk zo optimaal mogelijk verbonden
+zijn aan de batterijen.
+
+Opdracht:
+a. verbind alle huizen in de drie wijken aan een batterij
+b. Bereken de kosten voor de wijken
+    - optimaliseer deze
+c. Verplaats de batterijen en behaal een zo optimaal resultaat
+d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
+   verschillende batterij capaciteiten
+
+Upperbound:
+
+Lowerbound:
+
+Statespace: 5^150
+Er kunnen per batterij 150 huizen worden ingeladen
+
+
+Algoritmes
+
+First_fit:
+  Algoritme dat het eerstvolgende huis plaatst in de eerste batterij waar hij
+  in past. Dit algoritme hebben we toegepast op een csv bestand dat is gesorteerd
+  op basis van de output van het huis. We kregen een verdeling van de _huizen
+  over de batterijen waarbij de max capaciteit van de batterijen werd
+  oveschreden.
+
+
+Greedy:
+  greedy_1:
+  Een greedy algoritme dat bepaalt welke batterij op dat moment de minste
+  input heeft en daar het eerst volgende huis bij plaatst. Het resultaat
+  overschrijd de max capaciteit van de batterijen niet.
