@@ -12,7 +12,7 @@ from visualization import grid
 
 
 def main():
-    smartgrid = Smartgrid(1)
+    smartgrid = Smartgrid(2)
     grid(smartgrid.houses, smartgrid.batterys)
     greedy_1(smartgrid.houses, smartgrid.batterys)
     for battery in smartgrid.batterys:
