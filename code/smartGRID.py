@@ -10,28 +10,34 @@ from results import save_results
 class Smartgrid():
 
     def __init__(self, district):
+
+        # print the wijk which is worked with:
         print(f"This is wijk: {district}")
+
+        # sort the given data, before further usage
         sort(f"data/csv_bestanden/wijk{district}_huizen.csv", district)
+
+        # load both the houses and the batterys into the RAM
         self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses{district}.csv")
         self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
-        self.battery_sort_function()
 
-        # for battery in self.batterys:
-            # print(battery)
+        # calculate the results and save it in a csv file
         self.calculate_perfect()
         self.calculate_totals()
-
-
         save_results(self.batterys, self.calculate_perfect(), district)
 
     def load_houses(self, filename):
 
+        '''Function which is used to load the houses into the RAM'''
+
+        # open the file
         with open(filename, 'r') as csv_file:
             data = csv.DictReader(csv_file)
             houses = []
             id_number = 1
 
+            # append all the data into the class house
             for line in data:
                 identification = id_number
                 location_x = int(line['x'])
@@ -42,16 +48,21 @@ class Smartgrid():
                 houses.append(House(identification, location_x, location_y, output, battery_distances, connected_battery))
                 id_number += 1
 
+            # return the houses
             return houses
 
     def load_batterys(self, filename):
 
+        '''Function which is used to load the houses into the RAM'''
+
+        # open the data file
         with open(filename, "r") as f:
             data = f.readlines()
             del(data[0])
             id_number = 1
             batterys = []
 
+            # for every line in the data append certain data to the battery class
             for line in data:
                 identification = id_number
                 location, max_input = line.split('\t', 1)
@@ -66,38 +77,55 @@ class Smartgrid():
                 batterys.append(Battery(identification, location_x, location_y, max_input, current_input, list_of_houses))
                 id_number += 1
 
-        # for battery in batterys:
-        #     print(battery)
-
+        # return the batterys
         return batterys
-
-    def add_house_to_battery(self, house, battery):
-        battery.list_of_houses.append(house)
-        battery.current_input += (house.output)
-        house.connected_battery = int(battery.identification)
-
-    def remove_house_from_battery(self, house, battery):
-        battery.list_of_houses.remove(house)
-        battery.current_input -= (house.output)
-        house.connected_battery = 'not connected'
 
     def load_distances(self):
 
+        '''Function to determine the distances from every house to
+           every battery '''
+
+        # for every house determine the distance to all batterys
         for house in self.houses:
             battery_distances = {}
+
+            # for every battery determine the absolute distance to every house
             for battery in self.batterys:
                 x_distance = abs(house.location_x - battery.location_x)
                 y_distance = abs(house.location_y - battery.location_y)
                 distance = x_distance + y_distance
                 battery_distances.update({battery.identification: distance})
+
+            # save it into the house class
             house.battery_distances = battery_distances
 
+    def add_house_to_battery(self, house, battery):
+
+        ''' Function used to add houses to batterys '''
+
+        battery.list_of_houses.append(house)
+        battery.current_input += (house.output)
+        house.connected_battery = int(battery.identification)
+
+    def remove_house_from_battery(self, house, battery):
+
+        ''' Function used to remove houses to batterys '''
+
+        battery.list_of_houses.remove(house)
+        battery.current_input -= (house.output)
+        house.connected_battery = 'not connected'
+
     def calculate_distance(self, house):
+
+        '''Function used to calculate the actual distance to the connected
+           battery '''
 
         distance = house.battery_distances[house.connected_battery]
         return distance
 
     def calculate_totals(self):
+
+        '''Function used to calculate results based on distance'''
 
         total_distance_min = 0
         for house in self.houses:
@@ -120,6 +148,9 @@ class Smartgrid():
         print(f"total costs: {(total_distance_connected * 9)}")
 
     def calculate_perfect(self):
+
+        '''Function used to calculate how many houses are connected to the
+           best option'''
 
         counter_first = 0
         counter_second = 0
