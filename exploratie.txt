@@ -29,3 +29,11 @@ Greedy:
   Een greedy algoritme dat bepaalt welke batterij op dat moment de minste
   input heeft en daar het eerst volgende huis bij plaatst. Het resultaat
   overschrijd de max capaciteit van de batterijen niet.
+
+Ideeën:
+- binpacking problem: door de overeenkomsten van ons probleem met het binpacking
+  problem zijn we op het idee gekomen om een first_fit algorithme te gebruiken.
+  Dit probleem gaat er vanuit dat er een variabel aantal bins is, wij hebben tot
+  nu toe een fixed aantal batterijen en is daardoor niet goed vergelijkbaar.
+  Misschien kunnen we hier later opnieuw naar kijken als we het aantal
+  batterijen mogen variëren.
