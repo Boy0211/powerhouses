@@ -7,10 +7,12 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 
 from greedy import greedy_1
 from smartGRID import Smartgrid
+from visualization import grid
 
 
 def main():
     smartgrid = Smartgrid(1)
+    grid(smartgrid.houses, smartgrid.batterys)
     greedy_1(smartgrid.houses, smartgrid.batterys)
     for battery in smartgrid.batterys:
         print(battery)
