@@ -5,6 +5,7 @@ from house import House
 from battery import Battery
 from sort import sort_function as sort
 from results import save_results
+from visualization import grid
 
 
 class Smartgrid(object):
