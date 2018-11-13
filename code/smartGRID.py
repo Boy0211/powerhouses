@@ -10,12 +10,12 @@ from results import save_results
 class Smartgrid():
 
     def __init__(self, district):
+        print(f"This is wijk: {district}")
         sort(f"data/csv_bestanden/wijk{district}_huizen.csv", district)
         self.houses = self.load_houses(f"../data/csv_bestanden/sorted_houses{district}.csv")
         self.batterys = self.load_batterys(f"../data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
         self.battery_sort_function()
-
 
         # for battery in self.batterys:
             # print(battery)
@@ -117,7 +117,7 @@ class Smartgrid():
             total_distance_max += distance_max
         print(f"maximal distance: {total_distance_max}")
 
-        print(f"total costs: {total_distance_connected * 9}")
+        print(f"total costs: {(total_distance_connected * 9)}")
 
     def calculate_perfect(self):
 
@@ -159,4 +159,4 @@ class Smartgrid():
         return(percentage_first)
 
 if __name__ == "__main__":
-    smartgrid = Smartgrid("1")
+    smartgrid = Smartgrid("3")
