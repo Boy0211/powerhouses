@@ -10,10 +10,6 @@ c. Verplaats de batterijen en behaal een zo optimaal resultaat
 d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
    verschillende batterij capaciteiten
 
-Upperbound:
-
-Lowerbound:
-
 Statespace: 5^150
 Er kunnen per batterij 150 huizen worden ingeladen
 
