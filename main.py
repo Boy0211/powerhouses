@@ -7,5 +7,10 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 
 from greedy import greedy_1
 
+
 def main():
-    A = 
+
+    greedy_1(houses, batterys)
+
+if __name__ == "__main__":
+    main()
