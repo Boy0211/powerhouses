@@ -2,7 +2,7 @@ import os
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
-import time
+from datetime import datetime
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -18,20 +18,27 @@ from visualization import grid
 
 def main():
 
-    smartgrid = Smartgrid(1)
+    smartgrid = Smartgrid(3)
     # grid(smartgrid.houses, smartgrid.batterys)
     # greedy_1(smartgrid.houses, smartgrid.batterys)
     i = 0
     all_scores = []
-    while i < 1000:
+    time_stamp = datetime.now()
+    while i < 10000:
         random_greedy(smartgrid.houses, smartgrid.batterys)
         score = calculate_score(smartgrid.houses)
         all_scores.append(score)
         i += 1
 
+    print(datetime.now() - time_stamp)
     all_scores.sort()
-    plt.hist(all_scores, 10)
+    bins = 25
+    n,x,_ = plt.hist(all_scores, bins)
+    bin_centers = 0.5*(x[1:]+x[:-1])
+    plt.plot(bin_centers, n)
     plt.show()
+    for battery in smartgrid.batterys:
+        print(battery)
     exit()
 
 
