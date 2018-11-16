@@ -72,7 +72,7 @@ def greedy_2(houses, batterys):
         # print(f"battery number: {battery_number}")
         # print(f"try battery: {try_battery}")
 
-        if batterys[battery_number-1].current_input + houses[house_counter].output < 1507:
+        if batterys[battery_number-1].current_input + houses[house_counter].output <= float(batterys[battery_number-1].max_input):
             add_house_to_battery(houses[house_counter], batterys[battery_number-1])
             # print(houses[house_counter].battery_distances)
 

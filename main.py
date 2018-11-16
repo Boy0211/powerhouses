@@ -20,9 +20,9 @@ def main():
     smartgrid = Smartgrid(1)
     # grid(smartgrid.houses, smartgrid.batterys)
     # greedy_1(smartgrid.houses, smartgrid.batterys)
-    random_distribution(smartgrid.houses, smartgrid.batterys, 100000, 10)
-    # greedy_2(smartgrid.houses, smartgrid.batterys)
-    # print(calculate_score(smartgrid.houses))
+    # random_distribution(smartgrid.houses, smartgrid.batterys, 100000, 10)
+    greedy_2(smartgrid.houses, smartgrid.batterys)
+    print(calculate_score(smartgrid.houses))
 
 
 
