@@ -1,5 +1,9 @@
 import random
+from datetime import datetime
+import matplotlib.pyplot as plt
+
 from add_remove import add_house_to_battery
+from score import calculate_score
 
 
 def random_greedy(houses, batterys):
@@ -24,3 +28,21 @@ def random_greedy(houses, batterys):
                         battery.list_of_houses = []
                     list_2.clear()
                     i = 0
+
+def random_distribution(houses, batterys, attempts, bins):
+
+    i = 0
+    all_scores = []
+    time_stamp = datetime.now()
+    while i < attempts:
+        random_greedy(houses, batterys)
+        score = calculate_score(houses)
+        all_scores.append(score)
+        i += 1
+
+    print(datetime.now() - time_stamp)
+    all_scores.sort()
+    n,x,_ = plt.hist(all_scores, bins)
+    bin_centers = 0.5*(x[1:]+x[:-1])
+    plt.plot(bin_centers, n)
+    plt.show()
