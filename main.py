@@ -7,11 +7,12 @@ sys.path.append(os.path.join(directory, "code"))
 sys.path.append(os.path.join(directory, "code", "algorithmes"))
 sys.path.append(os.path.join(directory, "code", "classes"))
 
-from random_greedy import random_distribution
+# from random_greedy import random_distribution
 from greedy import greedy_1
+from greedy import greedy_2
 from smartGRID import Smartgrid
 from score import calculate_score
-from visualization import grid
+# from visualization import grid
 
 
 def main():
@@ -19,7 +20,9 @@ def main():
     smartgrid = Smartgrid(1)
     # grid(smartgrid.houses, smartgrid.batterys)
     # greedy_1(smartgrid.houses, smartgrid.batterys)
-    random_distribution(smartgrid.houses, smartgrid.batterys, 1000, 10)
+    # random_distribution(smartgrid.houses, smartgrid.batterys, 1000, 10)
+    greedy_2(smartgrid.houses, smartgrid.batterys)
+    print(calculate_score(smartgrid.houses))
 
 
 

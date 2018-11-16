@@ -27,14 +27,6 @@ def sort_function(filename, district):
 
 
 def sort_distance(houses):
-    ''' Sort houses in order of distance to nearest battery'''
-
-    for house in houses:
-        house_values = house.battery_distances.values()
-        min_length = min(house_values)
-        print(min_length)
-
-def sort_distance(houses):
 
     n = len(houses)
 
