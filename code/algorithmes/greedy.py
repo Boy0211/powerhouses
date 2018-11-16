@@ -39,20 +39,6 @@ def greedy_2(houses, batterys):
     house_counter = 0
     try_battery = 0
     while house_counter < len(houses):
-        # bat_list = []
-
-        # append all batteries in new list and choose battery with lowest
-        # current input
-        # for battery in batterys:
-        #     bat_list.append(battery.current_input)
-        # battery_counter = bat_list.index(min(bat_list))
-        #
-        # del(bat_list)
-
-        # if a house fits into the battery with the lowest input, put this
-        # house inside this battery. Otherwise were scruwed because we have
-        # reached the max capacity of all batteries
-        # print(min(houses[house_counter].battery_distances, key=houses[house_counter].battery_distances.get))
 
         # sorteer lijst van batterijen per huis
         battery_list = (list(houses[house_counter].battery_distances.values()))
@@ -83,9 +69,6 @@ def greedy_2(houses, batterys):
             print(try_battery)
             print(houses[house_counter].output)
             del houses[house_counter].battery_distances[battery_number]
-            # try_battery += 1
-        # else:
-        #     print("het past gewoon godverdomme niet!")
-        #     print(houses[house_counter])
+
     for battery in batterys:
         print(battery)
