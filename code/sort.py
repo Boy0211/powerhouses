@@ -2,6 +2,7 @@ import csv
 
 def sort_function(filename, district):
 
+    ''' Sort houses in order of output'''
 
     OUTPUT_CSV = f"data/csv_bestanden/sorted_houses{district}.csv"
 
@@ -23,3 +24,30 @@ def sort_function(filename, district):
             templist.append(y_value)
             templist.append(max_output)
             writer.writerow(templist)
+
+
+def sort_distance(houses):
+    ''' Sort houses in order of distance to nearest battery'''
+
+    for house in houses:
+        house_values = house.battery_distances.values()
+        min_length = min(house_values)
+        print(min_length)
+
+def sort_distance(houses):
+
+    n = len(houses)
+
+    # Traverse through all array elements
+    for i in range(n):
+
+        # Last i elements are already in place
+        for j in range(0, n-i-1):
+
+            # traverse the array from 0 to n-i-1
+            # Swap if the element found is greater
+            # than the next element
+            if (min(houses[j].battery_distances.values())) > (min(houses[j+1].battery_distances.values())):
+                houses[j], houses[j+1] = houses[j+1], houses[j]
+
+    return houses
