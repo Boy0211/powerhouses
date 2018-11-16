@@ -16,19 +16,19 @@ def calculate_score(houses):
     for house in houses:
         distance_min = min(house.battery_distances.values())
         total_distance_min += distance_min
-    print(f"minimal distance: {total_distance_min}")
+    # print(f"minimal distance: {total_distance_min}")
 
     total_distance_connected = 0
     for house in houses:
         distance = calculate_distance(house)
         total_distance_connected += distance
-    print(f"connected distance: {total_distance_connected}")
+    # print(f"connected distance: {total_distance_connected}")
 
     total_distance_max = 0
     for house in houses:
         distance_max = max(house.battery_distances.values())
         total_distance_max += distance_max
-    print(f"maximal distance: {total_distance_max}")
+    # print(f"maximal distance: {total_distance_max}")
 
     score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
     return score
