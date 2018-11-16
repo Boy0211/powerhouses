@@ -8,26 +8,29 @@ from score import calculate_score
 
 def random_greedy(houses, batterys):
 
-    list = [0, 1, 2, 3, 4]
+    list_houses = list(range(0, 150))
+
+    lijst = [0, 1, 2, 3, 4]
     list_2 = []
 
     i = 0
-    while i < len(houses):
+    while len(list_houses) > 0:
 
-            counter = random.choice(list)
+            house_counter = random.choice(list_houses)
+            counter = random.choice(lijst)
 
-            if batterys[counter].current_input + houses[i].output <= float(batterys[counter].max_input):
-                add_house_to_battery(houses[i], batterys[counter])
-                i += 1
-
+            if batterys[counter].current_input + houses[house_counter].output <= float(batterys[counter].max_input):
+                add_house_to_battery(houses[house_counter], batterys[counter])
+                list_houses.remove(house_counter)
+                
             else:
                 list_2.append(counter)
-                if set(list_2) == set(list):
+                if set(list_2) == set(lijst):
                     for battery in batterys:
                         battery.current_input = 0
                         battery.list_of_houses = []
                     list_2.clear()
-                    i = 0
+                    list_houses = list(range(0, 150))
 
 def random_distribution(houses, batterys, attempts, bins):
 
