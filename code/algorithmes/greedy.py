@@ -90,7 +90,7 @@ def greedy_2(houses, batterys):
             del temp_dict[battery_number]
 
 
-    for house in houses:
-        print(house)
-    for battery in batterys:
-        print(battery)
+    # for house in houses:
+    #     print(house)
+    # for battery in batterys:
+    #     print(battery)

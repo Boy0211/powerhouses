@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 from add_remove import add_house_to_battery
 from score import calculate_score
+from hillclimber import hill_climber
 
 
 def random_greedy(houses, batterys):
@@ -22,7 +23,7 @@ def random_greedy(houses, batterys):
             if batterys[counter].current_input + houses[house_counter].output <= float(batterys[counter].max_input):
                 add_house_to_battery(houses[house_counter], batterys[counter])
                 list_houses.remove(house_counter)
-                
+
             else:
                 list_2.append(counter)
                 if set(list_2) == set(lijst):
@@ -39,6 +40,7 @@ def random_distribution(houses, batterys, attempts, bins):
     time_stamp = datetime.now()
     while i < attempts:
         random_greedy(houses, batterys)
+        hill_climber(houses, batterys)
         score = calculate_score(houses)
         all_scores.append(score)
         i += 1

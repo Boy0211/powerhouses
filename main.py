@@ -13,16 +13,21 @@ from greedy import greedy_2
 from smartGRID import Smartgrid
 from score import calculate_score
 from visualization import grid
+from hillclimber import hill_climber
 
 
 def main():
 
-    smartgrid = Smartgrid(1)
+    smartgrid = Smartgrid(2)
     # grid(smartgrid.houses, smartgrid.batterys)
     # greedy_1(smartgrid.houses, smartgrid.batterys)
-    # random_distribution(smartgrid.houses, smartgrid.batterys, 100, 10)
+    random_distribution(smartgrid.houses, smartgrid.batterys, 1000, 99)
     # greedy_2(smartgrid.houses, smartgrid.batterys)
     # print(calculate_score(smartgrid.houses))
+    # hill_climber(smartgrid.houses, smartgrid.batterys)
+    # print(calculate_score(smartgrid.houses))
+    # for battery in smartgrid.batterys:
+        # print(battery)
 
 
 

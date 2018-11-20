@@ -22,7 +22,7 @@ def calculate_score(houses):
     for house in houses:
         distance = calculate_distance(house)
         total_distance_connected += distance
-    print(f"connected distance: {total_distance_connected}")
+    # print(f"connected distance: {total_distance_connected}")
 
     total_distance_max = 0
     for house in houses:
@@ -31,7 +31,7 @@ def calculate_score(houses):
     # print(f"maximal distance: {total_distance_max}")
 
     costs = (total_distance_connected * 9)  + 25000
-    print(f"total costs: {costs}")
+    # print(f"total costs: {costs}")
 
     score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
     return score
