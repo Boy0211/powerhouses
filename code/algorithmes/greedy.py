@@ -1,5 +1,7 @@
 from add_remove import add_house_to_battery
-
+from sort import sort_distance
+import random
+import copy
 
 def greedy_1(houses, batterys):
 
@@ -26,3 +28,39 @@ def greedy_1(houses, batterys):
         else:
             print("het past gewoon godverdomme niet!")
         house_counter += 1
+
+def greedy_2(houses, batterys):
+    ''' Greedy algorithm that fills up the most empty battery on a sorted list'''
+
+    houses = sort_distance(houses)
+
+    # iterate through all houses
+    house_counter = 0
+    temp_house_counter = 0
+    temp_dict = dict()
+
+    while house_counter < len(houses):
+
+        # als house_counter toeneemt, sla battery_distances op in nieuwe lijst
+        if temp_house_counter == house_counter:
+            temp_dict = dict()
+            temp_dict = copy.deepcopy(houses[house_counter].battery_distances)
+
+        # sorteer lijst van batterijen per huis
+        battery_list = (list(temp_dict.values()))
+        battery_list = sorted(battery_list)
+
+        # neem eerste waarde in deze lijst(is minimale waarde)
+        current_battery = (battery_list[0])
+
+        # zoek key met bijbehorende afstand
+        battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
+
+        if batterys[battery_number-1].current_input + houses[house_counter].output <= float(batterys[battery_number-1].max_input) + 0.01 * float(batterys[battery_number-1].max_input):
+            add_house_to_battery(houses[house_counter], batterys[battery_number-1])
+
+            house_counter += 1
+            temp_house_counter = house_counter
+        else:
+            temp_house_counter += 1
+            del temp_dict[battery_number]

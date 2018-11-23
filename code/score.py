@@ -5,7 +5,7 @@ def calculate_distance(house):
     '''Function used to calculate the actual distance to the connected
        battery '''
 
-    distance = house.battery_distances[house.connected_battery]
+    distance = house.connected_battery["distance"]
     return distance
 
 def calculate_score(houses):
@@ -29,6 +29,9 @@ def calculate_score(houses):
         distance_max = max(house.battery_distances.values())
         total_distance_max += distance_max
     # print(f"maximal distance: {total_distance_max}")
+
+    costs = (total_distance_connected * 9)  + 25000
+    # print(f"total costs: {costs}")
 
     score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
     return score
