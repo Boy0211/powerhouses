@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import interactive
 
 
 def grid(houses, batterys):
@@ -98,10 +99,12 @@ def grid(houses, batterys):
     plt.scatter([x_battery_4], [y_battery_4], s=70, color='purple')
     plt.scatter([x_battery_5], [y_battery_5], s=70, color='green')
 
-    plt.plot(x_1, y_1, color="red")
-    plt.plot(x_2, y_2, color="orange")
-    plt.plot(x_3, y_3, color="blue")
-    plt.plot(x_4, y_4, color="purple")
-    plt.plot(x_5, y_5, color="green")
-
+    plt.plot(x_1, y_1, linewidth=0.5, color="red")
+    plt.plot(x_2, y_2, linewidth=0.5, color="orange")
+    plt.plot(x_3, y_3, linewidth=0.5, color="blue")
+    plt.plot(x_4, y_4, linewidth=0.5, color="purple")
+    plt.plot(x_5, y_5, linewidth=0.5, color="green")
+    for house in batterys[0].list_of_houses:
+        print(house)
+        plt.text(house.location_x, house.location_y, house.output, size=2)
     plt.show()

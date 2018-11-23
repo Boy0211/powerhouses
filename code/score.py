@@ -31,8 +31,13 @@ def calculate_score(houses):
     # print(f"maximal distance: {total_distance_max}")
 
     costs = (total_distance_connected * 9)  + 25000
-    # print(f"total costs: {costs}")
+    print(f"total costs: {costs}")
 
+    costs_min = (total_distance_min * 9)  + 25000
+    print(f"total min costs: {costs_min}")
+
+    costs_max = (total_distance_max * 9)  + 25000
+    print(f"total max costs: {costs_max}")
     score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
     return score
 
