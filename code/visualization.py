@@ -21,7 +21,6 @@ def grid(houses, batterys):
             y_2.append(house.location_y)
             y_2.append(batterys[1].location_y)
 
-
     x_3 = []
     y_3 = []
     for house in batterys[2].list_of_houses:
@@ -83,10 +82,10 @@ def grid(houses, batterys):
     # y_line = [5, 25]
 
     plt.scatter([x_1], [y_1], s=10, color='red')
-    plt.scatter([x_2], [y_2], s=10, color='green')
+    plt.scatter([x_2], [y_2], s=10, color='orange')
     plt.scatter([x_3], [y_3], s=10, color='blue')
     plt.scatter([x_4], [y_4], s=10, color='purple')
-    plt.scatter([x_5], [y_5], s=10, color='orange')
+    plt.scatter([x_5], [y_5], s=10, color='green')
     plt.axis([-5, 60, -5, 60])
     x_grid = np.linspace(0, 59, 60)
     y_grid = np.linspace(0, 59, 60)
@@ -94,15 +93,15 @@ def grid(houses, batterys):
     plt.yticks(y_grid)
     plt.grid()
     plt.scatter([x_battery_1], [y_battery_1], s=70, color='red')
-    plt.scatter([x_battery_2], [y_battery_2], s=70, color='green')
+    plt.scatter([x_battery_2], [y_battery_2], s=70, color='orange')
     plt.scatter([x_battery_3], [y_battery_3], s=70, color='blue')
     plt.scatter([x_battery_4], [y_battery_4], s=70, color='purple')
-    plt.scatter([x_battery_5], [y_battery_5], s=70, color='orange')
+    plt.scatter([x_battery_5], [y_battery_5], s=70, color='green')
 
     plt.plot(x_1, y_1, color="red")
-    plt.plot(x_2, y_2, color="green")
+    plt.plot(x_2, y_2, color="orange")
     plt.plot(x_3, y_3, color="blue")
     plt.plot(x_4, y_4, color="purple")
-    plt.plot(x_5, y_5, color="orange")
+    plt.plot(x_5, y_5, color="green")
 
     plt.show()
