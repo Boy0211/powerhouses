@@ -75,3 +75,5 @@ Ideeën:
   hele statespace. Naarmate de iteraties toenemen neemt de temperatuur af en daarmee
   de mate waarin een negatieve score wordt aangenenomen. Het werkt zich dus nog
   steeds naar een optimum toe maar de kans is groter dat dit het totale optimum is.
+- K-means: voor het verplaatsen van de batterij misschien een nieuw cluster algorithme
+  gebruiken zoals K-means??
