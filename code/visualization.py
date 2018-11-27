@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import interactive
 
 
 def grid(houses, batterys):
