@@ -30,6 +30,38 @@ Greedy:
   input heeft en daar het eerst volgende huis bij plaatst. Het resultaat
   overschrijd de max capaciteit van de batterijen niet.
 
+  Upper_bound kosten: 53188
+  Lower_bound kosten: 103030
+
+  greedy_2:
+  Plaatst batterijen op basis van afstand tot batterij. Dus huizen worden als
+  eerste in de batterij geplaatst die het meest dichtbij hen is. Als die vol zit
+  wordt de tweede batterij geprobeert etc.
+
+  Upper_bound kosten: 53188
+  Lower_bound kosten: 103030
+
+Hillclimber:
+  Hillclimber_1:
+  Deze hillclimber verbeterd de resultaten nadat een ander algorithme de eerste
+  verdeling heeft gemaakt. Het doet dit door random 2 batterijen te kiezen en
+  daarin twee random gekozen huizen te proberen te swappen. Deze swap wordt
+  alleen uitgevoerd als dit een gunstige swap is, als het dus de score verbeterd.
+
+  Upper_bound kosten: 53188
+  Lower_bound kosten: 103030
+
+  Hillclimber_2:
+  Deze hillclimber berekent voor alle mogelijke swaps een score en voert vervolgens
+  de swap met de hoogeste score uit. Hierdoor wordt dus altijd de beste swap uitgevoerd.
+  Het nadeel van deze methode is dat je een grote kans hebt dat je in een lokaal
+  optimum terecht komt. Een mogelijke oplossing hiervoor zou misschien een
+  simulated annealing algorithme zijn.
+
+  Upper_bound kosten: 53188
+  Lower_bound kosten: 103030
+
+
 Ideeën:
 - binpacking problem: door de overeenkomsten van ons probleem met het binpacking
   problem zijn we op het idee gekomen om een first_fit algorithme te gebruiken.
@@ -37,3 +69,9 @@ Ideeën:
   nu toe een fixed aantal batterijen en is daardoor niet goed vergelijkbaar.
   Misschien kunnen we hier later opnieuw naar kijken als we het aantal
   batterijen mogen variëren.
+- simulated annealing: dit algorithme zou het probleem van een lokaal optimum
+  kunnen verhelpen. Dit algorithme neemt in het begin ook minder positieve scores
+  aan zodat het niet vast blijft zitten in een optimum. Het verkent hierdoor de
+  hele statespace. Naarmate de iteraties toenemen neemt de temperatuur af en daarmee
+  de mate waarin een negatieve score wordt aangenenomen. Het werkt zich dus nog
+  steeds naar een optimum toe maar de kans is groter dat dit het totale optimum is.

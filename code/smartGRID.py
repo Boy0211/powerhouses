@@ -20,7 +20,7 @@ class Smartgrid(object):
         self.houses = self.load_houses(f"data/csv_bestanden/sorted_houses{district}.csv")
         self.batterys = self.load_batterys(f"data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
-        self.load_distance_houses()
+        # self.load_distance_houses()
 
 
     def load_houses(self, filename):
@@ -42,7 +42,7 @@ class Smartgrid(object):
                 battery_distances = str('empty')
                 connected_battery = 'not connected'
                 distance_houses = str('empty')
-                houses.append(House(identification, location_x, location_y, output, battery_distances, connected_battery, distance_houses))
+                houses.append(House(identification, location_x, location_y, output, battery_distances, connected_battery))
                 id_number += 1
 
             # return the houses
