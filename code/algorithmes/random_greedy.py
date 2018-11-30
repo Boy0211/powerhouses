@@ -21,7 +21,7 @@ def random_greedy(houses, batterys):
             house_counter = random.choice(list_houses)
             counter = random.choice(lijst)
 
-            if batterys[counter].current_input + houses[house_counter].output <= float(batterys[counter].max_input):
+            if batterys[counter].current_input + houses[house_counter].output <= 1.01 * float(batterys[counter].max_input):
                 add_house_to_battery(houses[house_counter], batterys[counter])
                 list_houses.remove(house_counter)
 
