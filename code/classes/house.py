@@ -8,6 +8,6 @@ class House(object):
         self.output = output
         self.battery_distances = battery_distances
         self.connected_battery = connected_battery
-
+        # self.distance_houses = distance_houses
     def __str__(self):
-        return f"ID: {self.identification}\nlocation: ({self.location_x},{self.location_y})\noutput: {self.output}\nbattery_distances: {self.battery_distances}\nconnected battery: {self.connected_battery}\n"
+        return f"ID: {self.identification}\nlocation: ({self.location_x},{self.location_y})\noutput: {self.output}\nbattery_distances: {self.battery_distances}\nconnected battery: {self.connected_battery}\ndistance_houses: {self.distance_houses}\n"
