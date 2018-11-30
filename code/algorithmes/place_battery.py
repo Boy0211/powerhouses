@@ -3,12 +3,16 @@
 # 2601^5 mogelijke oplossingen: 1.19*e^17
 # 1.19*e^17 - opties waarbij batterijen op zelfde plek staan
 # dus maak algorithme dat alle mogelijkheden afgaat
-from hillclimber import hill_climber
+
 from score import calculate_score
-from random_greedy import random_greedy
 from datetime import datetime
 import matplotlib.pyplot as plt
-import itertools
+import random
+import copy
+from add_remove import add_house_to_battery
+
+from numpy import mean
+from visualization import grid
 
 def load_distances(houses, batterys):
 
@@ -141,12 +145,84 @@ def place_battery(houses, batterys):
     #     for subset in itertools.combinations(stuff, L):
     #         print(subset)
 
-'''Verdeel huizen met greedy in 4 groepen met de korst mogelijke afstand'''
-def place_battery_2(houses, batterys):
-    for house in houses:
-        print(house)
+'''Verdeel huizen met greedy in 5 groepen met de korst mogelijke afstand'''
+def k_means(houses, batterys):
+    # 1. random x,y aanmaken voor batterijen
+    # 2. afstand tot elk huis berekenen
+    # 3. clusters vormen waarbij huizen die dichstbij staan in cluster worden gezet
+    # 4. herhalen totdat clusters niet veranderen
+
+    # for house in houses:
+    #     print(house)
+
+    # assign random location to batterys
+    for battery in batterys:
+        battery.location_x = random.randint(0, 51)
+        battery.location_y = random.randint(0, 51)
+
+    # load_distances(houses, batterys)
+
+    # for battery in batterys:
+    #     print(battery)
+
+    # houses = sort_distance(houses)
+
+    # iterate through all houses
 
 
+    while True:
+        total_change = 0
+        for battery in batterys:
+            battery.list_of_houses = []
+            battery.current_input = 0
+        temp_dict = dict()
+        load_distances(houses, batterys)
+        for house in houses:
+
+            temp_dict = dict()
+            temp_dict = copy.deepcopy(house.battery_distances)
+
+            # sorteer lijst van batterijen per huis
+            battery_list = (list(temp_dict.values()))
+            battery_list = sorted(battery_list)
+
+            # neem eerste waarde in deze lijst(is minimale waarde)
+            current_battery = (battery_list[0])
+
+            # zoek key met bijbehorende afstand
+            battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
+
+            add_house_to_battery(house, batterys[battery_number-1])
+
+        # grid(houses, batterys)
+
+        for battery in batterys:
+            x_coordinates = list()
+            y_coordinates = list()
+            for house in battery.list_of_houses:
+                x_coordinates.append(house.location_x)
+                y_coordinates.append(house.location_y)
+            mean_x = round(mean(x_coordinates))
+            mean_y = round(mean(y_coordinates))
+
+            change_x = abs(battery.location_x - mean_x)
+            change_y = abs(battery.location_y - mean_y)
+            total_change += change_x + change_y
+            battery.location_x = mean_x
+            battery.location_y = mean_y
+
+            # print(total_change)
+        # print("----------------")
+        if total_change < 1:
+            break
+
+
+
+
+
+        temp_batterys = copy.deepcopy(batterys)
+        # grid(houses, batterys)
+    return houses, batterys
 
 def greedy_2(houses, batterys):
     ''' Greedy algorithm that fills up the most empty battery on a sorted list'''
