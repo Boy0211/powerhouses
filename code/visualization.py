@@ -89,9 +89,15 @@ def grid(houses, batterys):
     plt.axis([-5, 60, -5, 60])
     x_grid = np.linspace(0, 59, 60)
     y_grid = np.linspace(0, 59, 60)
-    plt.xticks(x_grid)
-    plt.yticks(y_grid)
-    plt.grid()
+    plt.xticks(x_grid, [])
+    plt.yticks(y_grid, [])
+
+    plt.grid(True)
+    # plt.xlabel(0, 20)
+    # plt.ylabel(0, 20)
+
+    # plt.xticks(-5, 60)
+    # plt.yticks(-5, 60)
     plt.scatter([x_battery_1], [y_battery_1], s=70, color='red')
     plt.scatter([x_battery_2], [y_battery_2], s=70, color='orange')
     plt.scatter([x_battery_3], [y_battery_3], s=70, color='blue')
@@ -103,7 +109,17 @@ def grid(houses, batterys):
     plt.plot(x_3, y_3, linewidth=0.5, color="blue")
     plt.plot(x_4, y_4, linewidth=0.5, color="purple")
     plt.plot(x_5, y_5, linewidth=0.5, color="green")
+
+    # for i, txt in enumerate(house.output):
+    #     plt.annotate(house.output, (house.location_x[i], house.location_y[i]))
     for house in batterys[0].list_of_houses:
-        print(house)
-        plt.text(house.location_x, house.location_y, house.output, size=2)
+        plt.text(house.location_x, house.location_y, house.output, fontsize=5)
+    for house in batterys[1].list_of_houses:
+        plt.text(house.location_x, house.location_y, house.output, fontsize=5)
+    for house in batterys[2].list_of_houses:
+        plt.text(house.location_x, house.location_y, house.output, fontsize=5)
+    for house in batterys[3].list_of_houses:
+        plt.text(house.location_x, house.location_y, house.output, fontsize=5)
+    for house in batterys[4].list_of_houses:
+        plt.text(house.location_x, house.location_y, house.output, fontsize=5)
     plt.show()

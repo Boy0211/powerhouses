@@ -55,8 +55,7 @@ def greedy_2(houses, batterys):
 
         # zoek key met bijbehorende afstand
         battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
-
-        if batterys[battery_number-1].current_input + houses[house_counter].output <= float(batterys[battery_number-1].max_input):
+        if batterys[battery_number-1].current_input + houses[house_counter].output <= 1.01 * float(batterys[battery_number-1].max_input):
             add_house_to_battery(houses[house_counter], batterys[battery_number-1])
 
             house_counter += 1
