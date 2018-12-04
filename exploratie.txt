@@ -22,6 +22,16 @@ vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze bucket
 over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
 De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
 
+Score
+In de situatie van statische batterijen kan de lower bound als volgt worden
+berekend. Het is de som van de afstand van elk huis, tot de dichtsbijzijnde
+batterij. Dit getal vermenigvuldigd met 9 (een kabelsegment kost 9),
+geeft de laagst mogelijke totale kosten. 
+Voor de maximale kosten geld
+total_distance_min = 0
+for house in houses:
+    distance_min = min(house.battery_distances.values())
+    total_distance_min += distance_min
 
 
 Algoritmes
@@ -38,7 +48,7 @@ Greedy:
   greedy_1:
   Een greedy algoritme dat bepaalt welke batterij op dat moment de minste
   input heeft en daar het eerst volgende huis bij plaatst. Het resultaat
-  overschrijd de max capaciteit van de batterijen niet.
+  overschrijdt de maximale capaciteit van de batterijen niet.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
@@ -46,17 +56,18 @@ Greedy:
   greedy_2:
   Plaatst batterijen op basis van afstand tot batterij. Dus huizen worden als
   eerste in de batterij geplaatst die het meest dichtbij hen is. Als die vol zit
-  wordt de tweede batterij geprobeert etc.
+  wordt er gekeken naar de tweede batterij etc.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
 
 Hillclimber:
   Hillclimber_1:
-  Deze hillclimber verbeterd de resultaten nadat een ander algorithme de eerste
-  verdeling heeft gemaakt. Het doet dit door random 2 batterijen te kiezen en
-  daarin twee random gekozen huizen te proberen te swappen. Deze swap wordt
-  alleen uitgevoerd als dit een gunstige swap is, als het dus de score verbeterd.
+  Deze hillclimber verbeterd de resultaten nadat een ander algoritme de eerste
+  verdeling heeft gemaakt. Het algoritme kiest twee random batterijen, en
+  daarin twee random gekozen huizen proberen te swappen. Deze swap wordt
+  alleen uitgevoerd als dit een gunstige swap is, een gunstige swap houdt in dat
+  de score wordt verbeterd.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
@@ -72,6 +83,7 @@ Hillclimber:
   Bound_bound kosten: 103030
 
 Knelpunten
+
 De combinatie van een greedy en een hillclimber heeft in wijk 1 veel
 belovende resultaten teweeggebracht. De efficientie bedroeg hier
 namelijk ≈ 0.93 %. Maar wat al snel opviel in de visualisatie, was dat een
@@ -105,13 +117,13 @@ wegstrepen wanneer deze in eerste instantie ongeldig zijn. Het behoudt van deze
 grote statespace maakt ons probleem lastig.
 
 Ideeën:
-- binpacking problem: door de overeenkomsten van ons probleem met het binpacking
+- Binpacking problem: door de overeenkomsten van ons probleem met het binpacking
   problem zijn we op het idee gekomen om een first_fit algorithme te gebruiken.
   Dit probleem gaat er vanuit dat er een variabel aantal bins is, wij hebben tot
   nu toe een fixed aantal batterijen en is daardoor niet goed vergelijkbaar.
   Misschien kunnen we hier later opnieuw naar kijken als we het aantal
   batterijen mogen variëren.
-- simulated annealing: dit algorithme zou het probleem van een lokaal optimum
+- Simulated annealing: dit algorithme zou het probleem van een lokaal optimum
   kunnen verhelpen. Dit algorithme neemt in het begin ook minder positieve scores
   aan zodat het niet vast blijft zitten in een optimum. Het verkent hierdoor de
   hele statespace. Naarmate de iteraties toenemen neemt de temperatuur af en daarmee
