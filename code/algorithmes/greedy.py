@@ -34,11 +34,12 @@ def greedy_1(solution):
         house_counter += 1
 
 
-def greedy_2(houses, data_batterys):
+def greedy_2(solution):
     ''' Greedy algorithm that fills up the most empty battery from a sorted list'''
 
     # information for the solution
-    batterys = copy.deepcopy(data_batterys)
+    houses = solution.houses
+    batterys = solution.batterys
 
     # iterate through all houses
     sorted_houses = sort_distance(copy.deepcopy(houses))

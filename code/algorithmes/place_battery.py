@@ -4,7 +4,6 @@
 # 1.19*e^17 - opties waarbij batterijen op zelfde plek staan
 # dus maak algorithme dat alle mogelijkheden afgaat
 
-from score import calculate_score
 from datetime import datetime
 import matplotlib.pyplot as plt
 import random
@@ -13,6 +12,12 @@ from helpers import add_house_to_battery
 
 from numpy import mean
 from visualization import grid
+
+
+def calculate_score(x):
+    # herschrijven ivm solution class
+    x = 1
+    x += 1
 
 def load_distances(houses, batterys):
 
@@ -51,7 +56,6 @@ def place_battery(houses, batterys):
     i = 0
     all_scores = []
     time_stamp = datetime.now()
-    print(calculate_score(houses))
     for h in range(len(coordinates)):
         # print(f"battery 1: {coordinates[i]}")
         batterys[0].location_x = coordinates[h][0]

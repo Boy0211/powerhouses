@@ -12,16 +12,3 @@ class Battery(object):
 
     def __str__(self):
         return (f"ID: {self.identification}\ncurrent_input: {self.current_input}\nmax input: {self.max_input}\n Houses: {len(self.list_of_houses)}\n")
-
-
-
-def check_highest_output(battery):
-
-    '''a function to get the house with the highest output in a battery.'''
-
-    score = 0
-    for house in battery.list_of_houses:
-        if house.output > score:
-            score = house.output
-            highest_output_house = house
-    return highest_output_house

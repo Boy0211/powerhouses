@@ -44,14 +44,18 @@ class Solution(object):
         # else:
         total_distance_min = 0
         total_distance_max = 0
+        total_distance_connected = []
         for house in self.houses:
             distance_min = min(house.battery_distances.values())
             total_distance_min += distance_min
             distance_max = max(house.battery_distances.values())
             total_distance_max += distance_max
 
-        total_distance_connected = (self.costs - 25000) / 9
-        score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
+        for battery in self.batterys:
+            for house in battery.list_of_houses:
+                total_distance_connected.append(distance(house, battery))
+
+        score = 1 - ((sum(total_distance_connected) - total_distance_min) / (total_distance_max - total_distance_min))
 
         return score
 

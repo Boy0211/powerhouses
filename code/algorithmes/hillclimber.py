@@ -8,9 +8,9 @@ import copy
 
 
 # the main hill climber function.
-def hill_climber(data_batterys):
+def hillclimber(solution):
 
-    batterys = copy.deepcopy(data_batterys)
+    batterys = solution.batterys
 
     # initializing a while loop with a counter on zero.
     counter = 0

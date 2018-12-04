@@ -1,5 +1,4 @@
 import random
-import copy
 from helpers import swap
 from helpers import capacity
 from helpers import house_battery_distance as distance
@@ -14,11 +13,11 @@ def randomly(x):
     return shuffled
 
 
-def random_hillclimber(data_batterys):
+def random_hillclimber(solution):
 
     ''' A random Hill Climber '''
 
-    batterys = copy.deepcopy(data_batterys)
+    batterys = solution.batterys
 
     # while statement keep on trying swaps until there is no swap possible.
     counter = 0
