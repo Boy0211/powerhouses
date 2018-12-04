@@ -1,8 +1,10 @@
-Probleemomschrijving:
+Probleemomschrijving
+
 Maak een smartgrid waarin de huizen in een wijk zo optimaal mogelijk verbonden
 zijn aan de batterijen.
 
-Opdracht:
+Opdracht
+
 a. verbind alle huizen in de drie wijken aan een batterij
 b. Bereken de kosten voor de wijken
     - optimaliseer deze
@@ -10,7 +12,8 @@ c. Verplaats de batterijen en behaal een zo optimaal resultaat
 d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
    verschillende batterij capaciteiten
 
-Statespace:
+Statespace
+
 Elke wijk bevat 150 huizen en 5 batterijen, wat neerkomt op ≈ 30 huizen per
 batterij. Het maakt echter voor dit scenario niet uit welke 30 huizen het zijn,
 waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn er
@@ -23,15 +26,20 @@ over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
 De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
 
 Score
+
 In de situatie van statische batterijen kan de lower bound als volgt worden
 berekend. Het is de som van de afstand van elk huis, tot de dichtsbijzijnde
 batterij. Dit getal vermenigvuldigd met 9 (een kabelsegment kost 9),
-geeft de laagst mogelijke totale kosten. 
-Voor de maximale kosten geld
-total_distance_min = 0
-for house in houses:
-    distance_min = min(house.battery_distances.values())
-    total_distance_min += distance_min
+geeft de laagst mogelijke totale kosten. Lower bound = 42757.
+De upper bound werkt daarmee tegenovergesteld. De som van de afstand van elk
+huis, tot de verste batterij, vermenigvuldigd met 9, geeft de maximale totale
+kosten. Upper bound = 101491.
+
+Aan de hand van deze 2 waarden bepalen wij hoe goed onze resultaten zijn.
+Hoe dichter het resultaat bij de lower bound ligt hoe beter het resultaat.
+Daar hebben wij de volgende formule eraan verbonden.
+Score = Resultaat / (Upper bound - lower bound).
+Dit betekend dat de beste score 1.0 is en de laagste score 0.0.
 
 
 Algoritmes
