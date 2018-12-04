@@ -26,7 +26,22 @@ def grid(solution):
 
     x_grid = np.linspace(0, 59, 60)
     y_grid = np.linspace(0, 59, 60)
-    plt.xticks(x_grid, [])
-    plt.yticks(y_grid, [])
+    plt.xlabel('x-axis')
+    x_tick = []
+    y_tick = []
+    for x in range(60):
+        if x % 5 == 0:
+            x_tick.append(x)
+        else:
+            x_tick.append("")
+
+    for y in range(60):
+        if y % 5 == 0:
+            y_tick.append(y)
+        else:
+            y_tick.append("")
+
+    plt.xticks(x_grid, x_tick)
+    plt.yticks(y_grid, y_tick)
     plt.grid(True)
     plt.show()
