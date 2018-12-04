@@ -71,5 +71,3 @@ def greedy_2(solution):
         else:
             temp_house_counter += 1
             del temp_dict[battery_number]
-
-    return batterys

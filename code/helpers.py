@@ -53,6 +53,6 @@ def battery_capacity_exceeded(batterys):
     '''a method to determine whether a battery capacity is exceeded.'''
 
     for battery in batterys:
-        if battery.current_input > float(battery.max_input):
+        if battery.current_input > float(battery.max_input) * 1.10:
             return battery
     return False

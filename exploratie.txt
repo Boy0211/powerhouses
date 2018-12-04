@@ -10,8 +10,28 @@ c. Verplaats de batterijen en behaal een zo optimaal resultaat
 d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
    verschillende batterij capaciteiten
 
-Statespace: 5^150
-Er kunnen per batterij 150 huizen worden ingeladen
+Statespace:
+Elke wijk bevat 150 huizen en 5 batterijen, wat neerkomt op ≈ 30 huizen per
+batterij. Het maakt echter voor dit scenario niet uit welke 30 huizen het zijn,
+waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn er
+(150 30) mogelijkheden. De eerste bucket is gevuld en daarmee is het totaal
+aantal huizen nu 120. Voor de tweede bucket zijn er daardoor nu (120 30) opties.
+Voor het derde huis (90 30) opties, voor het vierde huis (60 30) en voor het
+vijfde en laatste huis (30 30) = 1 optie. Deze uitkomsten worden met elkaar
+vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze buckets
+over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
+De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
+
+Score
+In de situatie van statische batterijen kan de lower bound als volgt worden
+berekend. Het is de som van de afstand van elk huis, tot de dichtsbijzijnde
+batterij. Dit getal vermenigvuldigd met 9 (een kabelsegment kost 9),
+geeft de laagst mogelijke totale kosten. 
+Voor de maximale kosten geld
+total_distance_min = 0
+for house in houses:
+    distance_min = min(house.battery_distances.values())
+    total_distance_min += distance_min
 
 
 Algoritmes
@@ -28,7 +48,7 @@ Greedy:
   greedy_1:
   Een greedy algoritme dat bepaalt welke batterij op dat moment de minste
   input heeft en daar het eerst volgende huis bij plaatst. Het resultaat
-  overschrijd de max capaciteit van de batterijen niet.
+  overschrijdt de maximale capaciteit van de batterijen niet.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
@@ -36,17 +56,18 @@ Greedy:
   greedy_2:
   Plaatst batterijen op basis van afstand tot batterij. Dus huizen worden als
   eerste in de batterij geplaatst die het meest dichtbij hen is. Als die vol zit
-  wordt de tweede batterij geprobeert etc.
+  wordt er gekeken naar de tweede batterij etc.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
 
 Hillclimber:
   Hillclimber_1:
-  Deze hillclimber verbeterd de resultaten nadat een ander algorithme de eerste
-  verdeling heeft gemaakt. Het doet dit door random 2 batterijen te kiezen en
-  daarin twee random gekozen huizen te proberen te swappen. Deze swap wordt
-  alleen uitgevoerd als dit een gunstige swap is, als het dus de score verbeterd.
+  Deze hillclimber verbeterd de resultaten nadat een ander algoritme de eerste
+  verdeling heeft gemaakt. Het algoritme kiest twee random batterijen, en
+  daarin twee random gekozen huizen proberen te swappen. Deze swap wordt
+  alleen uitgevoerd als dit een gunstige swap is, een gunstige swap houdt in dat
+  de score wordt verbeterd.
 
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
@@ -61,15 +82,48 @@ Hillclimber:
   Lower_bound kosten: 53188
   Bound_bound kosten: 103030
 
+Knelpunten
+
+De combinatie van een greedy en een hillclimber heeft in wijk 1 veel
+belovende resultaten teweeggebracht. De efficientie bedroeg hier
+namelijk ≈ 0.93 %. Maar wat al snel opviel in de visualisatie, was dat een
+aantal huizen geswitched moesten worden om zo de afstand tot de batterij te
+verlagen en zo de totale kosten te reduceren. Echter kampen wij met het
+probleem dat de output van de huizen in wijk 1 zodanig verschillen,
+dat een switch tussen huizen kan resulteren in overschrijding van de
+maximumcapaciteit van de batterij. En daarmee wordt er niet voldaan aan de
+constrains. Hierdoor wordt de optimilisatie na de toepassing van
+deze algortimes bemoeilijkt.
+
+Wanneer de resulaten met de hoogste efficientie voor elke wijk worden
+gevisualiseerd, komt het volgende knelpunt al snel aan het licht. Elke batterij
+vormt een soort wolk waarin deze is verbonden met huizen. Maar door het feit
+dat de huizen per definitie erg ligt bij elkaar liggen in de wijken,
+kunnen de clusters gaan overlappen. Aan de rand van de clusters is het voor het
+algoritme lastig om te weten welke opties het beste is. In de visualisatie is
+ook duidelijk dat dit een probleem is. De clusterswolken overlappen aan de
+randen sterk, waardoor de efficientie daalt.
+
+De constrains van onze case zijn redelijk streng. Wanneer een of meerdere
+constrains worden overschreden is er geen sprake van strafpunten of een minder
+goed resultaat maar er is sprake van een ongeldig resultaat. Echter is
+het nog wel mogelijk om vanuit een ongeldig resultaat verder te werken naar een
+valide resultaat. Dit kan doormiddel van een hillclimber. Eerder is
+beschreven dat de statespace van onze case erg groot is. Het feit dat doormiddel
+van een hillclimber een in eerste instantie ongeldig resultaat, hervormd kan
+worden in een geldig resultaat. Duidt erop dat onze statespace erg groot blijft.
+Het is niet het geval dat wij een deel van de oplossingen meteen kunnen
+wegstrepen wanneer deze in eerste instantie ongeldig zijn. Het behoudt van deze
+grote statespace maakt ons probleem lastig.
 
 Ideeën:
-- binpacking problem: door de overeenkomsten van ons probleem met het binpacking
+- Binpacking problem: door de overeenkomsten van ons probleem met het binpacking
   problem zijn we op het idee gekomen om een first_fit algorithme te gebruiken.
   Dit probleem gaat er vanuit dat er een variabel aantal bins is, wij hebben tot
   nu toe een fixed aantal batterijen en is daardoor niet goed vergelijkbaar.
   Misschien kunnen we hier later opnieuw naar kijken als we het aantal
   batterijen mogen variëren.
-- simulated annealing: dit algorithme zou het probleem van een lokaal optimum
+- Simulated annealing: dit algorithme zou het probleem van een lokaal optimum
   kunnen verhelpen. Dit algorithme neemt in het begin ook minder positieve scores
   aan zodat het niet vast blijft zitten in een optimum. Het verkent hierdoor de
   hele statespace. Naarmate de iteraties toenemen neemt de temperatuur af en daarmee

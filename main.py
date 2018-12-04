@@ -22,17 +22,23 @@ def main():
     DataStructure = Smartgrid(1)
 
     Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-    greedy_1(Solution1)
-    random_hillclimber(Solution1)
-    grid(Solution1)
-
-    Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-    greedy_2(Solution2)
-    hillclimber(Solution2)
-    grid(Solution2)
-
+    k_means(Solution1)
     print(Solution1)
-    print(Solution2)
+    # grid(Solution1)
+    # print(Solution1.distances)
+
+    # Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
+    # greedy_2(Solution2)
+    # hillclimber(Solution2)
+    # grid(Solution2)
+
+    # Solution3 = Solution(DataStructure.houses, DataStructure.batterys)
+    # k_means(Solution3)
+    # grid(Solution3)
+
+    # print(Solution3)
+    print(Solution1.distances)
+    # print(Solution2.distances)
 
 
 if __name__ == "__main__":

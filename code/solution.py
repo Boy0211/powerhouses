@@ -1,6 +1,7 @@
 # import pandas as pd
-# from scipy.spatial import distance_matrix
+from scipy.spatial.distance import cdist
 import copy
+import pandas as pd
 
 from helpers import house_battery_distance as distance
 from helpers import battery_capacity_exceeded as cap_exc
@@ -12,7 +13,6 @@ class Solution(object):
         # self.algorithm = ## mehode om te bepalen welk algorithme gebruikt is
         self.houses = houses
         self.batterys = self.load_batterys(batterys)
-        # self.distances = ## matrix tussen batterijen en huizen
 
     def __str__(self):
         return (f"algorithme: {self.score} \nCosts: {self.costs}\n")
@@ -44,21 +44,42 @@ class Solution(object):
         # else:
         total_distance_min = 0
         total_distance_max = 0
-        total_distance_connected = []
-        for house in self.houses:
-            distance_min = min(house.battery_distances.values())
-            total_distance_min += distance_min
-            distance_max = max(house.battery_distances.values())
-            total_distance_max += distance_max
+
+        total_distance_connected = 0
 
         for battery in self.batterys:
             for house in battery.list_of_houses:
-                total_distance_connected.append(distance(house, battery))
+                total_distance_connected += (distance(house, battery))
 
-        score = 1 - ((sum(total_distance_connected) - total_distance_min) / (total_distance_max - total_distance_min))
+        total_distance_min = sum(self.distances["min_value"])
+        total_distance_max = sum(self.distances["max_value"])
+
+        score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
 
         return score
 
-    # def distances_matrix(self, houses, batterys):
-    #
-    #     #  maken
+    @property
+    def distances(self):
+
+        battery_ids = []
+        battery_coordinates = []
+
+        for battery in self.batterys:
+            battery_ids.append(battery.identification)
+            battery_coordinates.append([battery.location_x, battery.location_y])
+
+        house_ids = []
+        house_coordinates = []
+
+        for house in self.houses:
+            house_ids.append(house.identification)
+            house_coordinates.append([house.location_x, house.location_y])
+
+        df_batterys = pd.DataFrame(battery_coordinates, columns=['xcord', 'ycord'], index=battery_ids)
+        df_houses = pd.DataFrame(house_coordinates, columns=['xcord', 'ycord'], index=house_ids)
+        df = pd.DataFrame(cdist(df_houses.values, df_batterys.values, metric='cityblock'), index=df_houses.index, columns=df_batterys.index)
+        df['max_value'] = df.max(axis=1)
+        df['min_value'] = df.min(axis=1)
+        df['closest_house'] = df.idxmin(axis=1)
+
+        return df
