@@ -1,5 +1,4 @@
 import csv
-import heapq
 
 from house import House
 from battery import Battery

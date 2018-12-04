@@ -8,6 +8,7 @@ def calculate_distance(house):
     distance = house.connected_battery["distance"]
     return distance
 
+
 def calculate_score(houses):
 
     '''Function used to calculate results based on distance'''

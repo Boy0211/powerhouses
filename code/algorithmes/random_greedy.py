@@ -2,10 +2,10 @@ import random
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-from add_remove import add_house_to_battery
+from helpers import add_house_to_battery
 from score import calculate_score
+from randomHillclimber import random_hillclimber
 from hillclimber import hill_climber
-from hillclimber import hill_climber_2
 
 
 def random_greedy(houses, batterys):

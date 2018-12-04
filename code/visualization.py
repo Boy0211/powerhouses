@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def grid(houses, batterys):
+def grid(batterys):
     x_1 = []
     y_1 = []
     for house in batterys[0].list_of_houses:
@@ -103,7 +103,7 @@ def grid(houses, batterys):
     plt.plot(x_3, y_3, linewidth=0.5, color="blue")
     plt.plot(x_4, y_4, linewidth=0.5, color="purple")
     plt.plot(x_5, y_5, linewidth=0.5, color="green")
+
     for house in batterys[0].list_of_houses:
-        print(house)
         plt.text(house.location_x, house.location_y, house.output, size=2)
     plt.show()

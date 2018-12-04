@@ -28,6 +28,7 @@ def sort_function(filename, district):
 
 def sort_distance(houses):
     # bubble sort function. Copied and edited from https://repl.it/@farooqimdd/BubbleSort
+
     n = len(houses)
 
     # Traverse through all array elements
