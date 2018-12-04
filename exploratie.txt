@@ -11,13 +11,13 @@ d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
    verschillende batterij capaciteiten
 
 Statespace:
-Elke wijk bevat 150 huizen en 5 batterijen, wat neerkomt op ±30 huizen per
+Elke wijk bevat 150 huizen en 5 batterijen, wat neerkomt op ≈ 30 huizen per
 batterij. Het maakt echter voor dit scenario niet uit welke 30 huizen het zijn,
 waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn er
 (150 30) mogelijkheden. De eerste bucket is gevuld en daarmee is het totaal
 aantal huizen nu 120. Voor de tweede bucket zijn er daardoor nu (120 30) opties.
 Voor het derde huis (90 30) opties, voor het vierde huis (60 30) en voor het
-vijfde en laatste huis (30 30)=1 optie. Deze uitkomsten worden met elkaar
+vijfde en laatste huis (30 30) = 1 optie. Deze uitkomsten worden met elkaar
 vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze buckets
 over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
 De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
@@ -74,22 +74,35 @@ Hillclimber:
 Knelpunten
 De combinatie van een greedy en een hillclimber heeft in wijk 1 veel
 belovende resultaten teweeggebracht. De efficientie bedroeg hier
-namelijk ±0.93 %. Maar wat al snel opviel in de visualisatie, was dat een
+namelijk ≈ 0.93 %. Maar wat al snel opviel in de visualisatie, was dat een
 aantal huizen geswitched moesten worden om zo de afstand tot de batterij te
 verlagen en zo de totale kosten te reduceren. Echter kampen wij met het
 probleem dat de output van de huizen in wijk 1 zodanig verschillen,
 dat een switch tussen huizen kan resulteren in overschrijding van de
-maximumcapaciteit van de batterij. Hierdoor wordt de optimilisatie na de
-toepassing van deze algortimes bemoeilijkt.
+maximumcapaciteit van de batterij. En daarmee wordt er niet voldaan aan de
+constrains. Hierdoor wordt de optimilisatie na de toepassing van
+deze algortimes bemoeilijkt.
 
 Wanneer de resulaten met de hoogste efficientie voor elke wijk worden
 gevisualiseerd, komt het volgende knelpunt al snel aan het licht. Elke batterij
-vormt een soort cluster waarin deze is verbonden met huizen. Maar door het feit
-dat de batterijen per definitie niet heel goed zijn verdeeld over de wijken,
+vormt een soort wolk waarin deze is verbonden met huizen. Maar door het feit
+dat de huizen per definitie erg ligt bij elkaar liggen in de wijken,
 kunnen de clusters gaan overlappen. Aan de rand van de clusters is het voor het
 algoritme lastig om te weten welke opties het beste is. In de visualisatie is
 ook duidelijk dat dit een probleem is. De clusterswolken overlappen aan de
 randen sterk, waardoor de efficientie daalt.
+
+De constrains van onze case zijn redelijk streng. Wanneer een of meerdere
+constrains worden overschreden is er geen sprake van strafpunten of een minder
+goed resultaat maar er is sprake van een ongeldig resultaat. Echter is
+het nog wel mogelijk om vanuit een ongeldig resultaat verder te werken naar een
+valide resultaat. Dit kan doormiddel van een hillclimber. Eerder is
+beschreven dat de statespace van onze case erg groot is. Het feit dat doormiddel
+van een hillclimber een in eerste instantie ongeldig resultaat, hervormd kan
+worden in een geldig resultaat. Duidt erop dat onze statespace erg groot blijft.
+Het is niet het geval dat wij een deel van de oplossingen meteen kunnen
+wegstrepen wanneer deze in eerste instantie ongeldig zijn. Het behoudt van deze
+grote statespace maakt ons probleem lastig.
 
 Ideeën:
 - binpacking problem: door de overeenkomsten van ons probleem met het binpacking
