@@ -72,9 +72,9 @@ Hillclimber:
   Bound_bound kosten: 103030
 
 Knelpunten
-De combinatie tussen een greedy en een hillclimber heeft in wijk 1 veel
+De combinatie van een greedy en een hillclimber heeft in wijk 1 veel
 belovende resultaten teweeggebracht. De efficientie bedroeg hier
-namelijk ±0.93 %. Maar wat wel snel op viel in de visualisatie, was dat een
+namelijk ±0.93 %. Maar wat al snel opviel in de visualisatie, was dat een
 aantal huizen geswitched moesten worden om zo de afstand tot de batterij te
 verlagen en zo de totale kosten te reduceren. Echter kampen wij met het
 probleem dat de output van de huizen in wijk 1 zodanig verschillen,
@@ -85,7 +85,7 @@ toepassing van deze algortimes bemoeilijkt.
 Wanneer de resulaten met de hoogste efficientie voor elke wijk worden
 gevisualiseerd, komt het volgende knelpunt al snel aan het licht. Elke batterij
 vormt een soort cluster waarin deze is verbonden met huizen. Maar door het feit
-dat de batterij niet per definitie heel goed zijn verdeeld over de wijken,
+dat de batterijen per definitie niet heel goed zijn verdeeld over de wijken,
 kunnen de clusters gaan overlappen. Aan de rand van de clusters is het voor het
 algoritme lastig om te weten welke opties het beste is. In de visualisatie is
 ook duidelijk dat dit een probleem is. De clusterswolken overlappen aan de
