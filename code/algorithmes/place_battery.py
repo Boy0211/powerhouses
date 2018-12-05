@@ -195,7 +195,7 @@ def k_means(solution):
             if total_change < 1:
                 break
 
-        grid(solution)
+
         if cap_exc(batterys) is False:
             break
 
