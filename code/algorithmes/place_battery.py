@@ -159,9 +159,23 @@ def k_means(solution):
     while True:
         # assign random location to batterys
         for battery in batterys:
-            battery.location_x = random.randint(0, 51)
-            battery.location_y = random.randint(0, 51)
+            battery.location_x = random.randint(0, 26)
+            battery.location_y = random.randint(0, 26)
 
+        batterys[0].location_x = random.randint(26, 51)
+        batterys[0].location_x = random.randint(26, 51)
+
+        batterys[1].location_x = random.randint(0, 26)
+        batterys[1].location_y = random.randint(26, 51)
+
+        batterys[2].location_x = random.randint(26, 51)
+        batterys[2].location_y = random.randint(0, 26)
+
+        batterys[3].location_x = random.randint(0, 26)
+        batterys[3].location_y = random.randint(0, 26)
+
+        batterys[4].location_x = random.randint(20, 31)
+        batterys[4].location_y = random.randint(20, 31)
         # iterate through all houses
         while True:
             total_change = 0
@@ -195,58 +209,7 @@ def k_means(solution):
             if total_change < 1:
                 break
 
-        grid(solution)
+        # grid(solution)
         if cap_exc(batterys) is False:
+            grid(solution)
             break
-
-
-
-
-
-
-
-    # while True:
-    #     total_change = 0
-    #     for battery in batterys:
-    #         battery.list_of_houses = []
-    #         battery.current_input = 0
-    #     temp_dict = dict()
-    #     load_distances(houses, batterys)
-    #     for house in houses:
-    #
-    #         temp_dict = dict()
-    #         temp_dict = copy.deepcopy(house.battery_distances)
-    #
-    #         # sorteer lijst van batterijen per huis
-    #         battery_list = (list(temp_dict.values()))
-    #         battery_list = sorted(battery_list)
-    #
-    #         # neem eerste waarde in deze lijst(is minimale waarde)
-    #         current_battery = (battery_list[0])
-    #
-    #         # zoek key met bijbehorende afstand
-    #         battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
-    #
-    #         add_house_to_battery(house, batterys[battery_number-1])
-    #
-    #     # grid(houses, batterys)
-    #
-    #     for battery in batterys:
-    #         x_coordinates = list()
-    #         y_coordinates = list()
-    #         for house in battery.list_of_houses:
-    #             x_coordinates.append(house.location_x)
-    #             y_coordinates.append(house.location_y)
-    #         mean_x = round(mean(x_coordinates))
-    #         mean_y = round(mean(y_coordinates))
-    #
-    #         change_x = abs(battery.location_x - mean_x)
-    #         change_y = abs(battery.location_y - mean_y)
-    #         total_change += change_x + change_y
-    #         battery.location_x = mean_x
-    #         battery.location_y = mean_y
-    #
-    #         # print(total_change)
-    #     # print("----------------")
-    #     if total_change < 1:
-    #         break
