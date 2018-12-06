@@ -2,7 +2,7 @@
 ## Algoritmes
 Voor onze case is er gebruikt gemaakt van verschillende algoritmes. Uiteraard
 verschillen de resultaten van elk algoritme ten opzichte van elkaar.
-Hieronder worden alle gebruikte algoritme besproken en geanalyseerd.
+Hieronder worden alle gebruikte algoritmen besproken en geanalyseerd.
 
 ---
 ### Greedy 1
