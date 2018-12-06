@@ -13,6 +13,7 @@ Aan deze batterij wordt het eerstvolgende huis toegevoegd waarna deze while loop
 wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
 [Result Visualized](/resultaten/Images/Screen Shot 2018-12-06 at 17.30.40.png "Hyperlink")
 
+
 ### Greedy 2
 Het principe van dit algoritme berust voor een deel op dat van greedy 1.
 Echter wordt er niet gekeken naar de batterij met de meeste ruimte, maar voor
