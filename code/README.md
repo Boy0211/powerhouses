@@ -12,7 +12,7 @@ for loop wordt gekeken welke batterij op dat moment het meeste ruimte overheeft.
 Aan deze batterij wordt het eerstvolgende huis toegevoegd waarna deze while loop
 wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
 
-[Result Visualized](/resultaten/Images/Screen Shot 2018-12-06 at 17.30.40.png "Hyperlink")
+[Result Visualized](/resultaten/Images/Greedy1.png "Hyperlink")
 
 
 ### Greedy 2
