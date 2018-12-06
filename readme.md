@@ -12,7 +12,8 @@ minimaliseren?
 ---
 *Mendel Engelaer,
 Sam Kuilboer &
-Rutger Storm  Team MSR*
+Rutger Storm  
+Team MSR*
 
 ---
 ## Getting Started
