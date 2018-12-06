@@ -11,6 +11,7 @@ met de lengte van de hoeveelheid huizen, met daarin een for loop. In deze
 for loop wordt gekeken welke batterij op dat moment het meeste ruimte overheeft.
 Aan deze batterij wordt het eerstvolgende huis toegevoegd waarna deze while loop
 wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
+
 [Result Visualized](/resultaten/Images/Screen Shot 2018-12-06 at 17.30.40.png "Hyperlink")
 
 
