@@ -83,4 +83,5 @@ class Solution(object):
         df['min_value'] = df.min(axis=1)
         df['closest_house'] = df.idxmin(axis=1)
 
+
         return df
