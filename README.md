@@ -9,7 +9,7 @@ Zowel batterijen als kabelsegmenten kosten geld, hoe kunnen de huizen zo
 optimaal mogelijk verbonden worden met de batterijen om zo de kosten te
 minimaliseren?
 
-![Smartgrid wijk1](/resultaten/Wijk1.png "Smargrid")
+![Smartgrid wijk1](/resultaten/Wijk1.png "Smartgrid")
 
 
 
@@ -23,8 +23,10 @@ Team MSR*
 ## Getting Started
 ---
 ### Vereisten
-Voor het schrijven van de code is python3 gebruikt, zie de requirements.txt
-file voor alle benodigde libraries.
+Voor het schrijven van de code is python3 gebruikt, in de requirements.txt
+file staan alle benodigde libraries.
+
+[link](/requirements.txt "Hyperlink")
 
 ### Datastructure
 In de folder 'code' bevinden zich alle python files waarin is gecodeerd.
