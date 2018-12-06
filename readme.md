@@ -10,13 +10,25 @@ optimaal mogelijk verbonden worden met de batterijen om zo de kosten te
 minimaliseren?
 
 ---
-*Sam Kuilboer
-Mendel Engelear
+*Mendel Engelaer,
+Sam Kuilboer &
 Rutger Storm*
 
 ---
 ## Getting Started
 ---
 ### Vereisten
-Voor het schrijven van de code is python3 gebruikt, zie de requierements.txt
+Voor het schrijven van de code is python3 gebruikt, zie de requirements.txt
 file voor alle benodigde libraries.
+
+### Datastructure
+In de folder 'code' bevinden zich alle python files waarin is gecodeerd.
+Deze map bestaat uit alle algoritmes, de battery en houses classes en
+alle overige functies.  
+In de folder 'data' zijn alle csv bestanden te vinden die toegereikt werden
+bij deze case.  
+In de folder 'resultaten' XXXX!!!
+
+### Uitvoeren van de code
+Voor het uitvoeren van de code moet de volgende instructie in de terminal worden
+ingevoerd: 'python3 main.py'
