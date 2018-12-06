@@ -22,11 +22,12 @@ def grid(solution):
             plt.plot(x, y, linewidth=0.5, color=color_list[i])
             plt.scatter(x, y, s=10, color=color_list[i])
             plt.scatter(x_battery, y_battery, s=70, color=color_list[i])
-            plt.text(house.location_x, house.location_y, house.output, fontsize=5)
+            # plt.text(house.location_x, house.location_y, house.output, fontsize=5)
 
     x_grid = np.linspace(0, 59, 60)
     y_grid = np.linspace(0, 59, 60)
     plt.xlabel('x-axis')
+    plt.ylabel('y-axis')
     x_tick = []
     y_tick = []
     for x in range(60):

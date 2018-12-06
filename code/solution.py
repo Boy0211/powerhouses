@@ -55,7 +55,8 @@ class Solution(object):
         total_distance_max = sum(self.distances["max_value"])
 
         score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
-
+        print(total_distance_connected)
+        print(total_distance_min)
         return score
 
     @property
