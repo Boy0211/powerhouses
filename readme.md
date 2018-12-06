@@ -9,8 +9,14 @@ Zowel batterijen als kabelsegmenten kosten geld, hoe kunnen de huizen zo
 optimaal mogelijk verbonden worden met de batterijen om zo de kosten te
 minimaliseren?
 
-
-Sam Kuilboer
+---
+*Sam Kuilboer
 Mendel Engelear
-Rutger Storm
-s
+Rutger Storm*
+
+---
+## Getting Started
+---
+### Vereisten
+Voor het schrijven van de code is python3 gebruikt, zie de requierements.txt
+file voor alle benodigde libraries.
