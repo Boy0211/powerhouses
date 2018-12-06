@@ -2,7 +2,8 @@ from helpers import swap
 from helpers import remove_house_from_battery as rm
 from helpers import add_house_to_battery as add
 from helpers import capacity
-from helpers import house_battery_distance as distance
+from visualization import grid
+# from helpers import house_battery_distance as distance
 from helpers import battery_capacity_exceeded as cap_exc
 import copy
 import pandas as pd
@@ -39,42 +40,130 @@ def hillclimber_2(solution):
     # load_distances(houses, batterys)
 
     # print(solution.distances)
-    for battery in batterys:
-        print(battery)
 
-    # check of een batterij een max_input overschrijding heeft
-    if cap_exc(batterys) is False:
-        score = 1000
-        swap_house = 0
-        battery1 = check_battery_highest_input(batterys)
+    while True:
+        # grid(solution)
+        x = 0
+        # for battery in batterys:
+        #     print(battery)
+        # check of een batterij een max_input overschrijding heeft
+        if cap_exc(batterys) is False:
+            battery1 = check_battery_highest_input(batterys)
 
-        # select all houses in connected to battery
-        # print(solution.distances)
-        # print(battery1.identification)
-        houses_list = []
-        for house in battery1.list_of_houses:
-            houses_list.append(house.identification)
-        houses_list[:] = [x - 1 for x in houses_list]
-        battery_houses = (solution.distances.iloc[houses_list])
-        # print("--------------")
-        # print(battery_houses)
-        # print("---------")
-        # selected_list = battery_houses.loc[:, solution.distances.columns != battery1.identification ]
-        selected_list = battery_houses[battery_houses.columns.difference([battery1.identification, "max_value", "min_value", "closest_house"])]
-        # select every row but of the battery itself
-        column_numbers = selected_list.columns.values
-        # print(selected_list[column_numbers])
-        list_of_all_houses = []
-        for i in range(len(column_numbers)):
-            list_of_all_houses += (selected_list[column_numbers[i]].tolist())
-        # print(sorted(list_of_all_houses))
-        list_of_all_houses = sorted(list_of_all_houses)
-        print(selected_list)
-        print(list_of_all_houses[0])
-        battery_n = selected_list.apply(lambda row: row.astype(str).str.contains(f"{list_of_all_houses[0]}").any(), axis=1)
-        print(battery_n)
+            # lijst me alle huis id nummers in battery1
+            houses_list = []
+            for house in battery1.list_of_houses:
+                houses_list.append(house.identification)
+
+            # overal -1 voor index
+            houses_list[:] = [x - 1 for x in houses_list]
+
+            # selecteer huizen van battery1 uit dataframe
+            battery_houses = (solution.distances.iloc[houses_list])
+
+            # selecteer alle rijen met andere batterijen
+            selected_list = battery_houses[battery_houses.columns.difference([battery1.identification, "max_value", "min_value", "closest_house"])]
+
+            # selecteer column nummers
+            column_numbers = selected_list.columns.values
+
+            # maak lijst met alle huizen in alle batterijen
+            list_of_all_houses = []
+            for i in range(len(column_numbers)):
+                list_of_all_houses += (selected_list[column_numbers[i]].tolist())
+
+            # soorter van klein naar groot
+            list_of_all_houses = sorted(list_of_all_houses)
+
+            # house_counter neemt toe als een huis niet in een batterij passt
+            # dus gaat op zoek naar eerstvolgende dichstbijzijnde huis
+            house_counter = 0
+
+            # solved = True is als een huis is verplaatst
+            solved = False
+
+
+            while True:
+                # print(f"house counter: {house_counter}")
+
+                # print(solved)
+                battery_n = selected_list[selected_list.apply(lambda row: row.astype(str).str.contains(f"{list_of_all_houses[house_counter]}").any(), axis=1)]
+
+                # print(battery_n)
+
+                replace_house = (battery_n.iloc[x].name)
+                # print(replace_house)
+                distance = (battery_n.iloc[0].min())
+                # print(distance)
+                dict = battery_n.to_dict('index')
+                # print(dict)
+                replace_battery = min(dict[replace_house].items(), key=lambda x: x[1])[0]
+                # print(f"xx{replace_battery}")
+                # for value in dict:
+                #     # print(dict[value].values())
+                #     if distance in dict[value].values():
+                #         replace_battery = value
+
+
+                # print(replace_house)
+
+
+
+            # for house in battery1.list_of_houses:
+            #     print(replace_house)
+            #     print(house)
+                for house in battery1.list_of_houses:
+                    if house.identification == replace_house:
+                    # print("inside first if")
+                        # print(f"house id {house.identification}")
+                        print(house.output + batterys[replace_battery-1].current_input)
+                        if house.output + batterys[replace_battery-1].current_input < batterys[replace_battery-1].max_input:
+                            # print(len(battery1.list_of_houses))
+                            # print("booooooyyyyyaaaaaaaaa")
+                            add(house, batterys[replace_battery-1])
+                            rm(house, battery1)
+                            # print(len(battery1.list_of_houses))
+                            for battery in batterys:
+                                print(battery)
+                            solved = True
+                            x = 0
+                            break
+                        else:
+                            # print("last else")
+                            # print(house.output + batterys[replace_battery-1].current_input)
+                            house_counter += 1
+                            # print(f"len_battery{len(battery_n)}")
+                            # print(f"xx{x}")
+                            if len(battery_n) == 1:
+                                x = 0
+                            elif len(battery_n)-1 == x:
+                                x = 0
+
+                            else:
+                                x = 0
+                        # for battery in batterys:
+                        #     print(battery)
+                    # print(" ik ben hieeeeerrr")
+                if solved is True:
+                    break
+        else:
+            break
+
+        # battery_n['column'] = battery_n.apply(lambda x: battery_n.columns[x.argmax()], axis = 1)
+
+
+        # for row in replace_house:
+            # print(row)
+
+        # print(battery_n.iloc[0].min().idxmin())
+        # print(battery_n.loc(battery_n.min().min()))
+        # replace_house = battery_n.iloc[0].idxmin().min()
+        # print(replace_house)
+        # print(battery_n[replace_house])
+        # print(battery_n.idxmin().min())
+
         # print(selected_list[battery_n])
-        # print(selected_list.idxmin(axis='index'))
+
         # df = df.apply(lambda x: x.sort_values().values)
         # smallest_dict = dict()
         # for index, row in selected_list.iterrows():
