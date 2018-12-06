@@ -22,13 +22,13 @@ def main():
     DataStructure = Smartgrid(1)
 
     Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-    k_means(Solution1)
-    print(Solution1)
+    # k_means(Solution1)
+    # print(Solution1)
     # grid(Solution1)
     # print(Solution1.distances)
 
-    # Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-    # greedy_2(Solution2)
+    Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
+    greedy_2(Solution2)
     # hillclimber(Solution2)
     # grid(Solution2)
 
