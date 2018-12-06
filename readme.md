@@ -31,7 +31,7 @@ In de folder 'resultaten' XXXX!!!
 
 ### Uitvoeren van de code
 Voor het uitvoeren van de code moet de volgende instructie in de terminal worden
-ingevoerd: 'python3 main.py'
+ingevoerd: python3 main.py
 
 ### Authors
 * Mendel Engelaer
