@@ -9,6 +9,10 @@ Zowel batterijen als kabelsegmenten kosten geld, hoe kunnen de huizen zo
 optimaal mogelijk verbonden worden met de batterijen om zo de kosten te
 minimaliseren?
 
+![Smartgrid wijk1](/resultaten/Wijk1.png)
+
+
+
 ---
 *Mendel Engelaer,
 Sam Kuilboer &
