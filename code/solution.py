@@ -15,7 +15,7 @@ class Solution(object):
         self.batterys = self.load_batterys(batterys)
 
     def __str__(self):
-        return (f"algorithme: xxx\nScore: {self.score}\nCosts: {self.costs}\n")
+        return (f"algorithme: {self.score} \nCosts: {self.costs}\n")
 
     def load_batterys(self, batterys):
 
@@ -54,23 +54,9 @@ class Solution(object):
         total_distance_min = sum(self.distances["min_value"])
         total_distance_max = sum(self.distances["max_value"])
 
-        distance_score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
-
-        # capacity score
-        total_capacity_exceeded = 0
-        for battery in self.batterys:
-            if battery.current_input < battery.max_input:
-                capacity_exceeded = 0
-            else:
-                capacity_exceeded = battery.current_input - battery.max_input
-            total_capacity_exceeded += capacity_exceeded
-
-        max_exceeded = 6000
-        battery_score = (20*total_capacity_exceeded / max_exceeded)
-        score = distance_score - battery_score
-
-        # score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
-
+        score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
+        print(total_distance_connected)
+        print(total_distance_min)
         return score
 
     @property
