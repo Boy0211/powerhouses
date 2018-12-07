@@ -108,6 +108,8 @@ Op basis van de score gegenereerd in de solution class, bepaalt het algoritme
 of er een 'long runner' of een 'short runner' nodig is. Hoe dichter de score
 bij de optimale score zit, hoe shorter de runner
 
+> UITSLAGEN VOLGEN
+
 ### Plant Propagation algorithm voor beweeglijke batterijen
 
 [link naar bestand]
@@ -115,3 +117,7 @@ bij de optimale score zit, hoe shorter de runner
 Dit algoritme is op het zelfde concept gebasseerd als die voor stationaire
 batterijen. Nu is een van de mogelijke runners ook nog het verplaatsen van
 batterijen.
+
+> Wijk 1:  
+> Score: 0.9995391062455254
+> Costs: 40354
