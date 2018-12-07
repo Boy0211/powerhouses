@@ -15,6 +15,9 @@ wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
 
 [Result Greedy 1](/resultaten/Images/Greedy1.png "Hyperlink")
 
+> Score: 0.5915492957746479  
+> Costs: 73546
+
 
 ### Greedy 2
 Het principe van dit algoritme berust voor een deel op dat van greedy 1.
@@ -25,6 +28,8 @@ mogelijk, het huis hieraan toegevoegd.
 
 [Result Greedy 2](/resultaten/Images/Greedy_2.png "Hyperlink")
 
+> Score: 0.885187920825785   
+> Costs: 56977
 
 ### Random Hillclimber
 Nadat er een valide indeling van huizen in batterijen is gemaakt, wordt de
