@@ -23,13 +23,13 @@ def random_hillclimber(solution):
     counter = 0
     while True:
         temp_counter = counter
-        for i in range(len(batterys)):
+        for i in randomly(range(len(batterys))):
             battery_counter_1 = i
-            for j in range(len(batterys[battery_counter_1].list_of_houses)):
+            for j in randomly(range(len(batterys[battery_counter_1].list_of_houses))):
                 house_counter_1 = j
-                for k in range(len(batterys)):
+                for k in randomly(range(len(batterys))):
                     battery_counter_2 = k
-                    for l in range(len(batterys[battery_counter_2].list_of_houses)):
+                    for l in randomly(range(len(batterys[battery_counter_2].list_of_houses))):
                         house_counter_2 = l
                         # print(i, j, k, l)
                         battery_A = batterys[battery_counter_1]
