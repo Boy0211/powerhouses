@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from helpers import add_house_to_battery
 # from randomHillclimber import random_hillclimber
 from hillclimber import hillclimber
+from randomHillclimber import random_hillclimber
 
 
 def random_distribution(solution, attempts, bins):
@@ -14,7 +15,7 @@ def random_distribution(solution, attempts, bins):
     time_stamp = datetime.now()
     while i < attempts:
         random_greedy(solution)
-        hillclimber(solution)
+        random_hillclimber(solution)
         score = solution.score
         all_scores.append(score)
         i += 1
