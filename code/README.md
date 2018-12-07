@@ -48,7 +48,7 @@ Deze swap zal enkel plaatsvinden als dit een gunstig effect heeft op de score.
 
 [Result Hillclimber + Greedy 2](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")
 
-> Score: 0.9206315258431915
+> Score: 0.9206315258431915  
 > Costs: 56347
 
 
