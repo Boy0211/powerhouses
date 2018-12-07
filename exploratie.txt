@@ -113,8 +113,7 @@ ook duidelijk dat dit een probleem is. De clusterswolken overlappen aan de
 randen sterk, waardoor de efficientie daalt.
 
 De constrains van onze case zijn redelijk streng. Wanneer een of meerdere
-constrains worden overschreden is er geen sprake van strafpunten of een minder
-goed resultaat maar er is sprake van een ongeldig resultaat. Echter is
+constrains worden overschreden is er sprake van een ongeldig resultaat. Echter is
 het nog wel mogelijk om vanuit een ongeldig resultaat verder te werken naar een
 valide resultaat. Dit kan doormiddel van een hillclimber. Eerder is
 beschreven dat de statespace van onze case erg groot is. Het feit dat doormiddel
