@@ -12,6 +12,7 @@ for loop wordt gekeken welke batterij op dat moment het meeste ruimte overheeft.
 Aan deze batterij wordt het eerstvolgende huis toegevoegd waarna deze while loop
 wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
 
+
 [Result Greedy 1](/resultaten/Images/Greedy1.png "Hyperlink")
 
 
@@ -21,25 +22,38 @@ Echter wordt er niet gekeken naar de batterij met de meeste ruimte, maar voor
 elk huis naar de dichtsbijzijnde batterij. Wanneer de dichtsbijzijnde batterij
 al vol zit wordt er naar de volgende dichtsbijzijnde batterij gekenen als
 mogelijk, het huis hieraan toegevoegd.
-[Link]
 
-### Hillclimber
+[Result Greedy 2](/resultaten/Images/Greedy_2.png "Hyperlink")
+
+
+### Random Hillclimber
 Nadat er een valide indeling van huizen in batterijen is gemaakt, wordt de
 hillclimber toegepast. Deze gaat iteratief opzoek naar een betere oplossing.
 Het hillclimber algoritme maakt gebruikt van een swap functie tussen huizen.
-Deze swap zal enkel plaatsvinden als dit een gunstig effect heeft op de score.
-[Link]
+Dit algoritme maakt een swap tussen huizen als dat mogelijk is, tot het niet
+meer mogelijk is.
 
-### Random Hillclimber
-Dit algoritme is een variant op de orginele hillclimber. Het principe
-is hetzelfde er op een eerdere valide oplossing swaps worden toegepast om
-zo een betere nieuwe oplossing te creeëren. Maar het verschil zit erin dat dit
-algoritme blijft swappen tot het niet meer mogelijk is. XXXXX
-[Link]
+[Random Hillclimber + Greedy 2](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")
+
+
+### Hillclimber
+Dit algoritme is een variant op de orginele hillclimber. Het hillclimber
+algoritme maakt gebruikt van een swap functie tussen huizen.
+Deze swap zal enkel plaatsvinden als dit een gunstig effect heeft op de score.
+
+[Result Hillclimber + Greedy 1](/resultaten/Images/Greedy1+Hillclimber2.png "Hyperlink")
+
+> Score: 0.9360780065005417  
+> Costs: 56374
+
+[Result Hillclimber + Greedy 2](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")
+
+> Score: 0.9206315258431915  
+> Costs: 56347
+
 
 ### Random greedy
-Dit algoritme genereert random geldige uitkomsten aan de hand van greedy 1.
-Dit betekend dat een x aantal resultaten uitkomen door het greedy 1 algoritme
-een x aantal keer te laten draaien. Het beste resultaat hiervan wordt telkens
-opgeslagen.
-[Link]
+Dit algoritme probeert compleet random huizen in te delen bij batterijen,
+totdat er een valide oplossing is uitgekomen. Oplossinen die niet valide zijn
+worden weer verwijderd. Om dit algoritme te laten draaien wordt er een N aantal
+oplossingen ingevoerd.
