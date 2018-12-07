@@ -53,3 +53,5 @@ def random_greedy(solution):
                         battery.list_of_houses = []
                     list_2.clear()
                     list_houses = list(range(0, 150))
+
+    return solution
