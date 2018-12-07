@@ -159,9 +159,6 @@ def k_means(solution):
 
     while True:
         # assign random location to batterys
-        for battery in batterys:
-            battery.location_x = random.randint(0, 26)
-            battery.location_y = random.randint(0, 26)
 
         batterys[0].location_x = random.randint(26, 51)
         batterys[0].location_x = random.randint(26, 51)
@@ -210,11 +207,6 @@ def k_means(solution):
             if total_change < 1:
                 break
 
-<<<<<<< HEAD
-
-=======
-        # grid(solution)
->>>>>>> 9be63fba5060dadae45ae275cb88e0d78f3ca90d
         if cap_exc(batterys) is False:
             # grid(solution)
             break

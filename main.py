@@ -37,7 +37,7 @@ def main():
     # grid(Solution1)
     time_start2 = time.time()
     Solutions = []
-    for i in range(30):
+    for i in range(50):
         Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
         k_means(Solution_k)
         Solutions.append(Solution_k)
@@ -50,14 +50,6 @@ def main():
     grid(Solution_ultimate)
     print(f"running time 2: {(time_end2-time_start2)} seconds")
 
-
-    # Solution3 = Solution(DataStructure.houses, DataStructure.batterys)
-    # k_means(Solution3)
-    # grid(Solution3)
-
-    # print(Solution3)
-    # print(Solution1.distances)
-    # print(Solution2.distances)
 
 
 if __name__ == "__main__":

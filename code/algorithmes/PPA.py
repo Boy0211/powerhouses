@@ -40,7 +40,7 @@ def plant_propagation_algorithm(solution, x):
         print(solutions[0])
 
         if index % 10 == 0:
-            if solutions[0].score <= temp_save:
+            if solutions[0].score == temp_save:
                 print(index)
                 break
             else:
