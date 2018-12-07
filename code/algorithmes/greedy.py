@@ -33,6 +33,8 @@ def greedy_1(solution):
             print("het past gewoon godverdomme niet!")
         house_counter += 1
 
+    return solution
+
 
 def greedy_2(solution):
     ''' Greedy algorithm that fills up the most empty battery from a sorted list'''

@@ -27,6 +27,7 @@ def main():
 
     DataStructure = Smartgrid(1)
 
+
     # time_start1 = time.time()
     # Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
     # Solution1 = random_greedy(Solution1)
@@ -48,10 +49,6 @@ def main():
 
     grid(Solution_ultimate)
     print(f"running time 2: {(time_end2-time_start2)} seconds")
-
-
-    # print(Solution1)
-    # print(Solution2)
 
 
     # Solution3 = Solution(DataStructure.houses, DataStructure.batterys)

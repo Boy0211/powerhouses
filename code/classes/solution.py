@@ -68,7 +68,9 @@ class Solution(object):
         max_exceeded = 3000
         battery_score = (10*total_capacity_exceeded / max_exceeded)
         score = distance_score - battery_score
-        
+
+        score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
+
         return score
 
     @property
@@ -94,5 +96,6 @@ class Solution(object):
         df['max_value'] = df.max(axis=1)
         df['min_value'] = df.min(axis=1)
         df['closest_house'] = df.idxmin(axis=1)
+
 
         return df
