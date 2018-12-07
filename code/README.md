@@ -42,13 +42,10 @@ algoritme maakt gebruikt van een swap functie tussen huizen.
 Deze swap zal enkel plaatsvinden als dit een gunstig effect heeft op de score.
 
 [Result Hillclimber + Greedy 1](/resultaten/Images/Greedy1+Hillclimber2.png "Hyperlink")
----
-**NOTE**
 
-Score: 0.9360780065005417
-Costs: 56374
+> Score: 0.9360780065005417  
+> Costs: 56374
 
----  
 [Result Hillclimber + Greedy 2](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")
 
 
