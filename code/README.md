@@ -18,7 +18,7 @@ functies.
 [Result Greedy capacity](/resultaten/Images/Greedy1.png "Hyperlink")  
 [Greedy Algoritme](/code/algorithmes/greedy.py "Hyperlink")
 
-> Wijk 1:
+> Wijk 1:  
 > Score: 0.5915492957746479  
 > Costs: 73546
 
@@ -34,7 +34,7 @@ huizen geplaats zijn.
 [Result Greedy distance](/resultaten/Images/Greedy_2.png "Hyperlink")  
 [Greedy Algoritme](/code/algorithmes/greedy.py "Hyperlink")
 
-> Wijk 1:
+> Wijk 1:  
 > Score: 0.885187920825785   
 > Costs: 56977
 
@@ -49,14 +49,14 @@ hillclimber op zoek gaat naar de beste swap en deze uitvoert.
 [Result Hillclimber + Greedy capacity](/resultaten/Images/Greedy1+Hillclimber2.png "Hyperlink")  
 [Hillclimber Algoritme](/code/algorithmes/hillclimber.py "Hyperlink")
 
-> Wijk 1:
+> Wijk 1:  
 > Score: 0.9360780065005417  
 > Costs: 56374
 
 [Result Hillclimber + Greedy distance](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")  
 [Hillclimber Algoritme](/code/algorithmes/hillclimber.py "Hyperlink")
 
-> Wijk 1:
+> Wijk 1:  
 > Score: 0.9206315258431915  
 > Costs: 56347
 
