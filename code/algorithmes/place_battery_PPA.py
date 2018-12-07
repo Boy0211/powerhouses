@@ -111,15 +111,15 @@ def move_ten_houses(solution):
 def move_battery(solution):
 
     list = [0, 1]
-    for battery in solution.batterys:
+    battery = random.choice(solution.batterys)
+    if random.choice(list) == 0:
         if random.choice(list) == 0:
-            if random.choice(list) == 0:
-                battery.location_x += 1
-            elif random.choice(list) == 1:
-                battery.location_y += 1
+            battery.location_x += 1
         elif random.choice(list) == 1:
-            if random.choice(list) == 0:
-                battery.location_x -= 1
-            elif random.choice(list) == 1:
-                battery.location_y -= 1
+            battery.location_y += 1
+    elif random.choice(list) == 1:
+        if random.choice(list) == 0:
+            battery.location_x -= 1
+        elif random.choice(list) == 1:
+            battery.location_y -= 1
     return solution

@@ -63,7 +63,7 @@ def hillclimber_2(solution):
 
             # selecteer alle rijen met andere batterijen
             selected_list = battery_houses[battery_houses.columns.difference([battery1.identification, "max_value", "min_value", "closest_house"])]
-
+            # print(selected_list)
             # selecteer column nummers
             column_numbers = selected_list.columns.values
 
@@ -74,6 +74,8 @@ def hillclimber_2(solution):
 
             # soorter van klein naar groot
             list_of_all_houses = sorted(list_of_all_houses)
+            # print(list_of_all_houses)
+            # print(len(list_of_all_houses))
 
             # house_counter neemt toe als een huis niet in een batterij passt
             # dus gaat op zoek naar eerstvolgende dichstbijzijnde huis
@@ -81,14 +83,15 @@ def hillclimber_2(solution):
 
             # solved = True is als een huis is verplaatst
             solved = False
-
+            print("-----------")
 
             while True:
                 # print(f"house counter: {house_counter}")
 
                 # print(solved)
+                print(list_of_all_houses[house_counter])
                 battery_n = selected_list[selected_list.apply(lambda row: row.astype(str).str.contains(f"{list_of_all_houses[house_counter]}").any(), axis=1)]
-
+                # print(battery_n)
                 # print(battery_n)
 
                 replace_house = (battery_n.iloc[x].name)
@@ -98,6 +101,7 @@ def hillclimber_2(solution):
                 dict = battery_n.to_dict('index')
                 # print(dict)
                 replace_battery = min(dict[replace_house].items(), key=lambda x: x[1])[0]
+                # print(replace_battery)
                 # print(f"xx{replace_battery}")
                 # for value in dict:
                 #     # print(dict[value].values())
@@ -116,7 +120,7 @@ def hillclimber_2(solution):
                     if house.identification == replace_house:
                     # print("inside first if")
                         # print(f"house id {house.identification}")
-                        print(house.output + batterys[replace_battery-1].current_input)
+                        # print(house.output + batterys[replace_battery-1].current_input)
                         if house.output + batterys[replace_battery-1].current_input < batterys[replace_battery-1].max_input:
                             # print(len(battery1.list_of_houses))
                             # print("booooooyyyyyaaaaaaaaa")
