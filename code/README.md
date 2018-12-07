@@ -70,4 +70,4 @@ totdat er een valide oplossing is uitgekomen. Oplossinen die niet valide zijn
 worden weer verwijderd. Om dit algoritme te laten draaien wordt er een N aantal
 oplossingen ingevoerd.  
 
-[Hillclimber Algoritme](/code/algorithmes/random_greedy.py "Hyperlink")
+[Random Algoritme](/code/algorithmes/random_greedy.py "Hyperlink")
