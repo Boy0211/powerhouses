@@ -177,6 +177,9 @@ def k_means(solution):
 
         batterys[4].location_x = random.randint(17, 33)
         batterys[4].location_y = random.randint(17, 33)
+        print(solution)
+        grid(solution)
+
         # iterate through all houses
         while True:
             total_change = 0
@@ -211,6 +214,8 @@ def k_means(solution):
 
 
             if total_change < 1:
+                print(solution)
+                grid(solution)
                 break
 
         if solution.score > 0.6:
