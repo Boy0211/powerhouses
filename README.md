@@ -3,7 +3,7 @@ De productie van duurzame energie groeit ook onder de particulieren.
 Echter kampt men nog steeds met het probleem dat bij een overschot aan energie,
 deze duurzame energie niet kan worden opgeslagen. Maar de Smartgrid biedt
 hierbij mogelijkheden, een grid bestaande uit huizen die de energie produceren
-en batterijen die het overschot kunnen opvangen. Uiteraard moeten deze huizen
+en batterijen die het overschot kunnen opslaan. Uiteraard moeten deze huizen
 wel verbonden worden aan de batterijen door middel van kabelsegmenten.
 Zowel batterijen als kabelsegmenten kosten geld, hoe kunnen de huizen zo
 optimaal mogelijk verbonden worden met de batterijen om zo de kosten te
@@ -26,7 +26,7 @@ Team MSR*
 Voor het schrijven van de code is python3 gebruikt, in de requirements.txt
 file staan alle benodigde libraries.
 
-[link](/requirements.txt "Hyperlink")
+[Requirements](/requirements.txt "Hyperlink")
 
 ### Datastructure
 In de folder 'code' bevinden zich alle python files waarin is gecodeerd.
@@ -49,3 +49,4 @@ ingevoerd: python3 main.py
 * Quinten van den Post
 * Daan van den Berg
 * Bas Terwijn
+* Stackoverflow
