@@ -69,7 +69,7 @@ class Solution(object):
         battery_score = (10*total_capacity_exceeded / max_exceeded)
         score = distance_score - battery_score
 
-        score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
+        # score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
 
         return score
 

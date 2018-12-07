@@ -11,7 +11,7 @@ import copy
 from helpers import add_house_to_battery as ad
 from helpers import battery_capacity_exceeded as cap_exc
 
-from numpy import mean
+# from numpy import mean
 from visualization import grid
 
 
@@ -159,9 +159,9 @@ def k_means(solution):
 
     while True:
         # assign random location to batterys
-        for battery in batterys:
-            battery.location_x = random.randint(0, 26)
-            battery.location_y = random.randint(0, 26)
+        # for battery in batterys:
+        #     battery.location_x = random.randint(0, 26)
+        #     battery.location_y = random.randint(0, 26)
 
         batterys[0].location_x = random.randint(26, 51)
         batterys[0].location_x = random.randint(26, 51)
@@ -197,8 +197,11 @@ def k_means(solution):
                 for house in battery.list_of_houses:
                     x_coordinates.append(house.location_x)
                     y_coordinates.append(house.location_y)
-                mean_x = round(mean(x_coordinates))
-                mean_y = round(mean(y_coordinates))
+                if len(x_coordinates) == 0 or len(y_coordinates) == 0:
+                    x_coordinates = [1]
+                    y_coordinates = [1]
+                mean_x = round(sum(x_coordinates)/len(x_coordinates))
+                mean_y = round(sum(y_coordinates)/len(y_coordinates))
 
                 change_x = abs(battery.location_x - mean_x)
                 change_y = abs(battery.location_y - mean_y)
@@ -210,12 +213,9 @@ def k_means(solution):
             if total_change < 1:
                 break
 
-<<<<<<< HEAD
-
-=======
-        # grid(solution)
->>>>>>> 9be63fba5060dadae45ae275cb88e0d78f3ca90d
-        if cap_exc(batterys) is False:
+        if solution.score > 0.6:
             # grid(solution)
+            for battery in batterys:
+                print(battery)
             break
     return solution
