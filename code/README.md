@@ -13,7 +13,8 @@ Aan deze batterij wordt het eerstvolgende huis toegevoegd waarna deze while loop
 wordt herhaald tot dat alle huizen zijn ingedeeld in batterijen.
 
 
-[Result Greedy 1](/resultaten/Images/Greedy1.png "Hyperlink")
+[Result Greedy 1](/resultaten/Images/Greedy1.png "Hyperlink")  
+[Greedy 1](/code/algorithmes/greedy.py "Hyperlink")
 
 > Score: 0.5915492957746479  
 > Costs: 73546
