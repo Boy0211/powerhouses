@@ -20,11 +20,11 @@ waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn
 er 150! / (30!(150-30)!) mogelijkheden. De eerste bucket is gevuld en daarmee
 is het totaal aantal huizen nu 120. Voor de tweede bucket zijn er daardoor nu
 120! / (30!(120-30)!) opties. Voor het derde huis 90! / (30!(90-30)!)opties,
-voor het vierde huis (60! / (30!(60-30)!)en voor het vijfde en laatste huis
-(30 30) = 1 optie. Deze uitkomsten worden met elkaar vermenigvuldigd, hiervan
-is de uitkomst 4,35 * 10^100. Echter kunnen deze buckets over 5 batterijen
-worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
-De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
+voor het vierde huis 60! / (30!(60-30)!) en voor het vijfde en laatste huis
+30! / (30!(30-30)!) = 1 optie. Deze uitkomsten worden met elkaar
+vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze
+buckets over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden,
+5! = 120. De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
 
 Score
 
