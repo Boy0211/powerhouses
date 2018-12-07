@@ -38,19 +38,6 @@ huizen geplaats zijn.
 > Score: 0.885187920825785   
 > Costs: 56977
 
-### Random Hillclimber
-Nadat er een valide indeling van huizen in batterijen is gemaakt door een van
-de eerdere greedy algoritmes, wordt de hillclimber toegepast. Deze gaat
-iteratief opzoek naar een betere oplossing. Het hillclimber algoritme maakt
-gebruikt van een swap tussen huizen om zo een betere score te verkrijgen.
-Een swap is een wissel van twee random huizen in twee random batterijen.
-Dit algoritme maakt een swap tussen huizen als de capaciteit van beide
-batterijen dat toe laat. Mits dit de score bevorderd, gebeurd dit net zo lang
-totdat het niet meer mogelijk is.
-
-[Random Hillclimber + Greedy distance](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")  
-[Random Hillclimber Algoritme](/code/algorithmes/randomHillclimber.py "Hyperlink")
-
 
 ### Hillclimber
 Dit algoritme is een variant op de orginele hillclimber. Het hillclimber
@@ -66,7 +53,7 @@ hillclimber op zoek gaat naar de beste swap en deze uitvoert.
 > Score: 0.9360780065005417  
 > Costs: 56374
 
-[Result Hillclimber + Greedy 2](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")  
+[Result Hillclimber + Greedy distance](/resultaten/Images/greedy_2+hillclimber.png "Hyperlink")  
 [Hillclimber Algoritme](/code/algorithmes/hillclimber.py "Hyperlink")
 
 > Wijk 1:
@@ -82,3 +69,17 @@ ingeeld. Oplossinen die niet valide zijn worden weer verwijderd. Om dit
 algoritme te laten draaien wordt er een N aantal runs ingevoerd.  
 
 [Random Algoritme](/code/algorithmes/random_greedy.py "Hyperlink")
+
+
+### Random Hillclimber
+Nadat er een valide indeling van huizen in batterijen is gemaakt door een van
+de eerdere greedy algoritmes, wordt de hillclimber toegepast. Deze gaat
+iteratief opzoek naar een betere oplossing. Het hillclimber algoritme maakt
+gebruikt van een swap tussen huizen om zo een betere score te verkrijgen.
+Een swap is een wissel van twee random huizen in twee random batterijen.
+Dit algoritme maakt een swap tussen huizen als de capaciteit van beide
+batterijen dat toe laat. Mits dit de score bevorderd, gebeurd dit net zo lang
+totdat het niet meer mogelijk is.
+
+[Random Hillclimber + Greedy distance](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")  
+[Random Hillclimber Algoritme](/code/algorithmes/randomHillclimber.py "Hyperlink")
