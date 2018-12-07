@@ -5,9 +5,9 @@ zijn aan de batterijen.
 
 Opdracht
 
-a. verbind alle huizen in de drie wijken aan een batterij
+a. Verbind alle huizen in de drie wijken aan een batterij
 b. Bereken de kosten voor de wijken
-    - optimaliseer deze
+    - Optimaliseer deze
 c. Verplaats de batterijen en behaal een zo optimaal resultaat
 d. Probeer een verbeterde kosten optimalisatie te krijgen voor de wijk met
    verschillende batterij capaciteiten
@@ -16,20 +16,22 @@ Statespace
 
 Elke wijk bevat 150 huizen en 5 batterijen, wat neerkomt op ≈ 30 huizen per
 batterij. Het maakt echter voor dit scenario niet uit welke 30 huizen het zijn,
-waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn er
-(150 30) mogelijkheden. De eerste bucket is gevuld en daarmee is het totaal
-aantal huizen nu 120. Voor de tweede bucket zijn er daardoor nu (120 30) opties.
-Voor het derde huis (90 30) opties, voor het vierde huis (60 30) en voor het
-vijfde en laatste huis (30 30) = 1 optie. Deze uitkomsten worden met elkaar
-vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze buckets
-over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden, 5! = 120.
-De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
+waardoor er 5 buckets van 30 huizen worden gevormd. Voor de eerste bucket zijn
+er 150! / (30!(150-30)!) mogelijkheden. De eerste bucket is gevuld en daarmee
+is het totaal aantal huizen nu 120. Voor de tweede bucket zijn er daardoor nu
+120! / (30!(120-30)!) opties. Voor het derde huis 90! / (30!(90-30)!)opties,
+voor het vierde huis 60! / (30!(60-30)!) en voor het vijfde en laatste huis
+30! / (30!(30-30)!) = 1 optie. Deze uitkomsten worden met elkaar
+vermenigvuldigd, hiervan is de uitkomst 4,35 * 10^100. Echter kunnen deze
+buckets over 5 batterijen worden verdeeld. Hiervoor zijn 5! mogelijkheden,
+5! = 120. De totale state space bedraagt dus 120 *  4,35 * 10^100 = 5,22 * 10^102.
 
 Score
 
 In de situatie van statische batterijen kan de lower bound als volgt worden
 berekend. Het is de som van de afstand van elk huis, tot de dichtsbijzijnde
-batterij. Dit getal vermenigvuldigd met 9 (een kabelsegment kost 9),
+batterij. Voor de afstand wordt de manhattan distance gehanteerd.
+Deze uitkomst vermenigvuldigd met 9 (een kabelsegment kost 9),
 geeft de laagst mogelijke totale kosten. Lower bound = 42757.
 De upper bound werkt daarmee tegenovergesteld. De som van de afstand van elk
 huis, tot de verste batterij, vermenigvuldigd met 9, geeft de maximale totale
@@ -37,10 +39,25 @@ kosten. Upper bound = 101491.
 
 Aan de hand van deze 2 waarden bepalen wij hoe goed onze resultaten zijn.
 Hoe dichter het resultaat bij de lower bound ligt hoe beter het resultaat.
-Daar hebben wij de volgende formule eraan verbonden.
-Score = Resultaat / (Upper bound - lower bound).
-Dit betekend dat de beste score 1.0 is en de laagste score 0.0.
+Eerst wordt de score bepaald op basis van afstand, daarvoor hanteren wij de
+volgende formule:
+Distance score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
 
+Nadat deze score is bepaald wordt er rekening gehouden met eventuele
+overschrijding. Omdat een wijk maximaal 7500 aan output heeft en een batterij
+maximaal 1500 aan input kan ontvangen, beslaat de maximale overschrijding 6000.
+De battery score wordt bepaald door de total capaciteit van de battery te delen
+door de eventuele overschrijding. Dit wordt vermenigvuldigd met een factor 20
+waardoor deze score in proportie is met de eerder berekende distance score.
+
+De uiteindelijke score wordt dan berekend met de distance score minus de
+battery score.
+
+max_exceeded = 6000
+battery_score = (20 * total_capacity_exceeded / max_exceeded)
+score = distance_score - battery_score
+
+Dit betekend dat de beste score 1.0 is en de laagste score -20.
 
 Algoritmes
 
@@ -113,8 +130,7 @@ ook duidelijk dat dit een probleem is. De clusterswolken overlappen aan de
 randen sterk, waardoor de efficientie daalt.
 
 De constrains van onze case zijn redelijk streng. Wanneer een of meerdere
-constrains worden overschreden is er geen sprake van strafpunten of een minder
-goed resultaat maar er is sprake van een ongeldig resultaat. Echter is
+constrains worden overschreden is er sprake van een ongeldig resultaat. Echter is
 het nog wel mogelijk om vanuit een ongeldig resultaat verder te werken naar een
 valide resultaat. Dit kan doormiddel van een hillclimber. Eerder is
 beschreven dat de statespace van onze case erg groot is. Het feit dat doormiddel

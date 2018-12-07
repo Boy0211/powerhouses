@@ -38,7 +38,9 @@ In de folder 'resultaten' XXXX!!!
 
 ### Uitvoeren van de code
 Voor het uitvoeren van de code moet de volgende instructie in de terminal worden
-ingevoerd: python3 main.py
+ingevoerd:
+
+> python3 main.py
 
 ### Authors
 * Mendel Engelaer
@@ -50,3 +52,12 @@ ingevoerd: python3 main.py
 * Daan van den Berg
 * Bas Terwijn
 * Stackoverflow
+---
+
+Voor praktische informatie over de case, zie exploratie.txt.  
+
+[Exploratie](/exploratie.txt "Hyperlink")  
+
+Voor de gebruikte algoritmes in onze case, zie readme in de code folder.  
+
+[Readme](/code/README.md "Hyperlink")  
