@@ -44,8 +44,8 @@ huizen geplaats zijn.
 [Greedy Algoritme](/code/algorithmes/greedy.py "Hyperlink")
 
 > Wijk 1:  
-> Score: 0.885187920825785   
-> Costs: 56977
+> Score: 0.9207295052365475   
+> Costs: 57139
 
 
 ### Hillclimber
