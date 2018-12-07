@@ -16,6 +16,7 @@ def random_distribution(solution, attempts, bins):
     while i < attempts:
         random_greedy(solution)
         random_hillclimber(solution)
+        print(i)
         score = solution.score
         all_scores.append(score)
         i += 1

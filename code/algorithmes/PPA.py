@@ -27,13 +27,23 @@ def plant_propagation_algorithm(solution, x):
             all_solutions.append(old_solution)
             new_solution = copy_solution(solution)
 
-            # The first 15 are swapped 1 by 1, the second 15: 2 by 2
-            if counter < 0.5*len(solutions):
-                all_solutions.append(swap1_random(new_solution))
+            x = [0, 1]
+            y = [0, 1, 2]
 
+            if solution.score >= 0.90:
+                all_solutions.append(swap1_random(new_solution))
+            elif solution.score < 0.90 and solution.score >= 0.50:
+                if random.choice(x) == 0:
+                    all_solutions.append(swap1_random(new_solution))
+                else:
+                    all_solutions.append(move_one_house(new_solution))
             else:
-                all_solutions.append(swap2_random(new_solution))
-            counter += 1
+                if random.choice(y) == 0:
+                    all_solutions.append(swap2_random(new_solution))
+                elif random.choice(y) == 1:
+                    all_solutions.append(swap1_random(new_solution))
+                else:
+                    all_solutions.append(move_one_house(new_solution))
 
         all_solutions.sort(key=lambda x: x.score, reverse=True)
         solutions = all_solutions[:x]
@@ -90,5 +100,20 @@ def swap2_random(solution):
 
         swap(house1_1, house2_1, battery1, battery2)
         swap(house1_2, house2_2, battery1, battery2)
+
+    return solution
+
+
+def move_one_house(solution):
+    battery1 = random.choice(solution.batterys)
+    house1 = random.choice(battery1.list_of_houses)
+
+    while True:
+        battery2 = random.choice(solution.batterys)
+        if battery1 != battery2:
+            break
+
+    rm(house1, battery1)
+    ad(house1, battery2)
 
     return solution

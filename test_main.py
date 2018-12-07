@@ -18,28 +18,21 @@ from place_battery import k_means
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 
+
 def main():
 
     DataStructure = Smartgrid(1)
 
     time_start2 = time.time()
-    Solutions = []
-    for i in range(50):
-        Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
-        k_means(Solution_k)
-        Solutions.append(Solution_k)
-        print("gelukt")
-    for solution in Solutions:
-        print(solution)
-    Solution_ultimate = BBPPA(Solutions)
-    grid(Solution_ultimate)
+    Solution_x = Solution(DataStructure.houses, DataStructure.batterys)
+
+    greedy_2(Solution_x)
+    for battery in Solution_x.batterys:
+        print(battery)
     time_end2 = time.time()
 
-    hillclimber(Solution_ultimate)
-    for battery in Solution_ultimate.batterys:
-        print(battery)
-
-    print(Solution_ultimate)
+    grid(Solution_x)
+    print(Solution_x)
     print(f"running time: {time_end2 - time_start2}")
 
 

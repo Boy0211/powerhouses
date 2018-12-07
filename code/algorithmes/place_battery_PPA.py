@@ -27,15 +27,28 @@ def battery_based_plant_propagation_algorithm(solutions):
             all_solutions.append(old_solution)
             new_solution = copy_solution(solution)
 
-            random_list = [1, 2, 3, 4]
-            if random.choice(random_list) == 1:
-                all_solutions.append(move_one_house(new_solution))
-            if random.choice(random_list) == 2:
-                all_solutions.append(swap_one_pair(new_solution))
-            if random.choice(random_list) == 3:
-                all_solutions.append(move_ten_houses(new_solution))
-            if random.choice(random_list) == 4:
-                all_solutions.append(move_battery(new_solution))
+            x = [0, 1]
+            y = [0, 1, 2]
+
+            if solution.score >= 0.90:
+                if random.choice(x) == 0:
+                    all_solutions.append(swap_one_pair(new_solution))
+                else:
+                    all_solutions.append(move_battery(new_solution))
+            elif solution.score < 0.90 and solution.score >= 0.50:
+                if random.choice(y) == 0:
+                    all_solutions.append(swap_one_pair(new_solution))
+                elif random.choice(y) == 1:
+                    all_solutions.append(move_battery(new_solution))
+                else:
+                    all_solutions.append(move_one_house(new_solution))
+            else:
+                if random.choice(y) == 0:
+                    all_solutions.append(move_ten_houses(new_solution))
+                elif random.choice(y) == 1:
+                    all_solutions.append(move_battery(new_solution))
+                else:
+                    all_solutions.append(move_one_house(new_solution))
 
         all_solutions.sort(key=lambda x: x.score, reverse=True)
         solutions = all_solutions[:solutions_counter]
