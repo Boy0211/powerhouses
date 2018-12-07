@@ -52,6 +52,7 @@ ingevoerd:
 * Daan van den Berg
 * Bas Terwijn
 * Stackoverflow
+---
 
 Voor praktische informatie over de case, zie exploratie.txt.  
 
