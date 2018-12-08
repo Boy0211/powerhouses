@@ -15,7 +15,7 @@ class Solution(object):
         self.batterys = self.load_batterys(batterys)
 
     def __str__(self):
-        return (f"algorithme: xxx\nScore: {self.score}\nCosts: {self.costs}\n")
+        return (f"Score: {self.score}\nCosts: {self.costs}\n")
 
     def load_batterys(self, batterys):
 
