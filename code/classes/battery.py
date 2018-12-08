@@ -12,3 +12,15 @@ class Battery(object):
 
     def __str__(self):
         return (f"ID: {self.identification}\ncurrent_input: {self.current_input}\nmax input: {self.max_input}\n Houses: {len(self.list_of_houses)}\n")
+
+    @property
+    def battery_costs(self):
+
+        if self.max_input == 450:
+            return 900
+        elif self.max_input == 900:
+            return 1350
+        elif self.max_input == 1800:
+            return 1350
+        else:
+            return 5000
