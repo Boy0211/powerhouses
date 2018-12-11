@@ -11,7 +11,7 @@ werkt wel alleen met bestaande oplossingen waardoor het gebruik van een simpele
 greedy of een greedy gevolgd door een hillClimber onvermijdelijk is. De PPA
 zorgt door zijn mogelijkheid veel verschillende veranderingen toe te passen voor
 een hoge verscheidenheid aan oplossing die vervolgens weer geoptimaliseerd
-worden. 
+worden.
 
 ---
 ### Greedy capacity
@@ -93,7 +93,7 @@ totdat het niet meer mogelijk is.
 [Random Hillclimber + Greedy distance](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")  
 [Random Hillclimber Algoritme](/code/algorithmes/randomHillclimber.py "Hyperlink")
 
-> resultaten: [Random](/powerhouses/resultaten/random greedy + random hc n = 10,000.png "Hyperlink")
+[Normaal verdeling na 10000 runs](/powerhouses/resultaten/random greedy + random hc n = 10,000.png "Hyperlink")
 
 ### Plant Propagation algorithm voor stationaire batterijen
 

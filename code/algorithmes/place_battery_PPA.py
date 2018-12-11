@@ -123,16 +123,40 @@ def move_ten_houses(solution):
 
 def move_battery(solution):
 
-    list = [0, 1]
     battery = random.choice(solution.batterys)
-    if random.choice(list) == 0:
-        if random.choice(list) == 0:
-            battery.location_x += 1
-        elif random.choice(list) == 1:
-            battery.location_y += 1
-    elif random.choice(list) == 1:
-        if random.choice(list) == 0:
-            battery.location_x -= 1
-        elif random.choice(list) == 1:
-            battery.location_y -= 1
+    locatie = random.choice([battery.location_x, battery.location_y])
+    locatie += random.choice([-1, 1])
+
+    return solution
+
+    # list = [0, 1]
+    # battery = random.choice(solution.batterys)
+    # if random.choice(list) == 0:
+    #     if random.choice(list) == 0:
+    #         battery.location_x += 1
+    #     elif random.choice(list) == 1:
+    #         battery.location_y += 1
+    # elif random.choice(list) == 1:
+    #     if random.choice(list) == 0:
+    #         battery.location_x -= 1
+    #     elif random.choice(list) == 1:
+    #         battery.location_y -= 1
+    # return solution
+
+
+def change_battery(solution):
+
+    battery = random.choice(solution.batterys)
+    if battery.current_input > battery.max_input:
+        # battery x > y
+        if battery.max_input == 450:
+            battery.max_input = 900
+        elif battery.max_input == 900:
+            battery.max_input = 1800
+    elif battery.current_input < battery.max_input:
+        if battery.max_input == 1800:
+            battery.max_input = 900
+        elif battery.max_input == 900:
+            battery.max_input = 450
+
     return solution

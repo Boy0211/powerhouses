@@ -68,9 +68,19 @@ class Solution(object):
                 capacity_exceeded = battery.current_input - battery.max_input
             total_capacity_exceeded += capacity_exceeded
 
+        capacity_under_range = 0
+        for battery in self.batterys:
+            if battery.current_input + (0.20 * battery.max_input) < battery.max_input:
+                capacity_under_range += abs(battery.current_input - battery.max_input)
+
+
         max_exceeded = 6000
         battery_score = (20*total_capacity_exceeded / max_exceeded)
-        score = distance_score - battery_score
+        score = distance_score - battery_score #- capacity_under_range
+
+        # print(f"distance score = {distance_score}")
+        # print(f"battery score = {battery_score}")
+        # print(f"capacity under range score = {capacity_under_range}")
 
         return score
 
