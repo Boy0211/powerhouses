@@ -32,7 +32,7 @@ file staan alle benodigde libraries.
 In de folder 'code' bevinden zich alle python files waarin is gecodeerd.
 Deze map bestaat uit alle algoritmes, de battery en houses classes en
 alle overige functies. Daarnaast bevat deze een README waarin de algoritmes
-worden uitgelegd en geanalyseerd aan de hand van resultaten.
+worden uitgelegd en geanalyseerd aan de hand van resultaten.  
 In de folder 'data' zijn alle csv bestanden te vinden die toegereikt werden
 bij deze case.  
 In de folder 'resultaten' zijn de resultaten te vinden wanneer random algoritmes
