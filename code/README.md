@@ -6,12 +6,13 @@ van elkaar. Hieronder worden alle gebruikte algoritmen besproken en geanalyseerd
 
 ### Analyse Algoritmes
 
-Op basis van onze huidige bevindingen komt de PPA het beste uit de kast. De PPA
-werkt wel alleen met bestaande oplossingen waardoor het gebruik van een simpele
-greedy of een greedy gevolgd door een hillClimber onvermijdelijk is. De PPA
-zorgt door zijn mogelijkheid veel verschillende veranderingen toe te passen voor
-een hoge verscheidenheid aan oplossing die vervolgens weer geoptimaliseerd
-worden.
+Op basis van onze huidige resultaten en bevindingen geeft de PPA het beste
+resultaat. Echter werkt de PPA alleen met bestaande oplossingen waardoor het
+gebruik van een simpele greedy of een greedy gevolgd door een hillClimber
+onvermijdelijk is. Door veel verschillende veranderingen toe te passen,
+zorgt de PPA voor een hoge verscheidenheid. Deze oplossingen kunnen vervolgens
+weer geoptimaliseerd worden.
+
 
 ---
 ### Greedy capacity
@@ -129,5 +130,5 @@ batterijen.
 
 
 > Wijk 1:  
-> Score: 0.9995391062455254
+> Score: 0.9995391062455254  
 > Costs: 40354
