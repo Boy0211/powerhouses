@@ -43,7 +43,7 @@ def hillclimber_2(solution):
 
     while True:
         # grid(solution)
-        x = 0
+        y = 0
         # for battery in batterys:
         #     print(battery)
         # check of een batterij een max_input overschrijding heeft
@@ -70,7 +70,11 @@ def hillclimber_2(solution):
             # maak lijst met alle huizen in alle batterijen
             list_of_all_houses = []
             for i in range(len(column_numbers)):
-                list_of_all_houses += (selected_list[column_numbers[i]].tolist())
+                print(selected_list[column_numbers[i]].tolist())
+                print(selected_list[column_numbers[i]].name)
+                # list_of_all_houses += (selected_list[column_numbers[i]].tolist())
+                for distances in selected_list[column_numbers[i]].tolist():
+                    list_of_all_houses += [selected_list[column_numbers[i]].name, distances])
 
             # soorter van klein naar groot
             list_of_all_houses = sorted(list_of_all_houses)
@@ -89,14 +93,15 @@ def hillclimber_2(solution):
                 # print(f"house counter: {house_counter}")
 
                 # print(solved)
-                print(list_of_all_houses[house_counter])
+                # print(list_of_all_houses[house_counter])
                 battery_n = selected_list[selected_list.apply(lambda row: row.astype(str).str.contains(f"{list_of_all_houses[house_counter]}").any(), axis=1)]
                 # print(battery_n)
                 # print(battery_n)
 
-                replace_house = (battery_n.iloc[x].name)
+                replace_house = (battery_n.iloc[y].name)
+                # print(y)
                 # print(replace_house)
-                distance = (battery_n.iloc[0].min())
+                # distance = (battery_n.iloc[0].min())
                 # print(distance)
                 dict = battery_n.to_dict('index')
                 # print(dict)
@@ -139,12 +144,21 @@ def hillclimber_2(solution):
                             # print(f"len_battery{len(battery_n)}")
                             # print(f"xx{x}")
                             if len(battery_n) == 1:
-                                x = 0
-                            elif len(battery_n)-1 == x:
-                                x = 0
-
+                                # print("11111111111")
+                                y = 0
+                            #     x = 0
+                            elif len(battery_n) -1 == y and y > 0:
+                                # print("eindeeeeeee")
+                                y = 0
                             else:
-                                x = 0
+                                y += 1
+                                # print("increasseeeeee")
+                                # x = 0
+                            # elif len(battery_n) -1 > 1:
+                            #     x += 1
+                            #
+                            # else:
+                            #     x = 0
                         # for battery in batterys:
                         #     print(battery)
                     # print(" ik ben hieeeeerrr")
