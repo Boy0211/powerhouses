@@ -93,7 +93,7 @@ totdat het niet meer mogelijk is.
 [Random Hillclimber + Greedy distance](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")  
 [Random Hillclimber Algoritme](/code/algorithmes/randomHillclimber.py "Hyperlink")
 
-[Normaal verdeling na 10000 runs](/powerhouses/resultaten/random greedy + random hc n = 10,000.png "Hyperlink")
+[Normaal verdeling na 10000 runs](/resultaten/random greedy + random hc n = 10,000.png "Hyperlink")
 
 ### Plant Propagation algorithm voor stationaire batterijen
 
