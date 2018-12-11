@@ -31,10 +31,15 @@ file staan alle benodigde libraries.
 ### Datastructure
 In de folder 'code' bevinden zich alle python files waarin is gecodeerd.
 Deze map bestaat uit alle algoritmes, de battery en houses classes en
-alle overige functies.  
+alle overige functies. Daarnaast bevat deze een README waarin de algoritmes
+worden uitgelegd en geanalyseerd aan de hand van resultaten.
 In de folder 'data' zijn alle csv bestanden te vinden die toegereikt werden
 bij deze case.  
-In de folder 'resultaten' XXXX!!!
+In de folder 'resultaten' zijn de resultaten te vinden wanneer random algoritmes
+een n aantal keer worden gerund. De resultaten laten de scoreverdeling zien
+na de n aantal runs. In de folder resultaten is een subfolder te vinden genaamd
+"images" waarin de bovengenoemde resultaten van de 'code' README
+zijn gevisualiseerd.
 
 ### Uitvoeren van de code
 Voor het uitvoeren van de code moet de volgende instructie in de terminal worden
