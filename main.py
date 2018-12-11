@@ -14,7 +14,7 @@ from smartGRID import Smartgrid
 from visualization import grid
 from randomHillclimber import random_hillclimber
 from hillclimber import hillclimber
-from place_battery import k_means
+from k_means import k_means
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 

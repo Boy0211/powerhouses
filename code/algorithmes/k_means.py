@@ -8,8 +8,10 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import random
 import copy
+from battery import Battery
 from helpers import add_house_to_battery as ad
 from helpers import battery_capacity_exceeded as cap_exc
+from helpers import house_battery_distance
 
 # from numpy import mean
 from visualization import grid
@@ -156,7 +158,6 @@ def k_means(solution):
     houses = solution.houses
     batterys = solution.batterys
 
-
     while True:
         # assign random location to batterys
 
@@ -175,14 +176,19 @@ def k_means(solution):
         batterys[4].location_x = random.randint(17, 33)
         batterys[4].location_y = random.randint(17, 33)
 
+
         # iterate through all houses
         while True:
             total_change = 0
+            # counter = 0
             for battery in batterys:
+                # counter += 1
+                # print(counter)
                 battery.list_of_houses = []
                 battery.current_input = 0
 
             temp_df = solution.distances
+            # print(solution.distances)
 
             counter = 1
             for house in houses:
@@ -207,8 +213,25 @@ def k_means(solution):
                 battery.location_x = mean_x
                 battery.location_y = mean_y
 
+            print(total_change)
             if total_change < 1:
                 break
+
+        # solution.batterys = batterys
+        grid(solution)
+        for battery in batterys:
+            print(battery)
+        # merge_battery1, merge_battery2 = search_best_merge(batterys)
+        # battery_new = merge_batterys(merge_battery1, merge_battery2)
+        # print(merge_battery1)
+        # batterys.remove(merge_battery1)
+        # print(merge_battery2)
+        # batterys.remove(merge_battery2)
+        # batterys.append(battery_new)
+        # for battery in batterys:
+        #     print(battery)
+        # grid(solution)
+
 
         if cap_exc(batterys) is False:
             break
@@ -218,3 +241,75 @@ def k_means(solution):
         #         print(battery)
         #     break
     return solution
+
+
+    # solution.batterys = []
+    # for i in range(17):
+    #     identification = i + 1
+    #     location_x = random.randint(0, 51)
+    #     location_y = random.randint(0, 51)
+    #     max_input = 450
+    #     current_input = 0
+    #     list_of_houses = []
+    #     solution.batterys.append(Battery(identification, location_x, location_y, max_input, current_input, list_of_houses))
+
+
+# def search_best_merge(batterys):
+#
+#     score_merge = 0.0
+#     merge_battery1 = "none"
+#     merge_battery2 = "none"
+#     for i in range(len(batterys)):
+#         battery1 = batterys[i]
+#         for j in range(len(batterys)):
+#             battery2 = batterys[j]
+#
+#             if battery2 == battery1:
+#                 battery2 = batterys[(j + 1) % len(batterys)]
+#
+#             total_costs_before = battery1.battery_costs + battery2.battery_costs
+#             print('-----')
+#             # print(total_costs_before)
+#
+#             coordinate_x = round((battery1.location_x + battery2.location_x)/2)
+#             coordinate_y = round((battery1.location_y + battery2.location_y)/2)
+#
+#             # print(f"{battery1.location_x}, {coordinate_x}, {battery2.location_x}")
+#
+#             temp_ds = 0
+#             for house in battery1.list_of_houses:
+#                 temp_ds += abs(coordinate_x - house.location_x)
+#                 temp_ds += abs(coordinate_y - house.location_y)
+#             for house in battery2.list_of_houses:
+#                 temp_ds += abs(coordinate_x - house.location_x)
+#                 temp_ds += abs(coordinate_y - house.location_y)
+#
+#             total_costs_after = temp_ds * 9 + 1350
+#             # print(f'x{battery1.battery_type_costs}')
+#             # print(total_costs_after)
+#
+#             if total_costs_before - total_costs_after > score_merge:
+#                 merge_battery1 = battery1
+#                 merge_battery2 = battery2
+#                 print(merge_battery1)
+#                 print(merge_battery2)
+#
+#     return merge_battery1, merge_battery2
+#
+#
+# def merge_batterys(battery1, battery2):
+#
+#     identification = f"[{battery1.identification}_{battery2.identification}]"
+#     location_x = round((battery1.location_x + battery2.location_x)/2)
+#     location_y = round((battery1.location_y + battery2.location_y)/2)
+#     max_input = battery1.max_input + battery2.max_input
+#     current_input = 0
+#     list_of_houses = []
+#     battery_new = Battery(identification, location_x, location_y, max_input, current_input, list_of_houses)
+#
+#     for house in battery1.list_of_houses:
+#         ad(house, battery_new)
+#     for house in battery2.list_of_houses:
+#         ad(house, battery_new)
+#
+#     return battery_new

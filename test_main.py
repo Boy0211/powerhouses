@@ -14,7 +14,8 @@ from smartGRID import Smartgrid
 from visualization import grid
 from randomHillclimber import random_hillclimber
 from hillclimber import hillclimber
-from place_battery import k_means
+from k_means import k_means
+from k_means_stage3 import k_means_stage3
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 
@@ -26,7 +27,7 @@ def main():
     time_start2 = time.time()
     Solution_x = Solution(DataStructure.houses, DataStructure.batterys)
 
-    greedy_2(Solution_x)
+    k_means_stage3(Solution_x)
     for battery in Solution_x.batterys:
         print(battery)
     time_end2 = time.time()
