@@ -15,7 +15,7 @@ class Solution(object):
         self.batterys = self.load_batterys(batterys)
 
     def __str__(self):
-        return (f"algorithme: xxx\nScore: {self.score}\nCosts: {self.costs}\n")
+        return (f"Score: {self.score}\nCosts: {self.costs}\n")
 
     def load_batterys(self, batterys):
 
@@ -25,12 +25,14 @@ class Solution(object):
     @property
     def costs(self):
 
-        total_distance = []
+        total_distance = 0
+        total_battery_costs = 0
         for battery in self.batterys:
+            total_battery_costs += battery.battery_costs
             for house in battery.list_of_houses:
-                total_distance.append(distance(house, battery))
+                total_distance += distance(house, battery)
 
-        costs = (5000 * len(self.batterys)) + (9 * sum(total_distance))
+        costs = (total_battery_costs) + (9 * total_distance)
         if cap_exc(self.batterys) is not False:
             costs = 0000
 
@@ -54,7 +56,8 @@ class Solution(object):
         total_distance_min = sum(self.distances["min_value"])
         total_distance_max = sum(self.distances["max_value"])
 
-        distance_score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
+        distance_score = 1 - ((total_distance_connected - total_distance_min) /
+                              (total_distance_max - total_distance_min))
 
         # capacity score
         total_capacity_exceeded = 0
@@ -65,11 +68,9 @@ class Solution(object):
                 capacity_exceeded = battery.current_input - battery.max_input
             total_capacity_exceeded += capacity_exceeded
 
-        max_exceeded = 3000
-        battery_score = (10*total_capacity_exceeded / max_exceeded)
+        max_exceeded = 6000
+        battery_score = (20*total_capacity_exceeded / max_exceeded)
         score = distance_score - battery_score
-
-        # score = 1 - ((total_distance_connected - total_distance_min) / (total_distance_max - total_distance_min))
 
         return score
 
@@ -96,6 +97,5 @@ class Solution(object):
         df['max_value'] = df.max(axis=1)
         df['min_value'] = df.min(axis=1)
         df['closest_house'] = df.idxmin(axis=1)
-
 
         return df

@@ -159,9 +159,6 @@ def k_means(solution):
 
     while True:
         # assign random location to batterys
-        # for battery in batterys:
-        #     battery.location_x = random.randint(0, 26)
-        #     battery.location_y = random.randint(0, 26)
 
         batterys[0].location_x = random.randint(26, 51)
         batterys[0].location_x = random.randint(26, 51)
@@ -177,8 +174,6 @@ def k_means(solution):
 
         batterys[4].location_x = random.randint(17, 33)
         batterys[4].location_y = random.randint(17, 33)
-        print(solution)
-        grid(solution)
 
         # iterate through all houses
         while True:
@@ -212,15 +207,14 @@ def k_means(solution):
                 battery.location_x = mean_x
                 battery.location_y = mean_y
 
-
             if total_change < 1:
-                print(solution)
-                grid(solution)
                 break
 
-        if solution.score > 0.6:
-            # grid(solution)
-            for battery in batterys:
-                print(battery)
+        if cap_exc(batterys) is False:
             break
+        # if solution.score > 0.6:
+        #     print("gelukt")
+        #     for battery in batterys:
+        #         print(battery)
+        #     break
     return solution
