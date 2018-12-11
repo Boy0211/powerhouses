@@ -93,7 +93,7 @@ totdat het niet meer mogelijk is.
 [Random Hillclimber + Greedy distance](/resultaten/Images/greedy_2+randomhillclimber.png "Hyperlink")  
 [Random Hillclimber Algoritme](/code/algorithmes/randomHillclimber.py "Hyperlink")
 
-[Normaal verdeling na 10000 runs](/resultaten/Images/randomgreedy+hc,10000_runs.png "Hyperlink")
+> [Normaal verdeling na 10000 runs](/resultaten/Images/randomgreedy+hc,10000_runs.png "Hyperlink")
 
 ### Plant Propagation algoritme voor stationaire batterijen
 
@@ -113,7 +113,7 @@ vergelijken met de wortels van de aardbeiplant. Hoe dichter de score
 bij de optimale score zit, hoe shorter de runner (de wortels). Wat betekend dat
 de batterij zich in vruchtbare grond bevindt en vice versa.  
 
-[Statische](/code/algorithmes/PPA.py "Hyperlink")
+[Statische PPA](/code/algorithmes/PPA.py "Hyperlink")
 
 
 > UITSLAGEN VOLGEN
