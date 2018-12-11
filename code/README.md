@@ -95,30 +95,38 @@ totdat het niet meer mogelijk is.
 
 [Normaal verdeling na 10000 runs](/resultaten/Images/randomgreedy+hc,10000_runs.png "Hyperlink")
 
-### Plant Propagation algorithm voor stationaire batterijen
+### Plant Propagation algoritme voor stationaire batterijen
 
-[link naar bestand]
 
-Bij het plant propagation algoritm (PPA) wordt er gebruik gemaakt van het
-concept van de aarbei plant. De aarbei plant plant zich zelf voor door wanneer
-hij in vruchtbare grond zich snel uit te breiden, maar wanneer hij daar niet zit
-lange wortels er op uit te sturen opzoek naar vruchtbare grond.
+Bij het plant propagation algoritm (PPA) wordt er gebruik gemaakt van hetzelfde
+concept als de aardbeiplant. Wanneer de aardbeiplant zich in vruchtbare grond
+bevindt, kan deze zich voortplanten door zich op dat moment snel uit te breiden.
+Maar wanneer de aardbeiplant zich niet in vruchtbare grond bevindt, zoekt de
+plant met behulp van lange wortels naar vruchtbare grond. Vanuit de wortels zal
+de plant zich hier voortplanten en zal zich vanaf hier verder uitbreiden.
 
-De PPA gebruikt in ons geval dit concept.
+Onze PPA maakt gebruik van dit concept.
 
 Op basis van de score gegenereerd in de solution class, bepaalt het algoritme
-of er een 'long runner' of een 'short runner' nodig is. Hoe dichter de score
-bij de optimale score zit, hoe shorter de runner
+of er een 'long runner' of een 'short runner' nodig is. Deze begrippen kun je
+vergelijken met de wortels van de aardbeiplant. Hoe dichter de score
+bij de optimale score zit, hoe shorter de runner (de wortels). Wat betekend dat
+de batterij zich in vruchtbare grond bevindt en vice versa.  
+
+[Statische](/code/algorithmes/PPA.py "Hyperlink")
+
 
 > UITSLAGEN VOLGEN
 
-### Plant Propagation algorithm voor beweeglijke batterijen
+### Plant Propagation algoritme voor dyanmische batterijen
 
-[link naar bestand]
 
 Dit algoritme is op het zelfde concept gebasseerd als die voor stationaire
-batterijen. Nu is een van de mogelijke runners ook nog het verplaatsen van
-batterijen.
+batterijen. Echter is nu een van de mogelijke runners ook het verplaatsen van
+batterijen.  
+
+[Dynamische PPA](/code/algorithmes/place_battery_PPA.py "Hyperlink")
+
 
 > Wijk 1:  
 > Score: 0.9995391062455254
