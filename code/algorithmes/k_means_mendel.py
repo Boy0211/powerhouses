@@ -154,86 +154,124 @@ def k_means(solution):
     # 3. clusters vormen waarbij huizen die dichstbij staan in cluster worden gezet
     # 4. herhalen totdat clusters niet veranderen
 
-    houses = solution.houses
-    batterys = solution.batterys
+    original = copy.deepcopy(solution)
 
-    # continue until solution is valid
-    # while True:
-        # assign random location to batterys
+    # batterys = solution.batterys
 
-    batterys[0].location_x = random.randint(26, 51)
-    batterys[0].location_x = random.randint(26, 51)
+    # old_solution = copy.deepcopy(solution)
+    index = 0
+    temp_save = 50000
 
-    batterys[1].location_x = random.randint(0, 26)
-    batterys[1].location_y = random.randint(26, 51)
-
-    batterys[2].location_x = random.randint(26, 51)
-    batterys[2].location_y = random.randint(0, 26)
-
-    batterys[3].location_x = random.randint(0, 26)
-    batterys[3].location_y = random.randint(0, 26)
-
-    batterys[4].location_x = random.randint(17, 33)
-    batterys[4].location_y = random.randint(17, 33)
-
-    # iterate through all houses
-    lengte = False
-    old_solution = solution
     while True:
-        total_change = 0
-        for battery in batterys:
-            battery.list_of_houses = []
-            battery.current_input = 0
-
-        temp_df = solution.distances
-
-        counter = 1
-        for house in houses:
-            ad(house, batterys[(temp_df['closest_house'][counter]) - 1])
-            counter += 1
-
-        for battery in batterys:
-            x_coordinates = list()
-            y_coordinates = list()
-            for house in battery.list_of_houses:
-                x_coordinates.append(house.location_x)
-                y_coordinates.append(house.location_y)
-            if len(x_coordinates) == 0 or len(y_coordinates) == 0:
-                x_coordinates = [1]
-                y_coordinates = [1]
-            mean_x = round(sum(x_coordinates)/len(x_coordinates))
-            mean_y = round(sum(y_coordinates)/len(y_coordinates))
-
-            change_x = abs(battery.location_x - mean_x)
-            change_y = abs(battery.location_y - mean_y)
-            total_change += change_x + change_y
-            battery.location_x = mean_x
-            battery.location_y = mean_y
-
-        # check of plaatsing kosten heeft verlaagd
-        if lengte is True:
-            print("batterij geplaatst")
-            if solution.costs < old_solution.costs:
-                print("bettere oplossing gevonden")
-                break
-        # plaats een batterij
-        if total_change < 1:
-            # kijk of batterijen plaatsen de score verbeterd
-            old_solution = copy.deepcopy(solution)
-            new_battery = Battery(6, (batterys[0].location_x+1), (batterys[0].location_y+1), 900, 0, [])
-            # batterys.append(new_battery)
-            print(batterys)
-            batterys.append(new_battery)
-            grid(solution)
-            lengte = True
-        else:
-            lengte = False
+        # assign random location to batterys
+        counter = 0
+        old_solution = 0
+        solution = copy.deepcopy(original)
+        for battery in solution.batterys:
+            battery.max_input = 1800
 
 
+        place_batterys(solution)
 
-        if cap_exc(batterys) is False:
-            grid(solution)
+        x = 100000
+        y = 0
+        battery_type = 1800
+        # iterate through all houses
+        while True:
+            if y > 2:
+                y = 0
+            total_change = 0
+            if y == 0:
+                battery_type = 1800
+            elif y == 1:
+                battery_type = 900
+            else:
+                battery_type = 450
+            # counter = 0
+            houses = solution.houses
+            for battery in solution.batterys:
+                battery.list_of_houses = []
+                battery.current_input = 0
+
+            temp_df = solution.distances
+            counter = 1
+            for house in houses:
+                ad(house, solution.batterys[(temp_df['closest_house'][counter]) - 1])
+                counter += 1
+
+            for battery in solution.batterys:
+                x_coordinates = list()
+                y_coordinates = list()
+                for house in battery.list_of_houses:
+                    x_coordinates.append(house.location_x)
+                    y_coordinates.append(house.location_y)
+                if len(x_coordinates) == 0 or len(y_coordinates) == 0:
+                    x_coordinates = [1]
+                    y_coordinates = [1]
+                mean_x = round(sum(x_coordinates)/len(x_coordinates))
+                mean_y = round(sum(y_coordinates)/len(y_coordinates))
+
+                change_x = abs(battery.location_x - mean_x)
+                change_y = abs(battery.location_y - mean_y)
+                total_change += change_x + change_y
+                battery.location_x = mean_x
+                battery.location_y = mean_y
+            # choose_new_battery(solution)
+            index += 1
+            if index % 10 == 0:
+                if solution.costs == temp_save:
+                    # for battery in solution.batterys:
+                        # print(battery)
+                    # print(solution)
+                    # print("jihoho")
+
+                    # grid(solution)
+                    break
+                else:
+                    temp_save = solution.costs
+
+            if total_change < 1:
+                if solution.costs <= x:
+                    # print(solution.score)
+
+                    # sla oude oplossing op
+                    old_solution = copy.deepcopy(solution)
+                    x = old_solution.costs
+
+                    # als y 0 is dan ben je door alle mogelijke batterijen heen
+                    # kies dan een nieuwe batterij om te splitten
+                    if y == 0:
+                        split_battery = battery_chosen_for_split(solution.batterys)
+
+                    # maak een nieuwe batterij, kies steeds een ander type
+                    new_battery = Battery((len(solution.batterys)+1), (split_battery.location_x+1), (split_battery.location_y+1), battery_type, 0, [])
+                    solution.batterys.append(new_battery)
+                    y += 1
+
+
+                # als score niet beter is, zet oude oplossing terug
+                else:
+                    solution = copy.deepcopy(old_solution)
+                # print(index)
+
+        if cap_exc(solution.batterys) is False:
+            # # choose_new_battery(solution)
+            # print(solution)
+            # print("mission accomplished")
+            # for battery in solution.batterys:
+            #     print(battery)
+            # grid(solution)
             break
+
+    return solution
+
+
+
+
+
+        # if cap_exc(batterys) is False:
+        #     grid(solution)
+        #     break
         # if solution.score > 0.6:
         #     print("gelukt")
         #     for battery in batterys:
@@ -246,3 +284,44 @@ def k_means(solution):
 
 
     return solution
+
+def place_batterys(solution):
+    solution.batterys[0].location_x = random.randint(26, 51)
+    solution.batterys[0].location_x = random.randint(26, 51)
+
+    solution.batterys[1].location_x = random.randint(0, 26)
+    solution.batterys[1].location_y = random.randint(26, 51)
+
+    solution.batterys[2].location_x = random.randint(26, 51)
+    solution.batterys[2].location_y = random.randint(0, 26)
+
+    solution.batterys[3].location_x = random.randint(0, 26)
+    solution.batterys[3].location_y = random.randint(0, 26)
+
+    solution.batterys[4].location_x = random.randint(17, 33)
+    solution.batterys[4].location_y = random.randint(17, 33)
+
+
+
+
+
+
+def battery_chosen_for_split(batterys):
+    bat1 = random.choice(batterys)
+    # score = 0
+    # for battery in batterys:
+    #     if battery.distance_costs > score:
+    #         score = battery.distance_costs
+    #         bat1 = battery
+
+    return bat1
+
+
+def choose_new_battery(solution):
+    for battery in solution.batterys:
+        if battery.current_input > 900:
+            battery.max_input = 1800
+        elif battery.current_input > 450:
+            battery.max_input = 900
+        else:
+            battery.max_input = 450

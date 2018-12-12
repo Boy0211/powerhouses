@@ -19,9 +19,24 @@ from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 
 def main():
-
     DataStructure = Smartgrid(1)
+    Solution = Solution(DataStructure.houses, DataStructure.batterys)
 
+    # greedy based on capacity
+    Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
+    A = greedy_1(Solution1)
+
+    # hillclimber on greedy_1 results
+    B = hillclimber(Solution1)
+
+    # greedy based on distance
+    Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
+    C = greedy_2(Solution2)
+
+    # hillclimber on greedy_2 results
+    D = hillclimber(Solution2)
+
+    # replacing batterys with k-means and plant propagation (PPA)
     time_start2 = time.time()
     Solutions = []
     for i in range(50):
@@ -31,16 +46,20 @@ def main():
         print("gelukt")
     for solution in Solutions:
         print(solution)
-    Solution_ultimate = BBPPA(Solutions)
-    grid(Solution_ultimate)
+    E = BBPPA(Solutions)
     time_end2 = time.time()
 
-    hillclimber(Solution_ultimate)
-    for battery in Solution_ultimate.batterys:
-        print(battery)
+    print("score van greedy_capacity:                 {}\n"
+      "score van greedy_distance:                     {}\n"
+      "score van greedy_distance + hillclimber:       {}\n"
+      "score van greedy_capacity:                     {}\n"
+      "score van greedy_capacity + hillclimber:       {}\n"
+      "verplaatsen batterijen met k_means + PPA:      {}\n".format(
+    score(A), score(B), score(C), score(D), score(E)
+    ))
 
-    print(Solution_ultimate)
-    print(f"running time: {time_end2 - time_start2}")
+
+    # print(f"running time: {time_end2 - time_start2}")
 
 
 
