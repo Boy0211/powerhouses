@@ -65,6 +65,8 @@ def hillclimber(solution):
         else:
             break
 
+    return solution
+
 
 # a function used to determine a score for swapping the houses.
 def swap_score(house_a, house_b, battery_A, battery_B):

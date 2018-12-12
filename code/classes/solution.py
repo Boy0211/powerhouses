@@ -25,18 +25,11 @@ class Solution(object):
     @property
     def costs(self):
 
-        total_distance = 0
         total_battery_costs = 0
         for battery in self.batterys:
             total_battery_costs += battery.battery_costs
-            for house in battery.list_of_houses:
-                total_distance += distance(house, battery)
 
-        costs = (total_battery_costs) + (9 * total_distance)
-        if cap_exc(self.batterys) is not False:
-            costs = 0000
-
-        return costs
+        return total_battery_costs
 
     @property
     def score(self):

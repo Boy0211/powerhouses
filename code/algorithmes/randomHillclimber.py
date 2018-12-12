@@ -51,3 +51,6 @@ def random_hillclimber(solution):
 
         if temp_counter == counter:
             break
+
+    solution.batterys = batterys
+    return solution

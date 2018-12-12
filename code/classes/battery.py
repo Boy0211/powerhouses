@@ -31,7 +31,7 @@ class Battery(object):
         elif self.max_input == 900:
             return 1350
         elif self.max_input == 1800:
-            return 1350
+            return 1800
         else:
             return 5000
 

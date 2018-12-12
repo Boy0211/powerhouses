@@ -5,59 +5,71 @@ import random
 # from helpers import capacity
 from helpers import swap
 from copy_solution import copy_solution
+from helpers import remove_house_from_battery as rm
+from helpers import add_house_to_battery as ad
 
 
-def plant_propagation_algorithm(solution, x):
+def plant_propagation_algorithm(solutions):
 
-    solutions = []
-    for i in range(x):
-        solutions.append(copy_solution(solution))
-
-    index = 0
-    # print(solutions[0])
+    counter = 0
+    length = len(solutions)
     temp_save = 0
+
     while True:
-        index += 1
+        counter += 1
         all_solutions = []
-        counter = 0
-        for solution in solutions:
+
+        for index, solution in enumerate(solutions, start=0):   # default is zero
 
             # make a deepcopy of the current solutions
             old_solution = solution
             all_solutions.append(old_solution)
-            new_solution = copy_solution(solution)
 
-            x = [0, 1]
-            y = [0, 1, 2]
+            # x = [0, 1]
+            # y = [0, 1, 2]
 
-            if solution.score >= 0.90:
-                all_solutions.append(swap1_random(new_solution))
-            elif solution.score < 0.90 and solution.score >= 0.50:
-                if random.choice(x) == 0:
-                    all_solutions.append(swap1_random(new_solution))
-                else:
-                    all_solutions.append(move_one_house(new_solution))
+
+            if index < 10:
+                all_solutions.append(swap1_random(copy_solution(solution)))
+            elif index >= 10 and index < 20:
+                all_solutions.append(swap1_random(copy_solution(solution)))
+                all_solutions.append(move_one_house(copy_solution(solution)))
             else:
-                if random.choice(y) == 0:
-                    all_solutions.append(swap2_random(new_solution))
-                elif random.choice(y) == 1:
-                    all_solutions.append(swap1_random(new_solution))
-                else:
-                    all_solutions.append(move_one_house(new_solution))
+                all_solutions.append(swap2_random(copy_solution(solution)))
+                all_solutions.append(swap1_random(copy_solution(solution)))
+                all_solutions.append(move_one_house(copy_solution(solution)))
+
+            # if solution.score >= 0.90:
+            #     all_solutions.append(swap1_random(new_solution))
+            # elif solution.score < 0.90 and solution.score >= 0.50:
+            #     if random.choice(x) == 0:
+            #         all_solutions.append(swap1_random(new_solution))
+            #     else:
+            #         all_solutions.append(move_one_house(new_solution))
+            # else:
+            #     if random.choice(y) == 0:
+            #         all_solutions.append(swap2_random(new_solution))
+            #     elif random.choice(y) == 1:
+            #         all_solutions.append(swap1_random(new_solution))
+            #     else:
+            #         all_solutions.append(move_one_house(new_solution))
 
         all_solutions.sort(key=lambda x: x.score, reverse=True)
-        solutions = all_solutions[:x]
-        print(solutions[0])
+        solutions = all_solutions[:length]
+        # print(solutions[0])
 
-        if index % 10 == 0:
+        if counter % 100 == 0:
             if solutions[0].score == temp_save:
                 print(index)
                 break
             else:
                 temp_save = solutions[0].score
+        # if counter % 50 == 0:
+        #     for solution in solutions:
+        #         swap2_random(solution)
 
-    for battery in solutions[0].batterys:
-        print(battery)
+    # for battery in solutions[0].batterys:
+    #     print(battery)
 
     return solutions[0]
 
