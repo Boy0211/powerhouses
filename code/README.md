@@ -1,6 +1,6 @@
 # Code
 ## Algoritmes
-Voor onze case is er gebruikt gemaakt van iteratief, population baed and cluster
+Voor onze case is er gebruikt gemaakt van iteratief, population based and cluster
 algoritmes. Uiteraard verschillen de resultaten van elk algoritme ten opzichte
 van elkaar. Hieronder worden alle gebruikte algoritmen besproken en geanalyseerd.
 

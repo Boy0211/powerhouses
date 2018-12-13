@@ -23,17 +23,15 @@ from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 def main():
 
     DataStructure = Smartgrid(1)
+    x = Solution(DataStructure.houses, DataStructure.batterys)
 
     time_start2 = time.time()
-    Solution_x = Solution(DataStructure.houses, DataStructure.batterys)
 
-    k_means_stage3(Solution_x)
-    for battery in Solution_x.batterys:
-        print(battery)
+    Solution_fixed = k_means_stage3(x)
+
     time_end2 = time.time()
 
-    grid(Solution_x)
-    print(Solution_x)
+    print(Solution_fixed)
     print(f"running time: {time_end2 - time_start2}")
 
 

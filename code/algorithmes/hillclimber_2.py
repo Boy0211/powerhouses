@@ -74,7 +74,7 @@ def hillclimber_2(solution):
                 print(selected_list[column_numbers[i]].name)
                 # list_of_all_houses += (selected_list[column_numbers[i]].tolist())
                 for distances in selected_list[column_numbers[i]].tolist():
-                    list_of_all_houses += [selected_list[column_numbers[i]].name, distances])
+                    list_of_all_houses += [selected_list[column_numbers[i]].name, distances]
 
             # soorter van klein naar groot
             list_of_all_houses = sorted(list_of_all_houses)
