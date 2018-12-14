@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 def grid(solution):
 
     batterys = solution.batterys

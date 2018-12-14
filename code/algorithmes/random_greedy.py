@@ -1,7 +1,7 @@
 import random
 from datetime import datetime
 import matplotlib.pyplot as plt
-
+import seaborn as sns
 from helpers import add_house_to_battery
 # from randomHillclimber import random_hillclimber
 from hillclimber import hillclimber
@@ -16,7 +16,7 @@ def random_distribution(solution, attempts, bins):
     while i < attempts:
         random_greedy(solution)
         random_hillclimber(solution)
-        print(i)
+        # print(i)
         score = solution.score
         all_scores.append(score)
         i += 1
@@ -25,7 +25,8 @@ def random_distribution(solution, attempts, bins):
     all_scores.sort()
     n, x, _ = plt.hist(all_scores, bins)
     bin_centers = 0.5*(x[1:]+x[:-1])
-    plt.plot(bin_centers, n)
+    sns.distplot(bin_centers, n)
+    sns.set()
     plt.show()
 
 
