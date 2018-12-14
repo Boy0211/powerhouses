@@ -1,5 +1,6 @@
 import random
 import matplotlib.pyplot as plt
+import copy
 
 from helpers import remove_house_from_battery as rm
 from helpers import add_house_to_battery as ad
@@ -11,17 +12,18 @@ def battery_based_plant_propagation_algorithm(solutions):
 
     solutions_counter = len(solutions)
 
-    index = 0
-    temp_save = 0
+    counter = 0
+    temp_save = 0.0
 
     # list of scores for visualization
     list_of_scores = []
+    list_of_scores2 = []
 
     while True:
-        index += 1
+        counter += 1
         all_solutions = []
 
-        for index, solution in emumerate(solutions, start=0):
+        for index, solution in enumerate(solutions, start=0):
 
             old_solution = solution
             all_solutions.append(old_solution)
@@ -32,14 +34,18 @@ def battery_based_plant_propagation_algorithm(solutions):
             if index < 10:
                 all_solutions.append(swap_one_pair(copy.deepcopy(solution)))
                 all_solutions.append(move_battery(copy.deepcopy(solution)))
-            elif index => 10 and index < 20:
+                print("x")
+            elif index >= 10 and index < 20:
                 all_solutions.append(swap_one_pair(copy.deepcopy(solution)))
                 all_solutions.append(move_battery(copy.deepcopy(solution)))
                 all_solutions.append(move_one_house(copy.deepcopy(solution)))
+                print("xx")
             else:
                 all_solutions.append(move_one_house(copy.deepcopy(solution)))
                 all_solutions.append(move_ten_houses(copy.deepcopy(solution)))
                 all_solutions.append(change_battery(copy.deepcopy(solution)))
+                all_solutions.append(place_battery_middle(copy.deepcopy(solution)))
+                print("xxx")
 
             # if solution.score >= 0.90:
             #     if random.choice(x) == 0:
@@ -64,23 +70,26 @@ def battery_based_plant_propagation_algorithm(solutions):
             #         all_solutions.append(move_one_house(new_solution))
 
         all_solutions.sort(key=lambda x: x.score, reverse=True)
+        list_of_scores.append(all_solutions[0].score)
+        list_of_scores2.append(all_solutions[119].score)
         solutions = all_solutions[:solutions_counter]
 
         print(solutions[0])
 
-        if index % 100 == 0:
+        if counter % 1000 == 0:
             if solutions[0].score == temp_save:
                 print(f"Best score: {solutions[0].score}")
                 break
             else:
                 temp_save = solutions[0].score
 
-        list_of_scores.append(solutions[0].score)
+
 
     for battery in solutions[0].batterys:
         print(battery)
 
     plt.plot(list_of_scores)
+    plt.plot(list_of_scores2)
     plt.ylabel("score PPA")
     plt.show()
 
@@ -160,15 +169,35 @@ def move_battery(solution):
 def change_battery(solution):
 
     battery = random.choice(solution.batterys)
-    if battery.current_input > battery.max_input:
-        if battery.max_input == 450:
-            battery.max_input = 900
-        elif battery.max_input == 900:
-            battery.max_input = 1800
-    elif battery.current_input < battery.max_input:
+    # if battery.current_input > battery.max_input:
+    #     if battery.max_input == 450:
+    #         battery.max_input = 900
+    #     elif battery.max_input == 900:
+    #         battery.max_input = 1800
+    if battery.current_input < battery.max_input:
         if battery.max_input == 1800:
             battery.max_input = 900
         elif battery.max_input == 900:
             battery.max_input = 450
+
+    return solution
+
+
+def place_battery_middle(solution):
+
+    for battery in solution.batterys:
+        x_coordinates = list()
+        y_coordinates = list()
+        for house in battery.list_of_houses:
+            x_coordinates.append(house.location_x)
+            y_coordinates.append(house.location_y)
+        if len(x_coordinates) == 0 or len(y_coordinates) == 0:
+            x_coordinates = [1]
+            y_coordinates = [1]
+        mean_x = round(sum(x_coordinates)/len(x_coordinates))
+        mean_y = round(sum(y_coordinates)/len(y_coordinates))
+
+        battery.location_x = mean_x
+        battery.location_y = mean_y
 
     return solution
