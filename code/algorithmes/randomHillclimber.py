@@ -1,4 +1,5 @@
 import random
+
 from helpers import swap
 from helpers import capacity
 from helpers import house_battery_distance as distance
@@ -6,7 +7,7 @@ from helpers import house_battery_distance as distance
 
 def randomly(x):
 
-    '''A random function to randomize a list.'''
+    '''A function to randomize a list.'''
 
     shuffled = list(x)
     random.shuffle(shuffled)
@@ -15,8 +16,10 @@ def randomly(x):
 
 def random_hillclimber(solution):
 
-    ''' A random Hill Climber '''
+    ''' A hill climber which swappes random houses if and only when a better
+    solution is created '''
 
+    # take the variable out of the solution which is used in the algorithm
     batterys = solution.batterys
 
     # while statement keep on trying swaps until there is no swap possible.
@@ -25,13 +28,16 @@ def random_hillclimber(solution):
         temp_counter = counter
         for i in randomly(range(len(batterys))):
             battery_counter_1 = i
-            for j in randomly(range(len(batterys[battery_counter_1].list_of_houses))):
+            for j in randomly(range(len(batterys[battery_counter_1]
+                              .list_of_houses))):
                 house_counter_1 = j
                 for k in randomly(range(len(batterys))):
                     battery_counter_2 = k
-                    for l in randomly(range(len(batterys[battery_counter_2].list_of_houses))):
+                    for l in randomly(range(len(batterys[battery_counter_2]
+                                      .list_of_houses))):
                         house_counter_2 = l
-                        # print(i, j, k, l)
+
+                        # creates variables to make the algorithm more readable
                         battery_A = batterys[battery_counter_1]
                         battery_B = batterys[battery_counter_2]
                         house_a = battery_A.list_of_houses[house_counter_1]
@@ -40,8 +46,10 @@ def random_hillclimber(solution):
                         # if statement to check whether the possible swap is
                         # - bennificial.
                         # - doesn't surpass the capacity of the batterys.
-                        if (distance(house_a, battery_A) + distance(house_b, battery_B) >
-                           distance(house_a, battery_B) + distance(house_b, battery_A) and
+                        if (distance(house_a, battery_A) +
+                            distance(house_b, battery_B) >
+                            distance(house_a, battery_B) +
+                            distance(house_b, battery_A) and
                            (capacity(house_a, house_b, battery_A) is True)
                            and capacity(house_b, house_a, battery_B) is True):
 
@@ -52,5 +60,6 @@ def random_hillclimber(solution):
         if temp_counter == counter:
             break
 
+    # save the used variable into the solution and return it
     solution.batterys = batterys
     return solution

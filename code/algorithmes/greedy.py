@@ -8,6 +8,7 @@ def greedy_1(solution):
 
     ''' Greedy algorithm that fills up the most empty battery'''
 
+    # save the solution variables into local variables
     houses = solution.houses
     batterys = solution.batterys
 
@@ -49,6 +50,7 @@ def greedy_2(solution):
     temp_house_counter = 0
     temp_dict = dict()
 
+    # while loop as long as there are houses for sorting
     while house_counter < len(sorted_houses):
 
         # als house_counter toeneemt, sla battery_distances op in nieuwe lijst
