@@ -29,6 +29,7 @@ def main():
                         choices=['greedy', 'k_means', 'k_means_mendel'])
     parser.add_argument("-g", "--greedy_type",
                         const='greedy_1',
+                        default='greedy_1',
                         nargs='?',
                         choices=["greedy_1", "greedy_2"],
                         help="choice the type of greedy")
@@ -48,7 +49,7 @@ def main():
     # else:
     #     ppa = False
     print(args)
-    if args.algorithm == "greedy":
+    if args.algorithm == "greedy" and args.additional is False:
         print(f"run greedy: {args.greedy_type}")
     elif args.algorithm == "greedy" and args.additional == "hillclimber":
         print(f"run greedy: {args.greedy_type} + hillclimber")
@@ -62,11 +63,11 @@ def main():
         print("k_means")
     elif args.algorithm == "k_means_mendel" and args.plant_propagation is False:
         print("k_means_mendel")
-    elif args.algorithm == "k_means" and args.additional is True:
+    elif args.algorithm == "k_means" and args.additional == "hillclimber":
         print("k_means + hillclimber")
     elif args.algorithm == "k_means" and args.plant_propagation is True:
         print("k_means + hillclimber + PPA")
-    elif args.algorithm == "k_means_mendel" and args.additional is True:
+    elif args.algorithm == "k_means_mendel" and args.additional == "hillclimber":
         print("k_means_mendel + hillclimber")
     elif args.algorithm == "k_means_mendel" and args.plant_propagation is True:
         print("k_means_mendel + hillclimber + PPA")
