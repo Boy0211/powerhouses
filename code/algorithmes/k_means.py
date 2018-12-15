@@ -194,7 +194,7 @@ def k_means(solution):
             for house in houses:
                 ad(house, batterys[(temp_df['closest_house'][counter]) - 1])
                 counter += 1
-
+            grid(solution)
             for battery in batterys:
                 x_coordinates = list()
                 y_coordinates = list()
@@ -210,15 +210,16 @@ def k_means(solution):
                 change_x = abs(battery.location_x - mean_x)
                 change_y = abs(battery.location_y - mean_y)
                 total_change += change_x + change_y
+                # grid(solution)
                 battery.location_x = mean_x
                 battery.location_y = mean_y
-
+            grid(solution)
             print(total_change)
             if total_change < 1:
                 break
 
         # solution.batterys = batterys
-        grid(solution)
+
         for battery in batterys:
             print(battery)
         # merge_battery1, merge_battery2 = search_best_merge(batterys)

@@ -161,7 +161,8 @@ def k_means(solution):
     # old_solution = copy.deepcopy(solution)
     index = 0
     temp_save = 50000
-
+    split_battery = solution.batterys[0]
+    new_battery = solution.batterys[0]
     while True:
         # assign random location to batterys
         counter = 0
@@ -216,13 +217,19 @@ def k_means(solution):
                 total_change += change_x + change_y
                 battery.location_x = mean_x
                 battery.location_y = mean_y
+            print("--------")
+            # print(split_battery)
+            choose_split_battery(split_battery)
+            print(split_battery)
+            print(new_battery)
+            print("++++++++")
             # choose_new_battery(solution)
             index += 1
             if index % 10 == 0:
                 if solution.costs == temp_save:
                     # for battery in solution.batterys:
                         # print(battery)
-                    # print(solution)
+                    print(solution)
                     # print("jihoho")
 
                     # grid(solution)
@@ -246,6 +253,8 @@ def k_means(solution):
                     # maak een nieuwe batterij, kies steeds een ander type
                     new_battery = Battery((len(solution.batterys)+1), (split_battery.location_x+1), (split_battery.location_y+1), battery_type, 0, [])
                     solution.batterys.append(new_battery)
+
+
                     y += 1
 
 
@@ -315,7 +324,14 @@ def battery_chosen_for_split(batterys):
     #         bat1 = battery
 
     return bat1
+def choose_split_battery(battery):
 
+    if battery.current_input > 900:
+        battery.max_input = 1800
+    elif battery.current_input > 450:
+        battery.max_input = 900
+    else:
+        battery.max_input = 450
 
 def choose_new_battery(solution):
     for battery in solution.batterys:
