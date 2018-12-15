@@ -1,15 +1,14 @@
 from helpers import swap
-from helpers import remove_house_from_battery as rm
-from helpers import add_house_to_battery as ad
 from helpers import capacity
 from helpers import house_battery_distance as distance
 from helpers import battery_capacity_exceeded as cap_exc
-import copy
 
 
-# the main hill climber function.
 def hillclimber(solution):
 
+    '''The main hill climber function.'''
+
+    # get the batterys out of the solution
     batterys = solution.batterys
 
     # initializing a while loop with a counter on zero.
@@ -33,7 +32,8 @@ def hillclimber(solution):
                 batterys.sort(key=lambda x: x.current_input, reverse=True)
                 battery1 = batterys[0]
 
-                battery1.list_of_houses.sort(key=lambda x: x.output, reverse=True)
+                battery1.list_of_houses.sort(key=lambda x: x.output,
+                                             reverse=True)
                 house1 = battery1.list_of_houses[0]
 
                 # returns the battery with the lowest input and within that
@@ -42,7 +42,8 @@ def hillclimber(solution):
                 # biggest and smallest fails. Next try will be the second
                 # smallest house.
                 battery2 = batterys[-1]
-                battery2.list_of_houses.sort(key=lambda x: x.output, reverse=True)
+                battery2.list_of_houses.sort(key=lambda x: x.output,
+                                             reverse=True)
                 difference = battery1.current_input - battery1.max_input
                 for house in battery2.list_of_houses:
                     if house.output < house1.output - difference:
@@ -91,7 +92,8 @@ def search_best_score(batterys):
                 battery_B = batterys[k]
                 for l in range(len(batterys[k].list_of_houses)):
                     house_b = battery_B.list_of_houses[l]
-                    new_score = swap_score(house_a, house_b, battery_A, battery_B)
+                    new_score = swap_score(house_a, house_b, battery_A,
+                                           battery_B)
 
                     # checks whether the swap is possible and is better than
                     # last option.

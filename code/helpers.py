@@ -1,3 +1,10 @@
+'''
+    File name: helpers.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 15/12-2018
+'''
+
 
 def add_house_to_battery(house, battery):
 
@@ -53,6 +60,6 @@ def battery_capacity_exceeded(batterys):
     '''a method to determine whether a battery capacity is exceeded.'''
 
     for battery in batterys:
-        if battery.current_input > float(battery.max_input) * 1.10:
+        if battery.current_input > float(battery.max_input) * 1.20:
             return battery
     return False

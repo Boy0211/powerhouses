@@ -1,5 +1,6 @@
 import random
 import copy
+from random import randint
 
 from battery import Battery
 from visualization import grid
@@ -12,21 +13,77 @@ from helpers import house_battery_distance as distance
 
 def k_means_stage3(solution):
 
-    houses = solution.houses
-    solution.batterys = []
+    # houses = solution.houses
+    # solution.batterys = []
+    #
+    # # start with one battery
+    # battery1 = Battery(1, 26, 26, 1800, 0, [])
+    # for house in houses:
+    #     ad(house, battery1)
+    # solution.batterys.append(battery1)
+    # # grid(solution)
 
-    # start with one battery
-    battery1 = Battery(1, 26, 26, 1800, 0, [])
+    houses = solution.houses
+    batterys = solution.batterys
+
+    batterys[0].location_x = random.randint(26, 51)
+    batterys[0].location_x = random.randint(26, 51)
+
+    batterys[1].location_x = random.randint(0, 26)
+    batterys[1].location_y = random.randint(26, 51)
+
+    batterys[2].location_x = random.randint(26, 51)
+    batterys[2].location_y = random.randint(0, 26)
+
+    batterys[3].location_x = random.randint(0, 26)
+    batterys[3].location_y = random.randint(0, 26)
+
+    batterys[4].location_x = random.randint(17, 33)
+    batterys[4].location_y = random.randint(17, 33)
+
+    for battery in batterys:
+        battery.max_input = 1800
+        battery.list_of_houses = []
+        battery.current_input = 0
+
+    temp_df = solution.distances
+    # print(solution.distances)
+
+    counter = 1
     for house in houses:
-        ad(house, battery1)
-    solution.batterys.append(battery1)
-    grid(solution)
+        ad(house, batterys[(temp_df['closest_house'][counter]) - 1])
+        counter += 1
 
     index = 0
     temp_save = solution.costs
 
     # initiate a while loop
     while True:
+
+        for battery in solution.batterys:
+            if 1050 < battery.current_input < 1350 and battery.max_input == 1800:
+
+                old_list_of_houses = copy.deepcopy(battery.list_of_houses)
+                battery.max_input = 900
+                battery.list_of_houses.clear()
+                battery.current_input = 0
+
+                for house in old_list_of_houses:
+                    maximum_distance = 0
+                    if distance(house, battery) > maximum_distance:
+                        most_far_away_house = house
+                        maximum_distance = distance(house, battery)
+
+                new_bat = Battery(len(solution.batterys) + 1, most_far_away_house.location_x + randint(-1, 1), most_far_away_house.location_y + randint(-1, 1), 450, 0, [])
+
+                for house in old_list_of_houses:
+                    if new_bat.current_input < new_bat.max_input and distance(house, new_bat) < distance(house, battery):
+                        ad(house, new_bat)
+                    else:
+                        ad(house, battery)
+
+                solution.batterys.append(new_bat)
+                # grid(solution)
 
         # save solution
         x_solution = copy.deepcopy(solution)
@@ -123,25 +180,46 @@ def k_means_stage3(solution):
         # for solution in solutions:
         #     print(solution.costs)
         solution = solutions[0]
+
+        # failsafe = False
+        # for battery in solution.batterys:
+        #     if len(battery.list_of_houses) <= 1:
+        #         failsafe = True
+        #
+        # if failsafe == True:
+        #     for battery in solution.batterys:
+        #         battery.list_of_houses = []
+        #         battery.current_input = 0
+        #
+        #     temp_df = solution.distances
+        #     # print(solution.distances)
+        #
+        #     counter = 1
+        #     for house in houses:
+        #         ad(house, batterys[(temp_df['closest_house'][counter]) - 1])
+        #         counter += 1
         # print("----")
         # print(solution.costs)
 
-        for battery in solution.batterys:
-            print(battery)
+        # for battery in solution.batterys:
+        #     print(battery)
 
-        if index % 5 == 0:
-            grid(solution)
-            if solution.costs == temp_save:
-                solution = add_small_battery(solution)
-            else:
-                temp_save = solution.costs
-                "het gaat lekker"
+        if index % 30 == 0:
+            # grid(solution)
+            temp_value = 0
+            for battery in solution.batterys:
+                temp_value += battery.max_input
+                # print(battery)
+            if temp_value >= 7650:
+                # grid(solution)
+                break
         index += 1
 
 
-    for battery in solution.batterys:
-        print(battery)
-    grid(solution)
+    print(solution)
+    # grid(solution)
+    return solution
+
 
 
 
@@ -196,35 +274,3 @@ def split_battery_y(bat1, counter):
     bat1.current_input = 0
 
     return [bat1, bat2]
-
-
-def add_small_battery(solution):
-
-    solutions = []
-    for i in range(4):
-        solutions.append(copy.deepcopy(solution))
-
-    for solution in solutions:
-        battery = random.choice(solution.batterys)
-        old_list_of_houses = copy.deepcopy(battery.list_of_houses)
-
-        battery.list_of_houses.clear()
-        battery.current_input = 0
-        print("xxx")
-        grid(solution)
-
-        new_bat = Battery(len(solution.batterys) + 1, battery.location_x + 5, battery.location_y, 450, 0 ,[])
-
-        for house in old_list_of_houses:
-            if new_bat.current_input < new_bat.max_input:
-                ad(house, new_bat)
-            else:
-                ad(house, battery)
-
-        solution.batterys.append(new_bat)
-        # for house in old_list_of_houses:
-        #     ad(house, battery)
-
-    solutions.sort(key=lambda x: x.costs, reverse=False)
-
-    return solutions[0]

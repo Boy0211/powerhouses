@@ -179,6 +179,7 @@ def k_means(solution):
         battery_type = 1800
         # iterate through all houses
         while True:
+
             if y > 2:
                 y = 0
             total_change = 0
@@ -225,6 +226,7 @@ def k_means(solution):
             print("++++++++")
             # choose_new_battery(solution)
             index += 1
+            print(temp_save)
             if index % 10 == 0:
                 if solution.costs == temp_save:
                     # for battery in solution.batterys:
@@ -262,7 +264,7 @@ def k_means(solution):
                 else:
                     solution = copy.deepcopy(old_solution)
                 # print(index)
-
+        print("mendel")
         if cap_exc(solution.batterys) is False:
             # # choose_new_battery(solution)
             # print(solution)
@@ -271,10 +273,8 @@ def k_means(solution):
             #     print(battery)
             # grid(solution)
             break
-
+    print(solution.costs)
     return solution
-
-
 
 
 
@@ -290,9 +290,6 @@ def k_means(solution):
     # bekijk of score hoger wordt als er tweede batterij wordt geplaatst
     # dit moet per batterij
 
-
-
-    return solution
 
 def place_batterys(solution):
     solution.batterys[0].location_x = random.randint(26, 51)
