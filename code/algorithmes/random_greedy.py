@@ -4,12 +4,16 @@
     Date created: 17/11/2018
     Date last modified: 17/12-2018
 '''
+import copy
 import random
 import matplotlib.pyplot as plt
 
 from helpers import add_possible
 from helpers import add_house_to_battery
 from randomHillclimber import random_hillclimber
+from hillclimber import hillclimber
+from greedy import greedy_2
+from greedy import greedy_1
 
 
 def random_distribution(solution, attempts, bins):
@@ -19,18 +23,27 @@ def random_distribution(solution, attempts, bins):
     # creates empty variables
     i = 0
     all_scores = []
+    solution_2 = copy.deepcopy(solution)
 
     # while the attempts are not reached keep on trying
     while i < attempts:
         random_greedy(solution)
         print(solution)
-        all_scores.append(solution.score)
+        all_scores.append(solution.costs)
         random_hillclimber(solution)
         print(solution)
-        all_scores.append(solution.score)
+        all_scores.append(solution.costs)
         i += 1
 
     # sort all the scores and create a normal distribution
+    solution_distance = greedy_2(solution_2)
+    solution_capacity = greedy_1(solution_2)
+    plt.plot(solution_distance.costs)
+    plt.plot(solution_capacity.costs)
+
+    solution_hillclimber = hillclimber(solution_capacity)
+    plt.plot(solution_hillclimber.costs)
+
     all_scores.sort()
     n, x, _ = plt.hist(all_scores, bins)
     bin_centers = 0.5*(x[1:]+x[:-1])
