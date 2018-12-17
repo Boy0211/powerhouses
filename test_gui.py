@@ -17,7 +17,7 @@ from random_greedy import random_distribution
 from randomHillclimber import random_hillclimber
 from hillclimber import hillclimber
 from k_means import k_means
-from k_means_mendel import k_means as k_means_mendel
+from k_means_2 import k_means as k_means_2
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 
@@ -33,7 +33,7 @@ def main():
                         choices=[1, 2, 3],
                         help="kies het wijknummer dat je wilt analyseren")
     parser.add_argument("algorithm",
-                        choices=['greedy', 'k_means', 'k_means_mendel'],
+                        choices=['greedy', 'k_means', 'k_means_2'],
                         help="kies het algoritme dat je wilt runnen")
     parser.add_argument("-g", "--greedy_type",
                         const='greedy_1',
@@ -137,10 +137,10 @@ def main():
         k_means(Solution5)
         print(Solution5)
         grid(Solution5)
-    elif args.algorithm == "k_means_mendel" and args.plant_propagation is False:
-        print("k_means_mendel")
+    elif args.algorithm == "k_means_2" and args.plant_propagation is False:
+        print("k_means_2")
         Solution5 = Solution(DataStructure.houses, DataStructure.batterys)
-        k_means_mendel(Solution5)
+        k_means_2(Solution5)
         print(Solution5)
         grid(Solution5)
     elif args.algorithm == "k_means" and args.additional == "hillclimber" and args.plant_propagation == False:
@@ -171,20 +171,20 @@ def main():
         grid(E)
         time_end2 = time.time()
 
-    elif args.algorithm == "k_means_mendel" and args.additional == "hillclimber":
-        print("k_means_mendel + hillclimber")
+    elif args.algorithm == "k_means_2" and args.additional == "hillclimber":
+        print("k_means_2 + hillclimber")
         Solution5 = Solution(DataStructure.houses, DataStructure.batterys)
-        k_means_mendel(Solution5)
+        k_means_2(Solution5)
         hillclimber(Solution5)
-    elif args.algorithm == "k_means_mendel" and args.plant_propagation is True:
-        print("k_means_mendel + hillclimber + PPA")
+    elif args.algorithm == "k_means_2" and args.plant_propagation is True:
+        print("k_means_2 + hillclimber + PPA")
         time_start2 = time.time()
         Solutions = []
         iterations = 10
         counter = 0
         for i in range(iterations):
             Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means_mendel(Solution_k)
+            k_means_2(Solution_k)
             hillclimber(Solution_k)
             Solutions.append(Solution_k)
             print("nieuw k_means + Hillclimber resultaat")
