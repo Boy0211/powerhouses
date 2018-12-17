@@ -1,7 +1,6 @@
 import os
 import argparse
 import sys
-import time
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -31,7 +30,7 @@ def main():
                         choices=[1, 2, 3],
                         help="kies het wijknummer dat je wilt analyseren")
     parser.add_argument("probleemset",
-                        choices=["statisch ", "dynamisch ", "batterijen_toevoegen "],
+                        choices=["statisch", "dynamisch", "batterijen_toevoegen"],
                         help="kies de probleemset: statische batterijen, dynamische batterijen,"
                         " nieuwe batterijen toevoegen")
     parser.add_argument("-g", "--greedy_type",
@@ -62,11 +61,11 @@ def main():
     DataStructure = Smartgrid(args.wijk)
 
     if args.probleemset == "statisch":
-        if args.wijk == 2 or args.wijk == 3 and args.greedy_type == 'greedy_capacity':
+        if (args.wijk == 2 or args.wijk == 3) and args.greedy_type == 'greedy_capacity':
             print("greedy_capacity kan geen resultaat geven voor wijk 2 en 3 dat aan de constraints voldoet")
-        elif (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
+        elif (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation is True:
             print("het combineren van een hillclimber met een plant propagation algoritme is inefficient en daarom niet toegestaan")
-        elif  args.additional == None and args.plant_propagation is False:
+        elif args.additional is None and args.plant_propagation is False:
             if args.greedy_type == "greedy_distance":
                 print(f"Running: {args.greedy_type}")
                 # greedy based on capacity
@@ -144,9 +143,7 @@ def main():
 
 
     elif args.probleemset == "dynamisch":
-        if args.wijk == 2 or args.wijk == 3 and args.greedy_type == 'greedy_capacity':
-            print("greedy_capacity kan geen resultaat geven voor wijk 2 en 3 dat aan de constraints voldoet")
-        elif (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
+        if (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
             print("het combineren van een hillclimber met een plant propagation algoritme is inefficient en daarom niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
@@ -179,9 +176,7 @@ def main():
             print(E)
             grid(E)
     elif args.probleemset == "batterijen_toevoegen":
-        if args.wijk == 2 or args.wijk == 3 and args.greedy_type == 'greedy_capacity':
-            print("greedy_capacity kan geen resultaat geven voor wijk 2 en 3 dat aan de constraints voldoet")
-        elif (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
+        if (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
             print("het combineren van een hillclimber met een plant propagation algoritme is inefficient en daarom niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means_2")
