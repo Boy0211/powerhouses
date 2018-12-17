@@ -70,52 +70,38 @@ def main():
                 print(f"Running: {args.greedy_type}")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_1(Solution1)
-                print(Solution1)
-                grid(Solution1)
+                E = greedy_1(Solution1)
             else:
                 print(f"Running: {args.greedy_type}")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_2(Solution1)
-                print(Solution1)
-                grid(Solution1)
+                E = greedy_2(Solution1)
         elif args.additional == "hillclimber" and args.plant_propagation is False:
             if args.greedy_type == "greedy_distance":
                 print(f"Running: {args.greedy_type} + hillclimber")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_1(Solution1)
-                hillclimber(Solution1)
-                print(Solution1)
-                grid(Solution1)
+                A = greedy_1(Solution1)
+                E = hillclimber(A)
             else:
                 print(f"Running: {args.greedy_type} + hillclimber")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_2(Solution1)
-                hillclimber(Solution1)
-                print(Solution1)
-                grid(Solution1)
-                print(f"Running: {args.greedy_type} + hillclimber")
-            # greedy based on capacity
+                A = greedy_2(Solution1)
+                E = hillclimber(A)
         elif args.additional == "random_hillclimber":
             if args.greedy_type == "greedy_distance":
                 print(f"Running: {args.greedy_type} + random_hillclimber")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_1(Solution1)
-                random_hillclimber(Solution1)
-                print(Solution1)
-                grid(Solution1)
+                A = greedy_1(Solution1)
+                E = random_hillclimber(A)
             else:
                 print(f"Running: {args.greedy_type} + random_hillclimber")
                 # greedy based on capacity
                 Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-                greedy_2(Solution1)
-                random_hillclimber(Solution1)
-                print(Solution1)
-                grid(Solution1)
+                A = greedy_2(Solution1)
+                E = random_hillclimber(A)
         elif args.plant_propagation is True:
             print(f"Running: {args.greedy_type} + {args.additional} + ppa")
             if args.greedy_type == "greedy_distance":
@@ -124,23 +110,14 @@ def main():
                     Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                     greedy_1(Solution_k)
                     Solutions.append(Solution_k)
-                for solution in Solutions:
-                    print(solution)
                 E = PPA(Solutions, round(args.iterations))
-                print(E)
-                grid(E)
             elif args.greedy_type == "greedy_capacity":
                 Solutions = []
                 for i in range(round(args.population)):
                     Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                     greedy_2(Solution_k)
                     Solutions.append(Solution_k)
-                for solution in Solutions:
-                    print(solution)
                 E = PPA(Solutions, round(args.iterations))
-                print(E)
-                grid(E)
-
 
     elif args.probleemset == "dynamisch":
         if (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
@@ -148,23 +125,17 @@ def main():
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
             Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means(Solution2)
-            print(Solution2)
-            grid(Solution2)
+            E = k_means(Solution2)
         elif args.additional == "hillclimber" and args.plant_propagation == False:
             print("Running: k_means + hillclimber")
             Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means(Solution2)
-            hillclimber(Solution2)
-            print(Solution2)
-            grid(Solution2)
+            A = k_means(Solution2)
+            E = hillclimber(A)
         elif args.additional == "random_hillclimber" and args.plant_propagation == False:
             print("Running: k_means + random_hillclimber")
             Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means(Solution2)
-            random_hillclimber(Solution2, round(args.iterations), round(args.iterations/10))
-            print(Solution2)
-            grid(Solution2)
+            A = k_means(Solution2)
+            E = random_hillclimber(A, round(args.iterations), round(args.iterations/10))
         elif args.plant_propagation is True:
             print("Running: k_means + PPA")
             Solutions = []
@@ -173,33 +144,31 @@ def main():
                 k_means(Solution_k)
                 Solutions.append(Solution_k)
             E = BBPPA(Solutions, round(args.iterations))
-            print(E)
-            grid(E)
+
     elif args.probleemset == "batterijen_toevoegen":
         if (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
             print("het combineren van een hillclimber met een plant propagation algoritme is inefficient en daarom niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
-            print("Running: k_means_2")
+            print("Running: k_means")
             Solution3 = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means_2(Solution3)
-            print(Solution3)
-            grid(Solution3)
+            E = k_means_2(Solution3)
         elif args.additional == "hillclimber":
-            print("Running: k_means_2 + hillclimber")
+            print("Running: k_means + hillclimber")
             Solution5 = Solution(DataStructure.houses, DataStructure.batterys)
-            k_means_2(Solution5)
-            hillclimber(Solution5)
+            A = k_means_2(Solution5)
+            E = hillclimber(A)
         elif args.plant_propagation is True:
-            print("Runnign: k_means_2 + PPA")
+            print("Running: k_means + PPA")
             Solutions = []
             for i in range(round(args.population)):
                 Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                 k_means_2(Solution_k)
                 Solutions.append(Solution_k)
-                print("nieuw k_means + Hillclimber resultaat")
             E = BBPPA(Solutions)
-            print(E)
-            grid(E)
+    for battery in E.batterys:
+        print(battery)
+    print(E)
+    grid(E)
 
 
 if __name__ == "__main__":
