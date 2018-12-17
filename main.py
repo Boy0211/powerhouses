@@ -143,7 +143,10 @@ def main():
                 Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                 k_means(Solution_k)
                 Solutions.append(Solution_k)
-            E = BBPPA(Solutions, round(args.iterations))
+            for solution in Solutions:
+                print(solution)
+
+            # E = BBPPA(Solutions, round(args.iterations))
 
     elif args.probleemset == "batterijen_toevoegen":
         if (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
@@ -162,8 +165,8 @@ def main():
             Solutions = []
             for i in range(round(args.population)):
                 Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
-                k_means_2(Solution_k)
-                Solutions.append(Solution_k)
+                Z = k_means_2(Solution_k)
+                Solutions.append(Z)
             E = BBPPA(Solutions, args.iterations)
     for battery in E.batterys:
         print(battery)

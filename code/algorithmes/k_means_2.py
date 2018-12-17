@@ -123,15 +123,15 @@ def k_means(solution):
                 else:
                     solution = copy.deepcopy(old_solution)
                 # print(index)
+        x = 0
+        for battery in solution.batterys:
+            x += battery.max_input
 
         if cap_exc(solution.batterys) is False:
-            # # choose_new_battery(solution)
-            # print(solution)
-            # print("mission accomplished")
-            # for battery in solution.batterys:
-            #     print(battery)
-            # grid(solution)
             break
+        elif x > 7500 and x < 8000:
+            break
+
     print(solution.costs)
     return solution
 
