@@ -1,4 +1,11 @@
+'''
+    File name: sort.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import csv
+
 
 def sort_function(filename, district):
 
@@ -9,7 +16,6 @@ def sort_function(filename, district):
     with open(filename, 'r') as csv_file:
         data = csv.DictReader(csv_file)
         sortedlist = sorted(data, key=lambda row: row["max. output"], reverse=True)
-        # print(sortedlist)
 
     with open(OUTPUT_CSV, 'w', newline='') as output_file:
         writer = csv.writer(output_file)

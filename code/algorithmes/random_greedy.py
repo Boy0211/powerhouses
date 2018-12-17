@@ -1,3 +1,9 @@
+'''
+    File name: random_greedy.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import random
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -14,7 +20,7 @@ def random_distribution(solution, attempts, bins):
     i = 0
     all_scores = []
 
-    # while the attemts are not reached keep on trying.
+    # while the attempts are not reached keep on trying
     while i < attempts:
         random_greedy(solution)
         random_hillclimber(solution)
@@ -22,7 +28,7 @@ def random_distribution(solution, attempts, bins):
         all_scores.append(score)
         i += 1
 
-    #  sort all the scores and create a normal distribution.
+    # sort all the scores and create a normal distribution
     all_scores.sort()
     n, x, _ = plt.hist(all_scores, bins)
     bin_centers = 0.5*(x[1:]+x[:-1])
@@ -62,7 +68,7 @@ def random_greedy(solution):
 
                 # if all the batterys are saved into this seperate list
                 # the solution is not right, so all the batteries are emptied
-                # and the algorithm starts again.
+                # and the algorithm runs again.
                 if set(list_2) == set(lijst):
                     for battery in batterys:
                         battery.current_input = 0

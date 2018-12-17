@@ -1,3 +1,9 @@
+'''
+    File name: randomHillclimber.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import random
 
 from helpers import swap
@@ -22,7 +28,7 @@ def random_hillclimber(solution):
     # take the variable out of the solution which is used in the algorithm
     batterys = solution.batterys
 
-    # while statement keep on trying swaps until there is no swap possible.
+    # while statement keep on trying swaps until there is no swap possible
     counter = 0
     while True:
         temp_counter = counter
@@ -44,8 +50,8 @@ def random_hillclimber(solution):
                         house_b = battery_B.list_of_houses[house_counter_2]
 
                         # if statement to check whether the possible swap is
-                        # - bennificial.
-                        # - doesn't surpass the capacity of the batterys.
+                        # bennificial and doesn't surpasses the capacity
+                        # of the batterys
                         if (distance(house_a, battery_A) +
                             distance(house_b, battery_B) >
                             distance(house_a, battery_B) +
@@ -53,7 +59,7 @@ def random_hillclimber(solution):
                            (capacity(house_a, house_b, battery_A) is True)
                            and capacity(house_b, house_a, battery_B) is True):
 
-                            # swap the houses.
+                            # swap the houses
                             swap(house_a, house_b, battery_A, battery_B)
                             counter = counter + 1
 

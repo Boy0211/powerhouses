@@ -1,3 +1,9 @@
+'''
+    File name: smartGRID.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import csv
 
 from house import House
@@ -9,9 +15,6 @@ class Smartgrid(object):
 
     def __init__(self, district):
 
-        # print the wijk which is worked with:
-        print(f"This is wijk: {district}")
-
         # sort the given data, before further usage
         sort(f"data/csv_bestanden/wijk{district}_huizen.csv", district)
 
@@ -20,7 +23,6 @@ class Smartgrid(object):
         self.batterys = self.load_batterys(f"data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
         # self.load_distance_houses()
-
 
     def load_houses(self, filename):
 

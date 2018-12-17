@@ -1,3 +1,9 @@
+'''
+    File name: save_results.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import csv
 import datetime
 
@@ -6,7 +12,7 @@ def save_results(batterys, percentage, district):
 
     OUTPUT_CSV = 'results.csv'
 
-    # update everytime smarGRID.py is run
+    # update everytime smartGRID.py is run
     with open(OUTPUT_CSV, 'a', newline='') as output_file:
         writer = csv.writer(output_file)
         temp_list = []

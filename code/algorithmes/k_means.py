@@ -4,15 +4,16 @@
     Date created: 17/11/2018
     Date last modified: 17/12-2018
 '''
-
 import random
+
 from helpers import add_house_to_battery as ad
 from helpers import battery_capacity_exceeded as cap_exc
 
 
 def k_means(solution):
 
-    '''Divide houses with k_means into 5 clusters and determine battery locations'''
+    '''Divide houses with k_means into 5 clusters and
+    determine battery locations'''
 
     houses = solution.houses
     batterys = solution.batterys
@@ -36,7 +37,6 @@ def k_means(solution):
         batterys[4].location_x = random.randint(17, 33)
         batterys[4].location_y = random.randint(17, 33)
 
-
         # iterate through all houses
         while True:
             total_change = 0
@@ -45,7 +45,6 @@ def k_means(solution):
             for battery in batterys:
                 battery.list_of_houses = []
                 battery.current_input = 0
-
 
             temp_df = solution.distances
 

@@ -1,3 +1,9 @@
+'''
+    File name: place_battery_PPA.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import random
 import matplotlib.pyplot as plt
 import copy
@@ -76,7 +82,7 @@ def battery_based_plant_propagation_algorithm(solutions):
             else:
                 temp_save = solutions[0].score
 
-    # plot a line graph showing the difference the PPA made.
+    # plot a line graph showing the difference the PPA made
     plt.plot(list_of_scores)
     plt.plot(list_of_scores2)
     plt.ylabel("score PPA")
@@ -115,7 +121,7 @@ def swap_one_pair(solution):
     # randomly choose one battery
     battery1 = random.choice(solution.batterys)
 
-    # randomly choose a second battery which cna't be the same as the first
+    # randomly choose a second battery which can't be the same as the first
     while True:
         battery2 = random.choice(solution.batterys)
         if battery1 != battery2:
@@ -139,7 +145,7 @@ def move_ten_houses(solution):
     # start a for loop with a range of 10
     for i in range(10):
 
-        # choose a battery and an house
+        # choose a battery and a house
         battery1 = random.choice(solution.batterys)
         house1 = random.choice(battery1.list_of_houses)
 
@@ -167,7 +173,7 @@ def move_battery(solution):
     # randomly choose whether you move the battery on the x or y-axis
     locatie = random.choice([battery.location_x, battery.location_y])
 
-    # randomly choose whether battery move up vs down or left vs right
+    # randomly choose whether battery moves up vs down or left vs right
     locatie += random.choice([-1, 1])
 
     # return the solution
@@ -194,7 +200,7 @@ def change_battery(solution):
 
 def place_bat_middle(solution):
 
-    '''place the battery in the middle of his connected houses'''
+    '''Place the battery in the middle of his connected houses'''
 
     # for every battery in the solution
     for battery in solution.batterys:

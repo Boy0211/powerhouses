@@ -4,9 +4,9 @@
     Date created: 17/11/2018
     Date last modified: 17/12-2018
 '''
-
 import random
 import copy
+
 from helpers import add_house_to_battery as ad
 from helpers import battery_capacity_exceeded as cap_exc
 from battery import Battery
@@ -31,7 +31,7 @@ def k_means(solution):
         # save orignal solution
         solution = copy.deepcopy(original)
 
-        # set battery capcatiy to max
+        # set battery capacity to max
         for battery in solution.batterys:
             battery.max_input = 1800
 
@@ -105,25 +105,25 @@ def k_means(solution):
             if total_change < 1:
                 if solution.costs <= x:
 
-                    # sla oude oplossing op
+                    # save previous solution
                     old_solution = copy.deepcopy(solution)
                     x = old_solution.costs
 
-                    # als y 0 is dan ben je door alle mogelijke batterijen heen
-                    # kies dan een nieuwe batterij om te splitten
+                    # if y is equal to zero, all available batterys are checked
+                    # choose a new battery to split
                     if y == 0:
                         split_battery = battery_chosen_for_split(solution.batterys)
 
-                    # maak een nieuwe batterij, kies steeds een ander type
+                    # create a new battery from a different type
                     new_battery = Battery((len(solution.batterys)+1), (split_battery.location_x+1), (split_battery.location_y+1), battery_type, 0, [])
                     solution.batterys.append(new_battery)
                     y += 1
 
-                # als score niet beter is, zet oude oplossing terug
+                # if score is not improved, return old solution
                 else:
                     solution = copy.deepcopy(old_solution)
                 # print(index)
-        print("mendel")
+
         if cap_exc(solution.batterys) is False:
             # # choose_new_battery(solution)
             # print(solution)
