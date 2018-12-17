@@ -28,7 +28,8 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
         counter += 1
         all_solutions = []
 
-        # for loop
+        # for loop which walks trough all the solutions and creates runners
+        # based on its current score
         for index, solution in enumerate(solutions, start=0):
 
             # append the old solution into the new list

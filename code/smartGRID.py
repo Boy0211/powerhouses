@@ -9,9 +9,6 @@ class Smartgrid(object):
 
     def __init__(self, district):
 
-        # print the wijk which is worked with:
-        print(f"This is wijk: {district}")
-
         # sort the given data, before further usage
         sort(f"data/csv_bestanden/wijk{district}_huizen.csv", district)
 
@@ -19,8 +16,6 @@ class Smartgrid(object):
         self.houses = self.load_houses(f"data/csv_bestanden/sorted_houses{district}.csv")
         self.batterys = self.load_batterys(f"data/csv_bestanden/wijk{district}_batterijen.txt")
         self.load_distances()
-        # self.load_distance_houses()
-
 
     def load_houses(self, filename):
 
@@ -40,8 +35,9 @@ class Smartgrid(object):
                 output = float(line['max. output'])
                 battery_distances = str('empty')
                 connected_battery = 'not connected'
-                distance_houses = str('empty')
-                houses.append(House(identification, location_x, location_y, output, battery_distances, connected_battery))
+                houses.append(House(identification, location_x, location_y,
+                                    output, battery_distances,
+                                    connected_battery))
                 id_number += 1
 
             # return the houses
@@ -58,7 +54,7 @@ class Smartgrid(object):
             id_number = 1
             batterys = []
 
-            # for every line in the data append certain data to the battery class
+            # for every line in the data append it to the battery class
             for line in data:
                 identification = id_number
                 location, max_input = line.split('\t', 1)
@@ -70,7 +66,9 @@ class Smartgrid(object):
                 location_y = int(location_y.strip())
                 current_input = 0
                 list_of_houses = []
-                batterys.append(Battery(identification, location_x, location_y, max_input, current_input, list_of_houses))
+                batterys.append(Battery(identification, location_x, location_y,
+                                        max_input, current_input,
+                                        list_of_houses))
                 id_number += 1
 
         # return the batterys
