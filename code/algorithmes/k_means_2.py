@@ -115,7 +115,10 @@ def k_means(solution):
                         split_battery = battery_chosen_for_split(solution.batterys)
 
                     # create a new battery from a different type
-                    new_battery = Battery((len(solution.batterys)+1), (split_battery.location_x+1), (split_battery.location_y+1), battery_type, 0, [])
+                    new_battery = Battery((len(solution.batterys)+1),
+                                          (split_battery.location_x+1),
+                                          (split_battery.location_y+1),
+                                          battery_type, 0, [])
                     solution.batterys.append(new_battery)
                     y += 1
 
@@ -136,7 +139,6 @@ def k_means(solution):
     return solution
 
 
-
         # if cap_exc(batterys) is False:
         #     grid(solution)
         #     break
@@ -149,8 +151,8 @@ def k_means(solution):
     # bekijk of score hoger wordt als er tweede batterij wordt geplaatst
     # dit moet per batterij
 
-
 def place_batterys(solution):
+
     solution.batterys[0].location_x = random.randint(26, 51)
     solution.batterys[0].location_x = random.randint(26, 51)
 
