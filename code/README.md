@@ -116,9 +116,6 @@ de batterij zich in vruchtbare grond bevindt en vice versa.
 
 [Statische PPA](/code/algorithmes/PPA.py "Hyperlink")
 
-
-> UITSLAGEN VOLGEN
-
 ### Plant Propagation algoritme voor dyanmische batterijen
 
 
