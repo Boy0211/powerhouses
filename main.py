@@ -164,7 +164,7 @@ def main():
                 Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                 k_means_2(Solution_k)
                 Solutions.append(Solution_k)
-            E = BBPPA(Solutions)
+            E = BBPPA(Solutions, args.iterations)
     for battery in E.batterys:
         print(battery)
     print(E)
