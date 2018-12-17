@@ -6,17 +6,15 @@ from helpers import remove_house_from_battery as rm
 from helpers import add_house_to_battery as ad
 
 
-def plant_propagation_algorithm(solutions):
+def plant_propagation_algorithm(solutions, iterations):
 
     '''Plant plant propagation algorithm whith short, medium
     and long runners'''
 
     counter = 0
     length = len(solutions)
-    temp_save = 0
 
     while True:
-        counter += 1
         all_solutions = []
 
         for index, solution in enumerate(solutions, start=0):
@@ -47,13 +45,14 @@ def plant_propagation_algorithm(solutions):
         # of start solutions
         solutions = all_solutions[:length]
 
-        # every 100 iterations progress is checked.
-        # when there is no progress the PPA is stopped.
-        if counter % 100 == 0:
-            if solutions[0].score == temp_save:
-                break
-            else:
-                temp_save = solutions[0].score
+        # print the best solution
+        print(solutions[0])
+
+        # if the amount of iterations is reachted, break
+        if counter == iterations:
+            break
+        else:
+            counter += 1
 
     # return the best solution
     return solutions[0]

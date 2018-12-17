@@ -2,6 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from helpers import add_possible
 from helpers import add_house_to_battery
 from randomHillclimber import random_hillclimber
 
@@ -52,7 +53,7 @@ def random_greedy(solution):
             counter = random.choice(lijst)
 
             # if the house fits into the battery, put it there
-            if batterys[counter].current_input + houses[house_counter].output <= float(batterys[counter].max_input):
+            if add_possible(batterys[counter], houses[house_counter]):
                 add_house_to_battery(houses[house_counter], batterys[counter])
                 list_houses.remove(house_counter)
 

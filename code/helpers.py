@@ -63,3 +63,13 @@ def battery_capacity_exceeded(batterys):
         if battery.current_input > float(battery.max_input) * 1.20:
             return battery
     return False
+
+
+def add_possible(battery, house):
+
+    '''a method to check whether a add house is possible'''
+
+    if battery.current_input + house.output <= battery.max_input:
+        return True
+    else:
+        return False
