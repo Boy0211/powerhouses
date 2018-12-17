@@ -13,7 +13,7 @@ from helpers import add_house_to_battery as ad
 from helpers import swap
 
 
-def battery_based_plant_propagation_algorithm(solutions):
+def battery_based_plant_propagation_algorithm(solutions, iterations):
 
     '''Plant propagation algorithm used for dynamic batterys. It differs from
     the other PPA in the runners. This PPA has runners which can move the
@@ -22,7 +22,6 @@ def battery_based_plant_propagation_algorithm(solutions):
     # temporary variables saved for usage by the algorithm
     length = len(solutions)
     counter = 0
-    temp_save = 0.0
 
     # list of scores for visualization
     list_of_scores = []
@@ -75,12 +74,11 @@ def battery_based_plant_propagation_algorithm(solutions):
 
         # every 100 iterations a check will be done
         # if no better solution is created, the while loop will break
-        if counter % 100 == 0:
-            if solutions[0].score == temp_save:
-                print(f"Best score: {solutions[0].score}")
-                break
-            else:
-                temp_save = solutions[0].score
+        # if the amount of iterations is reachted, break
+        if counter == iterations:
+            break
+        else:
+            counter += 1
 
     # plot a line graph showing the difference the PPA made
     plt.plot(list_of_scores)

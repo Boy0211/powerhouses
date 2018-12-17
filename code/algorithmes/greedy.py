@@ -6,6 +6,7 @@
 '''
 import copy
 
+from helpers import add_possible
 from helpers import add_house_to_battery
 from sort import sort_distance
 
@@ -33,8 +34,10 @@ def greedy_1(solution):
 
         # if a house fits into the battery with the lowest input, put this
         # house inside this battery
-        if batterys[battery_counter].current_input + houses[house_counter].output < float(batterys[battery_counter].max_input):
-            add_house_to_battery(houses[house_counter], batterys[battery_counter])
+        if (batterys[battery_counter].current_input + houses[house_counter]
+           .output < float(batterys[battery_counter].max_input)):
+            add_house_to_battery(houses[house_counter],
+                                 batterys[battery_counter])
         else:
             print("Doesn't fit")
         house_counter += 1
@@ -61,7 +64,8 @@ def greedy_2(solution):
         # if house_counter increases, save battery_distances in new list
         if temp_house_counter == house_counter:
             temp_dict = dict()
-            temp_dict = copy.deepcopy(sorted_houses[house_counter].battery_distances)
+            temp_dict = copy.deepcopy(sorted_houses[house_counter]
+                                      .battery_distances)
 
         # sort list of batterys for each house
         battery_list = (list(temp_dict.values()))
@@ -71,10 +75,13 @@ def greedy_2(solution):
         current_battery = (battery_list[0])
 
         # find key with matching distance
-        battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
-        if batterys[battery_number-1].current_input + sorted_houses[house_counter].output <= 1.01 * float(batterys[battery_number-1].max_input):
-            add_house_to_battery(sorted_houses[house_counter], batterys[battery_number-1])
+        battery_number = (list(temp_dict.keys())[list(temp_dict.values())
+                          .index(current_battery)])
+        if add_possible(batterys[battery_number-1],
+                        sorted_houses[house_counter]) is True:
 
+            add_house_to_battery(sorted_houses[house_counter],
+                                 batterys[battery_number-1])
             house_counter += 1
             temp_house_counter = house_counter
         else:
