@@ -20,6 +20,7 @@ from k_means import k_means
 from k_means_2 import k_means as k_means_2
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
+from PPA import plant_propagation_algorithm as PPA
 
 
 
@@ -32,6 +33,10 @@ def main():
                         type=int,
                         choices=[1, 2, 3],
                         help="kies het wijknummer dat je wilt analyseren")
+    parser.add_argument("probleemset",
+                        choices=["statisch", "dynamisch", "batterijen_toevoegen"],
+                        help="kies de probleemset: statische batterijen, dynamische batterijen,"
+                        " nieuwe batterijen toevoegen")
     parser.add_argument("algorithm",
                         choices=['greedy', 'k_means', 'k_means_2'],
                         help="kies het algoritme dat je wilt runnen")
@@ -57,37 +62,37 @@ def main():
     args = parser.parse_args()
     print(args)
     DataStructure = Smartgrid(args.wijk)
+    if args.probleemset == "statisch":
+        if args.wijk == 2 or args.wijk == 3 and args.greedy_type == 'greedy_2':
+            print("greedy_2 kan geen resultaat geven voor wijk 2 en 3 dat aan de constraints voldoet")
+        elif (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
+            print("het combineren van een hillclimber met een plant propagation algoritme is inefficient en daarom niet toegestaan")
+        elif args.algorithm == "greedy" and args.additional == None:
+            print(f"run greedy: {args.greedy_type}")
+            # greedy based on capacity
+            Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
+            greedy_1(Solution1)
+            print(Solution1)
+            grid(Solution1)
+        elif args.algorithm == "greedy" and args.additional == "hillclimber" and args.plant_propagation is False:
+            print(f"run greedy: {args.greedy_type} + hillclimber")
+            # greedy based on capacity
+            Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
+            greedy_1(Solution2)
+            hillclimber(Solution2)
+            print(Solution2)
+            grid(Solution2)
 
-    if args.wijk == 2 or args.wijk == 3 and args.greedy_type == 'greedy_2':
-        print("greedy_2 kan geen resultaat geven voor wijk 2 en 3 dat aan de constraints voldoet")
-    elif args.algorithm == "greedy" and args.additional == None:
-        print(f"run greedy: {args.greedy_type}")
-        # greedy based on capacity
-        Solution1 = Solution(DataStructure.houses, DataStructure.batterys)
-        greedy_1(Solution1)
-        print(Solution1)
-        grid(Solution1)
-    elif args.algorithm == "greedy" and args.additional == "hillclimber" and args.plant_propagation == False:
-        print(f"run greedy: {args.greedy_type} + hillclimber")
-        # greedy based on capacity
-        Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
-        greedy_1(Solution2)
-        hillclimber(Solution2)
-        print(Solution2)
-        grid(Solution2)
-
-    elif args.algorithm == "greedy" and args.additional == "random_hillclimber" and args.plant_propagation == False:
-        print(f"run greedy: {args.greedy_type} + random_hillclimber")
-        Solution3 = Solution(DataStructure.houses, DataStructure.batterys)
-        # greedy_1(Solution3)
-        random_distribution(Solution3, 10, 10)
-        print(Solution3)
-        grid(Solution3)
-    elif args.algorithm == "greedy" and (args.additional == "hillclimber" or args.additional == "random_hillclimber") and args.plant_propagation == True:
-        print(f"run greedy: {args.greedy_type} + {args.additional} + ppa")
-        if args.greedy_type == "greedy_1":
-            if args.additional == "hillclimber":
-
+        elif args.algorithm == "greedy" and args.additional == "random_hillclimber":
+            print(f"run greedy: {args.greedy_type} + random_hillclimber")
+            Solution3 = Solution(DataStructure.houses, DataStructure.batterys)
+            # greedy_1(Solution3)
+            random_distribution(Solution3, 10, 10)
+            print(Solution3)
+            grid(Solution3)
+        elif args.algorithm == "greedy" and args.plant_propagation is True:
+            print(f"run greedy: {args.greedy_type} + {args.additional} + ppa")
+            if args.greedy_type == "greedy_1":
                 time_start2 = time.time()
                 Solutions = []
                 iterations = 10
@@ -95,33 +100,29 @@ def main():
                 for i in range(iterations):
                     Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
                     greedy_1(Solution_k)
-                    hillclimber(Solution_k)
                     Solutions.append(Solution_k)
-                    print("nieuw Greedy + Hillclimber resultaat")
                     print(f"nog {iterations - counter} te gaan")
                     counter += 1
                 for solution in Solutions:
                     print(solution)
-                E = BBPPA(Solutions)
+                E = PPA(Solutions)
                 print(E)
                 grid(E)
                 time_end2 = time.time()
-            else:
-
+            if args.greedy_type == "greedy_2":
                 time_start2 = time.time()
                 Solutions = []
                 iterations = 10
                 counter = 0
                 for i in range(iterations):
                     Solution_k = Solution(DataStructure.houses, DataStructure.batterys)
-                    random_distribution(Solution_k, 10, 7)
+                    greedy_2(Solution_k)
                     Solutions.append(Solution_k)
-                    print("nieuw Greedy + Hillclimber resultaat")
                     print(f"nog {iterations - counter} te gaan")
                     counter += 1
                 for solution in Solutions:
                     print(solution)
-                E = BBPPA(Solutions)
+                E = PPA(Solutions)
                 print(E)
                 grid(E)
                 time_end2 = time.time()
