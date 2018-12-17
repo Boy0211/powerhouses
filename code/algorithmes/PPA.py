@@ -19,9 +19,13 @@ def plant_propagation_algorithm(solutions, iterations):
 
     counter = 0
     length = len(solutions)
+    iterations = int(iterations)
 
     # while the amount of iterations is not reached
     while True:
+
+        # print how many iterations are done
+        print(f"{counter}/{iterations}")
 
         # create a empty list in which the solutions are saved
         all_solutions = []

@@ -22,6 +22,7 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
     # temporary variables saved for usage by the algorithm
     length = len(solutions)
     counter = 0
+    iterations = int(iterations)
 
     # list of scores for visualization
     list_of_scores = []
@@ -30,8 +31,9 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
     # keep on trying to create a better solution
     while True:
 
+        print(f"{counter}/{iterations}")
+
         # variables used in the algorithm
-        counter += 1
         all_solutions = []
 
         # for loop which walks trough all the solutions and creates runners
