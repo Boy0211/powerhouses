@@ -1,6 +1,12 @@
+'''
+    File name: greedy.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
+
 from helpers import add_house_to_battery
 from sort import sort_distance
-import random
 import copy
 
 
@@ -53,19 +59,19 @@ def greedy_2(solution):
     # while loop as long as there are houses for sorting
     while house_counter < len(sorted_houses):
 
-        # als house_counter toeneemt, sla battery_distances op in nieuwe lijst
+        # if house_counter increases, save battery_distances in new list
         if temp_house_counter == house_counter:
             temp_dict = dict()
             temp_dict = copy.deepcopy(sorted_houses[house_counter].battery_distances)
 
-        # sorteer lijst van batterijen per huis
+        # sort list of batterys for each house
         battery_list = (list(temp_dict.values()))
         battery_list = sorted(battery_list)
 
-        # neem eerste waarde in deze lijst(is minimale waarde)
+        # take first value in this list (minimal value)
         current_battery = (battery_list[0])
 
-        # zoek key met bijbehorende afstand
+        # find key with matching distance
         battery_number = (list(temp_dict.keys())[list(temp_dict.values()).index(current_battery)])
         if batterys[battery_number-1].current_input + sorted_houses[house_counter].output <= 1.01 * float(batterys[battery_number-1].max_input):
             add_house_to_battery(sorted_houses[house_counter], batterys[battery_number-1])
