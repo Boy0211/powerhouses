@@ -76,8 +76,8 @@ def main():
         elif (args.additional == "hillclimber" or
                 args.additional == "random_hillclimber") and (
                 args.plant_propagation is True):
-            print("het combineren van een hillclimber met een plant"
-                  "propagation algoritme is inefficient en daarom niet"
+            print("het combineren van een hillclimber met een plant "
+                  "propagation algoritme is inefficient en daarom niet "
                   "toegestaan")
         elif args.additional is None and args.plant_propagation is False:
             if args.greedy_type == "greedy_distance":
@@ -147,7 +147,7 @@ def main():
             (args.additional == "random_hillclimber")
                 and args.plant_propagation is True):
             print("het combineren van een hillclimber met een plant "
-                  "propagation algoritme is inefficient en daarom"
+                  "propagation algoritme is inefficient en daarom "
                   "niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
@@ -180,8 +180,8 @@ def main():
         if (args.additional == "hillclimber" or
             (args.additional == "random_hillclimber")
                 and args.plant_propagation is True):
-            print("het combineren van een hillclimber met een plant"
-                  "propagation algoritme is inefficient en daarom"
+            print("het combineren van een hillclimber met een plant "
+                  "propagation algoritme is inefficient en daarom "
                   "niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
