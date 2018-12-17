@@ -4,10 +4,11 @@
     Date created: 17/11/2018
     Date last modified: 17/12-2018
 '''
+import copy
+
 from helpers import add_possible
 from helpers import add_house_to_battery
 from sort import sort_distance
-import copy
 
 
 def greedy_1(solution):
@@ -32,14 +33,13 @@ def greedy_1(solution):
         del(bat_list)
 
         # if a house fits into the battery with the lowest input, put this
-        # house inside this battery. Otherwise were scruwed because we have
-        # reached the max capacity of all batteries
+        # house inside this battery
         if (batterys[battery_counter].current_input + houses[house_counter]
            .output < float(batterys[battery_counter].max_input)):
             add_house_to_battery(houses[house_counter],
                                  batterys[battery_counter])
         else:
-            print("het past gewoon godverdomme niet!")
+            print("Doesn't fit")
         house_counter += 1
 
     return solution

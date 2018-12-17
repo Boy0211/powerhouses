@@ -1,3 +1,10 @@
+'''
+    File name: hillclimber.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
+
 from helpers import swap
 from helpers import capacity
 from helpers import house_battery_distance as distance
@@ -11,24 +18,24 @@ def hillclimber(solution):
     # get the batterys out of the solution
     batterys = solution.batterys
 
-    # initializing a while loop with a counter on zero.
+    # initializing a while loop with a counter on zero
     counter = 0
     while True:
         # search for the best score in houses and batterys.
-        # Best score is the score when swapped has to most impact.
-        # the function returns False when there is no possible score left.
+        # best score is the score when swapped has to most impact,
+        # the function returns False when there is no possible score left
         best_swap = search_best_score(batterys)
 
-        # when there is an swap left, do the folowing:
+        # when there is a swap left, do the folowing:
         if best_swap is not False:
 
             # controls of one of the batterys has an input that surpasses his
             # capacity. If so, the function returns a battery, else the
-            # function returns falseself.
+            # function returns falseself
             if cap_exc(batterys) is not False:
 
                 # returns the battery which is exceeded and within that battery
-                # the house with the highest output.
+                # the house with the highest output
                 batterys.sort(key=lambda x: x.current_input, reverse=True)
                 battery1 = batterys[0]
 
@@ -37,10 +44,10 @@ def hillclimber(solution):
                 house1 = battery1.list_of_houses[0]
 
                 # returns the battery with the lowest input and within that
-                # batery, the house with the lowest output. Also, a counter is
+                # battery, the house with the lowest output. Also, a counter is
                 # used. This counter comes in handy when the swap between
                 # biggest and smallest fails. Next try will be the second
-                # smallest house.
+                # smallest house
                 battery2 = batterys[-1]
                 battery2.list_of_houses.sort(key=lambda x: x.output,
                                              reverse=True)
@@ -57,12 +64,12 @@ def hillclimber(solution):
                     else:
                         counter -= 1
 
-            # if no batterys are exceeded, excecute the following:
+            # if no battery is exceeded, excecute the following:
             else:
-                # swap the houses with the highest score.
+                # swap the houses with the highest score
                 swap(best_swap[0], best_swap[1], best_swap[2], best_swap[3])
 
-        # when no swap is possible; break.
+        # when no swap is possible; break
         else:
             break
 
@@ -80,10 +87,10 @@ def swap_score(house_a, house_b, battery_A, battery_B):
 # function to determine the best possible swap.
 def search_best_score(batterys):
 
-    # score starts at 0.0 and will be replaced when a better score is found
+    # score starts at 0.0 and will be replaced if a better score is found
     score = 0.0
 
-    # using 4 for loops to check for the best score.
+    # using four for loops to check for the best score.
     for i in range(len(batterys)):
         battery_A = batterys[i]
         for j in range(len(batterys[i].list_of_houses)):
@@ -96,7 +103,7 @@ def search_best_score(batterys):
                                            battery_B)
 
                     # checks whether the swap is possible and is better than
-                    # last option.
+                    # last option
                     if (capacity(house_a, house_b, battery_A) is True
                        and capacity(house_b, house_a, battery_B) is True
                        and new_score >= score):

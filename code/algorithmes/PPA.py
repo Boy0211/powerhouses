@@ -1,3 +1,9 @@
+'''
+    File name: PPA.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
 import copy
 import random
 
@@ -27,7 +33,7 @@ def plant_propagation_algorithm(solutions, iterations):
             old_solution = solution
             all_solutions.append(old_solution)
 
-            # the first 10 solution will get a short runner
+            # the first 10 solutions will get a short runner
             if index < 10:
                 all_solutions.append(swap1_random(copy.deepcopy(solution)))
 
@@ -125,7 +131,7 @@ def swap2_random(solution):
 
 def move_one_house(solution):
 
-    '''move one house from one battery into another'''
+    '''Move one house from one battery into another'''
 
     # choose a battery and an house from the battery
     battery1 = random.choice(solution.batterys)
