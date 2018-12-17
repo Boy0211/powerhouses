@@ -20,13 +20,18 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
     batterys'''
 
     # temporary variables saved for usage by the algorithm
-    length = len(solutions)
     counter = 0
     iterations = int(iterations)
 
+    # create at least a population of 30
+    while len(solutions) < 30:
+        solutions.append(copy.deepcopy(solutions[0]))
+
+    length = len(solutions)
     # list of scores for visualization
     list_of_scores = []
     list_of_scores2 = []
+    list_of_scores3 = []
 
     # keep on trying to create a better solution
     while True:
@@ -58,16 +63,20 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
             # create long runners
             else:
                 all_solutions.append(move_one_house(copy.deepcopy(solution)))
-                all_solutions.append(move_ten_houses(copy.deepcopy(solution)))
+                xie = move_ten_houses(copy.deepcopy(solution))
+                all_solutions.append(xie)
                 all_solutions.append(change_battery(copy.deepcopy(solution)))
                 all_solutions.append(place_bat_middle(copy.deepcopy(solution)))
+
+        # save the score into a list for visualization
+        list_of_scores.append(all_solutions[0].score)
+        list_of_scores2.append(xie.score)
 
         # sort all the solutions into a list, based on score
         all_solutions.sort(key=lambda x: x.score, reverse=True)
 
-        # save the score into a list for visualization
-        list_of_scores.append(all_solutions[0].score)
-        list_of_scores2.append(all_solutions[length - 1].score)
+        # save the costs
+        list_of_scores3.append(all_solutions[0].costs)
 
         # keep the best solutions
         solutions = all_solutions[:length]
@@ -84,9 +93,26 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
             counter += 1
 
     # plot a line graph showing the difference the PPA made
-    plt.plot(list_of_scores)
-    plt.plot(list_of_scores2)
-    plt.ylabel("score PPA")
+
+# Create some mock data
+    fig, ax1 = plt.subplots()
+
+    color = 'tab:red'
+    color2 = 'tab:orange'
+    ax1.set_xlabel('Iterations')
+    ax1.set_ylabel('score', color=color)
+    ax1.plot(list_of_scores, color=color)
+    # ax1.plot(list_of_scores2, color=color2)
+    ax1.tick_params(axis='y', labelcolor=color)
+
+    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
+    color = 'tab:blue'
+    ax2.set_ylabel('costs', color=color)  # we already handled the x-label with ax1
+    ax2.plot(list_of_scores3, color=color)
+    ax2.tick_params(axis='y', labelcolor=color)
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.show()
 
     # return the best solution
@@ -141,10 +167,10 @@ def swap_one_pair(solution):
 
 def move_ten_houses(solution):
 
-    '''Move ten houses from 10 random chosen batterys'''
+    '''Move ten houses from 5 random chosen batterys'''
 
     # start a for loop with a range of 10
-    for i in range(10):
+    for i in range(5):
 
         # choose a battery and a house
         battery1 = random.choice(solution.batterys)
