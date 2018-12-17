@@ -2,7 +2,7 @@
     File name: helpers.py
     Author: Mendel, Sam, Rutger
     Date created: 17/11/2018
-    Date last modified: 15/12-2018
+    Date last modified: 17/12-2018
 '''
 
 
