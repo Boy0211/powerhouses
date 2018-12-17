@@ -1,26 +1,13 @@
+'''
+    File name: k_means.py
+    Author: Mendel, Sam, Rutger
+    Date created: 17/11/2018
+    Date last modified: 17/12-2018
+'''
+
 import random
 from helpers import add_house_to_battery as ad
 from helpers import battery_capacity_exceeded as cap_exc
-
-
-def load_distances(houses, batterys):
-
-    '''Function to determine the distances from every house to
-       every battery '''
-
-    # for every house determine the distance to all batterys
-    for house in houses:
-        battery_distances = {}
-
-        # for every battery determine the absolute distance to every house
-        for battery in batterys:
-            x_distance = abs(house.location_x - battery.location_x)
-            y_distance = abs(house.location_y - battery.location_y)
-            distance = x_distance + y_distance
-            battery_distances.update({battery.identification: distance})
-
-        # save it into the house class
-        house.battery_distances = battery_distances
 
 
 def k_means(solution):
