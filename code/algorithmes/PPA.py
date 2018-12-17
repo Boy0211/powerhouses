@@ -20,9 +20,13 @@ def plant_propagation_algorithm(solutions, iterations):
     counter = 0
     length = len(solutions)
 
+    # while the amount of iterations is not reached
     while True:
+
+        # create a empty list in which the solutions are saved
         all_solutions = []
 
+        # a for loop which creates new solutions based on the concept of PPA
         for index, solution in enumerate(solutions, start=0):
 
             # save the current solution into a list
