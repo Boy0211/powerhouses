@@ -84,8 +84,8 @@ def battery_based_plant_propagation_algorithm(solutions, iterations):
             counter += 1
 
     # plot a line graph showing the difference the PPA made
-    plt.plot(list_of_scores)
-    plt.plot(list_of_scores2)
+    plt.plot(list_of_scores, color="blue")
+    plt.plot(list_of_scores2, color="red")
     plt.ylabel("score PPA")
     plt.show()
 
