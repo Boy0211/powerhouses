@@ -20,6 +20,7 @@ from k_means_2 import k_means as k_means_2
 from solution import Solution
 from place_battery_PPA import battery_based_plant_propagation_algorithm as BBPPA
 from PPA import plant_propagation_algorithm as PPA
+from random_place import place_random
 
 
 
@@ -76,8 +77,8 @@ def main():
         elif (args.additional == "hillclimber" or
                 args.additional == "random_hillclimber") and (
                 args.plant_propagation is True):
-            print("het combineren van een hillclimber met een plant"
-                  "propagation algoritme is inefficient en daarom niet"
+            print("het combineren van een hillclimber met een plant "
+                  "propagation algoritme is inefficient en daarom niet "
                   "toegestaan")
         elif args.additional is None and args.plant_propagation is False:
             if args.greedy_type == "greedy_distance":
@@ -147,7 +148,7 @@ def main():
             (args.additional == "random_hillclimber")
                 and args.plant_propagation is True):
             print("het combineren van een hillclimber met een plant "
-                  "propagation algoritme is inefficient en daarom"
+                  "propagation algoritme is inefficient en daarom "
                   "niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
@@ -164,15 +165,15 @@ def main():
             print("Running: k_means + random_hillclimber")
             Solution2 = Solution(DataStructure.houses, DataStructure.batterys)
             A = k_means(Solution2)
-            E = random_hillclimber(A, round(args.iterations), round
-                                           (args.iterations/10))
+            E = random_hillclimber(A)
         elif args.plant_propagation is True:
             print("Running: k_means + PPA")
             Solutions = []
             for i in range(round(args.population)):
                 Solution_k = Solution(DataStructure.houses,
                                       DataStructure.batterys)
-                k_means(Solution_k)
+                Solution_k = k_means(Solution_k)
+                print(Solution_k)
                 Solutions.append(Solution_k)
             E = BBPPA(Solutions, round(args.iterations))
 
@@ -180,8 +181,8 @@ def main():
         if (args.additional == "hillclimber" or
             (args.additional == "random_hillclimber")
                 and args.plant_propagation is True):
-            print("het combineren van een hillclimber met een plant"
-                  "propagation algoritme is inefficient en daarom"
+            print("het combineren van een hillclimber met een plant "
+                  "propagation algoritme is inefficient en daarom "
                   "niet toegestaan")
         elif args.plant_propagation is False and args.additional is None:
             print("Running: k_means")
@@ -201,6 +202,7 @@ def main():
                 Z = k_means_2(Solution_k)
                 Solutions.append(Z)
             E = BBPPA(Solutions, args.iterations)
+
     for battery in E.batterys:
         print(battery)
     print(E)

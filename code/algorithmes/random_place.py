@@ -7,7 +7,6 @@
 import random
 
 from helpers import add_house_to_battery as ad
-from helpers import battery_capacity_exceeded as cap_exc
 
 
 def place_random(solution):
@@ -29,5 +28,5 @@ def place_random(solution):
         ad(house, place_battery)
 
     solution.batterys = batterys
-    
+
     return solution
